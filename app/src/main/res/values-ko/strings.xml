@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">개인 재무 관리</string>
+    <string name="widget_description" formatted="false">총 잔액, 월별 지출 및 빠른 입력을 한눈에 확인</string>
+    <string name="notification_channel_reminders_name" formatted="false">매일 지출 알림</string>
+    <string name="notification_channel_reminders_desc" formatted="false">매일 지출을 기록하도록 알림</string>
+    <string name="notification_channel_budgets_name" formatted="false">예산 알림</string>
+    <string name="notification_channel_budgets_desc" formatted="false">지출이 예산 한도에 근접하거나 초과할 때 알림</string>
+    <string name="nav_home" formatted="false">홈</string>
+    <string name="nav_transactions" formatted="false">내역</string>
+    <string name="nav_analytics" formatted="false">분석</string>
+    <string name="nav_budgets" formatted="false">예산</string>
+    <string name="nav_settings" formatted="false">설정</string>
+    <string name="total_balance" formatted="false">총 잔액</string>
+    <string name="total_income" formatted="false">총 수입</string>
+    <string name="total_expenses" formatted="false">총 지출</string>
+    <string name="monthly_savings" formatted="false">월간 저축</string>
+    <string name="net_cash_flow" formatted="false">순 현금흐름</string>
+    <string name="accounts" formatted="false">계좌</string>
+    <string name="manage" formatted="false">관리</string>
+    <string name="spending_overview" formatted="false">지출 개요</string>
+    <string name="income_vs_expense" formatted="false">수입 대 지출</string>
+    <string name="category_breakdown" formatted="false">지출 내역</string>
+    <string name="recent_transactions" formatted="false">최근 거래</string>
+    <string name="budget_progress" formatted="false">예산 진행률</string>
+    <string name="see_all" formatted="false">전체 보기</string>
+    <string name="today" formatted="false">오늘</string>
+    <string name="yesterday" formatted="false">어제</string>
+    <string name="this_week" formatted="false">이번 주</string>
+    <string name="this_month" formatted="false">이번 달</string>
+    <string name="this_year" formatted="false">올해</string>
+    <string name="custom_range" formatted="false">사용자 지정</string>
+    <string name="add_transaction" formatted="false">거래 추가</string>
+    <string name="edit_transaction" formatted="false">거래 수정</string>
+    <string name="transaction_details" formatted="false">거래 상세</string>
+    <string name="expense" formatted="false">지출</string>
+    <string name="income" formatted="false">수입</string>
+    <string name="transfer" formatted="false">이체</string>
+    <string name="all" formatted="false">전체</string>
+    <string name="amount" formatted="false">금액</string>
+    <string name="category" formatted="false">카테고리</string>
+    <string name="account" formatted="false">계좌</string>
+    <string name="from_account" formatted="false">출금 계좌</string>
+    <string name="to_account" formatted="false">입금 계좌</string>
+    <string name="date_time" formatted="false">날짜 및 시간</string>
+    <string name="note_optional" formatted="false">메모 (선택)</string>
+    <string name="recurring" formatted="false">반복 거래</string>
+    <string name="receipt_attachment" formatted="false">영수증 첨부</string>
+    <string name="attach_receipt" formatted="false">영수증 사진 첨부</string>
+    <string name="remove_receipt" formatted="false">사진 삭제</string>
+    <string name="save" formatted="false">저장</string>
+    <string name="cancel" formatted="false">취소</string>
+    <string name="delete" formatted="false">삭제</string>
+    <string name="edit" formatted="false">수정</string>
+    <string name="search_transactions" formatted="false">메모, 카테고리, 계좌 검색...</string>
+    <string name="filters" formatted="false">필터</string>
+    <string name="reset" formatted="false">초기화</string>
+    <string name="apply" formatted="false">적용</string>
+    <string name="recurring_only" formatted="false">반복 거래만</string>
+    <string name="no_transactions_title" formatted="false">아직 거래가 없습니다</string>
+    <string name="no_transactions_subtitle" formatted="false">+ 를 눌러 지출, 수입 또는 계좌 이체를 기록하세요.</string>
+    <string name="add_account" formatted="false">계좌 추가</string>
+    <string name="edit_account" formatted="false">계좌 수정</string>
+    <string name="account_name" formatted="false">계좌 이름</string>
+    <string name="account_type" formatted="false">계좌 유형</string>
+    <string name="opening_balance" formatted="false">초기 잔액</string>
+    <string name="quick_transfer" formatted="false">이체</string>
+    <string name="analytics" formatted="false">분석 및 리포트</string>
+    <string name="daily" formatted="false">일간</string>
+    <string name="weekly" formatted="false">주간</string>
+    <string name="monthly" formatted="false">월간</string>
+    <string name="yearly" formatted="false">연간</string>
+    <string name="savings_rate" formatted="false">저축률</string>
+    <string name="avg_daily_spend" formatted="false">일평균 지출</string>
+    <string name="vs_last_month" formatted="false">지난달 대비</string>
+    <string name="spending_trends" formatted="false">지출 추이</string>
+    <string name="budgets" formatted="false">예산</string>
+    <string name="add_budget" formatted="false">예산 추가</string>
+    <string name="edit_budget" formatted="false">예산 수정</string>
+    <string name="monthly_limit" formatted="false">월간 한도</string>
+    <string name="overall_monthly_budget" formatted="false">전체 월간 예산</string>
+    <string name="spent" formatted="false">지출액</string>
+    <string name="remaining" formatted="false">남은 금액</string>
+    <string name="overspent_by" formatted="false">초과 지출</string>
+    <string name="alert_threshold" formatted="false">알림 기준</string>
+    <string name="no_budgets_title" formatted="false">설정된 예산이 없습니다</string>
+    <string name="no_budgets_subtitle" formatted="false">월간 또는 카테고리별 지출 한도를 설정해 진행 상황을 추적하세요.</string>
+    <string name="settings" formatted="false">설정</string>
+    <string name="preferences" formatted="false">환경설정</string>
+    <string name="view_mode" formatted="false">보기 모드</string>
+    <string name="appearance" formatted="false">화면 스타일</string>
+    <string name="localization_display" formatted="false">언어 및 표시</string>
+    <string name="language" formatted="false">언어</string>
+    <string name="currency" formatted="false">통화</string>
+    <string name="number_format" formatted="false">숫자 형식</string>
+    <string name="hide_balances" formatted="false">잔액 숨기기</string>
+    <string name="security_privacy" formatted="false">보안 및 개인정보</string>
+    <string name="biometric_lock" formatted="false">생체 인증 앱 잠금</string>
+    <string name="notifications_reminders" formatted="false">알림 및 리마인더</string>
+    <string name="daily_reminder" formatted="false">매일 지출 알림</string>
+    <string name="budget_alerts" formatted="false">예산 초과 알림</string>
+    <string name="categories" formatted="false">카테고리</string>
+    <string name="manage_categories" formatted="false">사용자 지정 카테고리 관리</string>
+    <string name="add_category" formatted="false">카테고리 추가</string>
+    <string name="data_backup_export" formatted="false">내보내기 및 암호화 백업</string>
+    <string name="export_csv" formatted="false">CSV 내보내기</string>
+    <string name="export_pdf" formatted="false">PDF 명세서 내보내기</string>
+    <string name="encrypted_backup" formatted="false">암호화 백업 만들기</string>
+    <string name="restore_backup" formatted="false">암호화 백업 복원</string>
+    <string name="clear_all_data" formatted="false">모든 데이터 삭제</string>
+    <string name="about_license" formatted="false">정보 및 오픈소스 라이선스</string>
+    <string name="unlock_title" formatted="false">Daily Expenses 잠김</string>
+    <string name="unlock_subtitle" formatted="false">재무 기록에 접근하려면 생체 인증 또는 기기 인증을 진행하세요.</string>
+    <string name="unlock_button" formatted="false">잠금 해제</string>
+    <string name="passphrase_title" formatted="false">백업 암호</string>
+    <string name="passphrase_hint" formatted="false">암호 입력 (최소 4자)</string>
+    <string name="confirm_action" formatted="false">확인</string>
+    <string name="export_monthly_csv" formatted="false">월간 CSV 내보내기</string>
+    <string name="selected_month" formatted="false">선택한 월</string>
+    <string name="all_months" formatted="false">모든 월</string>
+    <string name="no_transactions_in_month" formatted="false">이 달에 기록된 거래가 없습니다.</string>
+    <string name="about_developer" formatted="false">개발자 정보</string>
+    <string name="contact_developer" formatted="false">개발자 문의</string>
+    <string name="app_version_label" formatted="false">앱 버전</string>
+    <string name="open_source_licenses" formatted="false">오픈소스 라이선스</string>
+    <string name="no_email_app_error" formatted="false">이메일 앱을 찾을 수 없습니다. foysal24x7@gmail.com 으로 문의해 주세요.</string>
+    <string name="next_scheduled" formatted="false">다음 예정 기록</string>
+    <string name="budget_alert_header" formatted="false">80% 예산 한도 알림</string>
+    <string name="approaching_limit" formatted="false">80%+ 도달</string>
+    <string name="limit_exceeded" formatted="false">한도 초과</string>
+    <string name="category_spending_cap" formatted="false">카테고리 지출 한도</string>
+    <string name="updates_existing_cap" formatted="false">이번 달 한도가 이미 존재합니다. 저장하면 업데이트됩니다.</string>
+    <string name="google_drive_backup" formatted="false">Google Drive 백업</string>
+    <string name="google_drive_subtitle" formatted="false">비공개 앱 데이터 폴더 동기화 및 클라우드 복원</string>
+    <string name="connect_google_drive" formatted="false">Google Drive 연결</string>
+    <string name="switch_account" formatted="false">계정 전환</string>
+    <string name="disconnect" formatted="false">연결 해제</string>
+    <string name="back_up_now" formatted="false">지금 백업</string>
+    <string name="restore_from_drive" formatted="false">Drive에서 복원</string>
+    <string name="drive_history_title" formatted="false">Google Drive 백업 목록</string>
+    <string name="no_drive_backups" formatted="false">Google Drive 앱 데이터 폴더에 아직 백업이 없습니다.</string>
+    <string name="auto_backup_schedule" formatted="false">자동 백업</string>
+    <string name="schedule_manual_only" formatted="false">수동</string>
+    <string name="schedule_daily" formatted="false">매일</string>
+    <string name="schedule_weekly" formatted="false">매주</string>
+    <string name="not_connected" formatted="false">연결되지 않음</string>
+    <string name="connected_as" formatted="false">연결됨</string>
+    <string name="encrypt_with_passphrase" formatted="false">암호로 보호</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">암호화 또는 일반 백업을 Google Drive 비공개 앱 폴더에 저장합니다.</string>
+    <string name="theme_system" formatted="false">시스템 기본값</string>
+    <string name="theme_light" formatted="false">라이트</string>
+    <string name="theme_dark" formatted="false">다크</string>
+    <string name="theme_amoled" formatted="false">AMOLED 블랙</string>
+    <string name="accent_color" formatted="false">강조 색상</string>
+    <string name="monthly_expense_summary" formatted="false">월별 지출 요약</string>
+    <string name="spending_by_category" formatted="false">카테고리별 지출</string>
+    <string name="top_spending_category" formatted="false">최다 지출 카테고리</string>
+    <string name="other_category" formatted="false">기타</string>
+    <string name="no_monthly_expenses_title" formatted="false">이번 달 지출 없음</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">지출을 추가하여 카테고리별 소비 추이를 확인하세요.</string>
+    <string name="select_specific_date" formatted="false">특정 날짜 선택</string>
+    <string name="select_date_range" formatted="false">날짜 범위 선택</string>
+    <string name="clear_selection" formatted="false">선택 지우기</string>
+    <string name="return_to_monthly_view" formatted="false">월간 보기로 돌아가기</string>
+    <string name="return_to_period_view" formatted="false">{view_mode} 보기로 돌아가기</string>
+    <string name="custom_filter_active" formatted="false">사용자 지정 필터 활성</string>
+    <string name="invalid_date_range" formatted="false">종료일은 시작일보다 빠를 수 없습니다.</string>
+    <string name="previous_period" formatted="false">이전 기간</string>
+    <string name="next_period" formatted="false">다음 기간</string>
+    <string name="select_period_shortcut" formatted="false">기간 및 날짜 선택</string>
+    <string name="future_period_note" formatted="false">미래 기간 선택됨 — 예약되거나 미래 날짜의 항목만 표시됩니다.</string>
+    <string name="mixed_currency_note" formatted="false">이 기간에 여러 통화가 기록되었습니다 (환율 변환 없이 통화별로 합계 표시).</string>
+    <string name="previous_month" formatted="false">이전 달</string>
+    <string name="next_month" formatted="false">다음 달</string>
+    <string name="budgets_exceeded_banner" formatted="false">이번 달 {count}개 예산이 한도를 초과했습니다.</string>
+    <string name="budgets_warning_banner" formatted="false">{count}개 예산이 지출 한도에 근접했습니다.</string>
+    <string name="view_mode_settings" formatted="false">보기 모드</string>
+    <string name="appearance_settings" formatted="false">화면 스타일</string>
+    <string name="language_settings" formatted="false">언어</string>
+    <string name="currency_settings" formatted="false">통화</string>
+    <string name="search_languages" formatted="false">언어 검색...</string>
+    <string name="search_currencies" formatted="false">통화 코드, 이름 또는 국가 검색...</string>
+    <string name="no_matching_languages" formatted="false">일치하는 언어가 없습니다</string>
+    <string name="no_matching_currencies" formatted="false">일치하는 통화가 없습니다</string>
+    <string name="selected_label" formatted="false">선택됨</string>
+    <string name="appearance_theme_section" formatted="false">테마</string>
+    <string name="biometric_not_configured" formatted="false">이 기기에는 생체 인증 또는 화면 잠금이 설정되어 있지 않습니다.</string>
+    <string name="reminder_time" formatted="false">알림 시간</string>
+    <string name="tap_to_change_time" formatted="false">눌러서 알림 시간 변경</string>
+    <string name="notification_permission_required" formatted="false">알림 기능을 위해 알림 권한이 필요합니다.</string>
+    <string name="category_name_primary" formatted="false">이름 (영어)</string>
+    <string name="category_name_secondary" formatted="false">로컬 이름 (선택)</string>
+    <string name="categories_count_fmt" formatted="false">{count}개 카테고리</string>
+    <string name="clear_all_data_confirm" formatted="false">모든 거래, 예산 및 사용자 지정 계좌가 삭제되고 잔액 0의 기본 계좌로 초기화됩니다.</string>
+    <string name="about_license_summary" formatted="false">Apache License 2.0 • 오픈소스 구성 요소</string>
+    <string name="about_license_detail" formatted="false">Apache License 2.0에 따라 라이선스가 부여됩니다. Room 로컬 저장소와 AES-256-GCM 암호화 백업을 지원합니다.</string>
+    <string name="encrypted_label" formatted="false">암호화됨</string>
+    <string name="copyright_label" formatted="false">저작권</string>
+    <string name="ok" formatted="false">확인</string>
+    <string name="daily_reminder_title" formatted="false">Daily Expenses 알림</string>
+    <string name="daily_reminder_body" formatted="false">오늘의 지출을 잊지 말고 기록하세요.</string>
+    <string name="budget_monthly_default" formatted="false">월간 예산</string>
+    <string name="budget_exceeded_notif_title" formatted="false">예산 초과: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">예산 경고: {cat}</string>
+    <string name="budget_notif_body" formatted="false">한도 {limit} 중 {spent} 지출 ({pct}%)</string>
+    <string name="restore_backup_preview" formatted="false">{date} (v{version}) 백업에는 계좌 {accounts}개, 카테고리 {categories}개, 거래 {transactions}건, 예산 {budgets}개가 포함되어 있습니다. 교체 전 안전 백업이 생성됩니다.</string>
+    <string name="transactions_count_single" formatted="false">거래 {count}건</string>
+    <string name="transactions_count_plural" formatted="false">거래 {count}건</string>
+    <string name="budget_alert_single" formatted="false">{count}개 예산이 월간 한도의 80% 이상에 도달했습니다</string>
+    <string name="budget_alert_plural" formatted="false">{count}개 예산이 월간 한도의 80% 이상에 도달했습니다</string>
+    <string name="sort_newest" formatted="false">최신순</string>
+    <string name="sort_oldest" formatted="false">오래된순</string>
+    <string name="sort_highest" formatted="false">높은 금액순</string>
+    <string name="sort_lowest" formatted="false">낮은 금액순</string>
+    <string name="err_invalid_amount" formatted="false">0보다 큰 올바른 금액을 입력하세요.</string>
+    <string name="err_select_account" formatted="false">먼저 계좌를 만들거나 선택하세요.</string>
+    <string name="err_different_to_account" formatted="false">이체할 다른 대상 계좌를 선택하세요.</string>
+    <string name="err_save_tx_failed" formatted="false">거래를 저장하지 못했습니다.</string>
+    <string name="account_type_cash" formatted="false">현금</string>
+    <string name="account_type_bank" formatted="false">은행 계좌</string>
+    <string name="account_type_savings" formatted="false">저축 예금</string>
+    <string name="account_type_credit_card" formatted="false">신용카드</string>
+    <string name="account_type_mobile_banking" formatted="false">모바일 뱅킹</string>
+    <string name="account_type_custom" formatted="false">사용자 지정</string>
+    <string name="recurrence_none" formatted="false">일회성</string>
+    <string name="recurrence_daily" formatted="false">매일</string>
+    <string name="recurrence_weekly" formatted="false">매주</string>
+    <string name="recurrence_monthly" formatted="false">매월</string>
+    <string name="recurrence_yearly" formatted="false">매년</string>
+    <string name="accent_emerald" formatted="false">에메랄드</string>
+    <string name="accent_ocean_blue" formatted="false">오션 블루</string>
+    <string name="accent_indigo" formatted="false">인디고</string>
+    <string name="accent_violet" formatted="false">바이올렛</string>
+    <string name="accent_coral_red" formatted="false">코랄 레드</string>
+    <string name="accent_amber_gold" formatted="false">앰버 골드</string>
+    <string name="accent_teal_cyan" formatted="false">틸 시안</string>
+    <string name="accent_rose_pink" formatted="false">로즈 핑크</string>
+    <string name="cat_food_dining" formatted="false">식비 및 외식</string>
+    <string name="cat_groceries" formatted="false">식료품</string>
+    <string name="cat_transport" formatted="false">교통비</string>
+    <string name="cat_house_rent" formatted="false">주거 및 월세</string>
+    <string name="cat_utilities_bills" formatted="false">공과금</string>
+    <string name="cat_mobile_internet" formatted="false">통신 및 인터넷</string>
+    <string name="cat_healthcare" formatted="false">의료 및 건강</string>
+    <string name="cat_shopping" formatted="false">쇼핑</string>
+    <string name="cat_education" formatted="false">교육</string>
+    <string name="cat_entertainment" formatted="false">여가 및 오락</string>
+    <string name="cat_travel" formatted="false">여행</string>
+    <string name="cat_other_expense" formatted="false">기타 지출</string>
+    <string name="cat_salary" formatted="false">급여</string>
+    <string name="cat_freelance" formatted="false">프리랜서</string>
+    <string name="cat_business" formatted="false">사업 수입</string>
+    <string name="cat_investment" formatted="false">투자</string>
+    <string name="cat_gift_bonus" formatted="false">상여금 및 선물</string>
+    <string name="cat_other_income" formatted="false">기타 수입</string>
+</resources>

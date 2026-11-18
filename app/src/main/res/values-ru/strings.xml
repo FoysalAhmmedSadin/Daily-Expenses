@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">Учёт личных финансов</string>
+    <string name="widget_description" formatted="false">Быстрый обзор общего баланса, расходов за месяц и быстрый ввод</string>
+    <string name="notification_channel_reminders_name" formatted="false">Ежедневные напоминания о расходах</string>
+    <string name="notification_channel_reminders_desc" formatted="false">Напоминает записывать ежедневные расходы</string>
+    <string name="notification_channel_budgets_name" formatted="false">Уведомления о бюджете</string>
+    <string name="notification_channel_budgets_desc" formatted="false">Предупреждает о приближении или превышении лимита бюджета</string>
+    <string name="nav_home" formatted="false">Главная</string>
+    <string name="nav_transactions" formatted="false">Операции</string>
+    <string name="nav_analytics" formatted="false">Аналитика</string>
+    <string name="nav_budgets" formatted="false">Бюджеты</string>
+    <string name="nav_settings" formatted="false">Настройки</string>
+    <string name="total_balance" formatted="false">Общий баланс</string>
+    <string name="total_income" formatted="false">Общий доход</string>
+    <string name="total_expenses" formatted="false">Общие расходы</string>
+    <string name="monthly_savings" formatted="false">Сбережения за месяц</string>
+    <string name="net_cash_flow" formatted="false">Чистый поток</string>
+    <string name="accounts" formatted="false">Счета</string>
+    <string name="manage" formatted="false">Управление</string>
+    <string name="spending_overview" formatted="false">Обзор расходов</string>
+    <string name="income_vs_expense" formatted="false">Доходы и расходы</string>
+    <string name="category_breakdown" formatted="false">Расходы по категориям</string>
+    <string name="recent_transactions" formatted="false">Недавние операции</string>
+    <string name="budget_progress" formatted="false">Прогресс бюджета</string>
+    <string name="see_all" formatted="false">Все</string>
+    <string name="today" formatted="false">Сегодня</string>
+    <string name="yesterday" formatted="false">Вчера</string>
+    <string name="this_week" formatted="false">Эта неделя</string>
+    <string name="this_month" formatted="false">Этот месяц</string>
+    <string name="this_year" formatted="false">Этот год</string>
+    <string name="custom_range" formatted="false">Свой период</string>
+    <string name="add_transaction" formatted="false">Добавить операцию</string>
+    <string name="edit_transaction" formatted="false">Редактировать</string>
+    <string name="transaction_details" formatted="false">Детали операции</string>
+    <string name="expense" formatted="false">Расход</string>
+    <string name="income" formatted="false">Доход</string>
+    <string name="transfer" formatted="false">Перевод</string>
+    <string name="all" formatted="false">Все</string>
+    <string name="amount" formatted="false">Сумма</string>
+    <string name="category" formatted="false">Категория</string>
+    <string name="account" formatted="false">Счёт</string>
+    <string name="from_account" formatted="false">Со счёта</string>
+    <string name="to_account" formatted="false">На счёт</string>
+    <string name="date_time" formatted="false">Дата и время</string>
+    <string name="note_optional" formatted="false">Заметка (необяз.)</string>
+    <string name="recurring" formatted="false">Повтор</string>
+    <string name="receipt_attachment" formatted="false">Чек</string>
+    <string name="attach_receipt" formatted="false">Прикрепить фото чека</string>
+    <string name="remove_receipt" formatted="false">Удалить фото</string>
+    <string name="save" formatted="false">Сохранить</string>
+    <string name="cancel" formatted="false">Отмена</string>
+    <string name="delete" formatted="false">Удалить</string>
+    <string name="edit" formatted="false">Изменить</string>
+    <string name="search_transactions" formatted="false">Поиск по заметкам, категориям, счетам...</string>
+    <string name="filters" formatted="false">Фильтры</string>
+    <string name="reset" formatted="false">Сбросить</string>
+    <string name="apply" formatted="false">Применить</string>
+    <string name="recurring_only" formatted="false">Только повторяющиеся</string>
+    <string name="no_transactions_title" formatted="false">Операций пока нет</string>
+    <string name="no_transactions_subtitle" formatted="false">Нажмите +, чтобы добавить расход, доход или перевод.</string>
+    <string name="add_account" formatted="false">Добавить счёт</string>
+    <string name="edit_account" formatted="false">Редактировать счёт</string>
+    <string name="account_name" formatted="false">Название счёта</string>
+    <string name="account_type" formatted="false">Тип счёта</string>
+    <string name="opening_balance" formatted="false">Начальный баланс</string>
+    <string name="quick_transfer" formatted="false">Перевести</string>
+    <string name="analytics" formatted="false">Аналитика и отчёты</string>
+    <string name="daily" formatted="false">День</string>
+    <string name="weekly" formatted="false">Неделя</string>
+    <string name="monthly" formatted="false">Месяц</string>
+    <string name="yearly" formatted="false">Год</string>
+    <string name="savings_rate" formatted="false">Норма сбережений</string>
+    <string name="avg_daily_spend" formatted="false">Ср. расход/день</string>
+    <string name="vs_last_month" formatted="false">к прошлому месяцу</string>
+    <string name="spending_trends" formatted="false">Динамика расходов</string>
+    <string name="budgets" formatted="false">Бюджеты</string>
+    <string name="add_budget" formatted="false">Добавить бюджет</string>
+    <string name="edit_budget" formatted="false">Редактировать бюджет</string>
+    <string name="monthly_limit" formatted="false">Месячный лимит</string>
+    <string name="overall_monthly_budget" formatted="false">Общий бюджет на месяц</string>
+    <string name="spent" formatted="false">Потрачено</string>
+    <string name="remaining" formatted="false">Осталось</string>
+    <string name="overspent_by" formatted="false">Перерасход</string>
+    <string name="alert_threshold" formatted="false">Порог оповещения</string>
+    <string name="no_budgets_title" formatted="false">Бюджеты не заданы</string>
+    <string name="no_budgets_subtitle" formatted="false">Задайте лимит на месяц или категорию для контроля расходов.</string>
+    <string name="settings" formatted="false">Настройки</string>
+    <string name="preferences" formatted="false">Предпочтения</string>
+    <string name="view_mode" formatted="false">Режим просмотра</string>
+    <string name="appearance" formatted="false">Оформление</string>
+    <string name="localization_display" formatted="false">Язык и отображение</string>
+    <string name="language" formatted="false">Язык</string>
+    <string name="currency" formatted="false">Валюта</string>
+    <string name="number_format" formatted="false">Формат чисел</string>
+    <string name="hide_balances" formatted="false">Скрывать баланс</string>
+    <string name="security_privacy" formatted="false">Безопасность и приватность</string>
+    <string name="biometric_lock" formatted="false">Биометрический замок</string>
+    <string name="notifications_reminders" formatted="false">Уведомления и напоминания</string>
+    <string name="daily_reminder" formatted="false">Ежедневное напоминание</string>
+    <string name="budget_alerts" formatted="false">Оповещения о бюджете</string>
+    <string name="categories" formatted="false">Категории</string>
+    <string name="manage_categories" formatted="false">Управление категориями</string>
+    <string name="add_category" formatted="false">Добавить категорию</string>
+    <string name="data_backup_export" formatted="false">Экспорт и зашифрованный бэкап</string>
+    <string name="export_csv" formatted="false">Экспорт CSV</string>
+    <string name="export_pdf" formatted="false">Экспорт PDF-выписки</string>
+    <string name="encrypted_backup" formatted="false">Создать шифрованный бэкап</string>
+    <string name="restore_backup" formatted="false">Восстановить бэкап</string>
+    <string name="clear_all_data" formatted="false">Удалить все данные</string>
+    <string name="about_license" formatted="false">О приложении и лицензиях</string>
+    <string name="unlock_title" formatted="false">Daily Expenses заблокирован</string>
+    <string name="unlock_subtitle" formatted="false">Подтвердите личность для доступа к финансовым записям.</string>
+    <string name="unlock_button" formatted="false">Разблокировать</string>
+    <string name="passphrase_title" formatted="false">Пароль бэкапа</string>
+    <string name="passphrase_hint" formatted="false">Введите пароль (мин. 4 символа)</string>
+    <string name="confirm_action" formatted="false">Подтвердить</string>
+    <string name="export_monthly_csv" formatted="false">Экспорт CSV за месяц</string>
+    <string name="selected_month" formatted="false">Выбранный месяц</string>
+    <string name="all_months" formatted="false">Все месяцы</string>
+    <string name="no_transactions_in_month" formatted="false">За этот месяц операций нет.</string>
+    <string name="about_developer" formatted="false">О разработчике</string>
+    <string name="contact_developer" formatted="false">Связаться с разработчиком</string>
+    <string name="app_version_label" formatted="false">Версия приложения</string>
+    <string name="open_source_licenses" formatted="false">Лицензии открытого ПО</string>
+    <string name="no_email_app_error" formatted="false">Почтовое приложение не найдено. Напишите на foysal24x7@gmail.com.</string>
+    <string name="next_scheduled" formatted="false">Следующая запись</string>
+    <string name="budget_alert_header" formatted="false">Порог бюджета 80%</string>
+    <string name="approaching_limit" formatted="false">Достигнуто 80%+</string>
+    <string name="limit_exceeded" formatted="false">Лимит превышен</string>
+    <string name="category_spending_cap" formatted="false">Лимит категории</string>
+    <string name="updates_existing_cap" formatted="false">Лимит на этот месяц уже задан; сохранение обновит его.</string>
+    <string name="google_drive_backup" formatted="false">Бэкап в Google Диск</string>
+    <string name="google_drive_subtitle" formatted="false">Синхронизация в личную папку приложения</string>
+    <string name="connect_google_drive" formatted="false">Подключить Google Диск</string>
+    <string name="switch_account" formatted="false">Сменить аккаунт</string>
+    <string name="disconnect" formatted="false">Отключить</string>
+    <string name="back_up_now" formatted="false">Создать копию</string>
+    <string name="restore_from_drive" formatted="false">Восстановить</string>
+    <string name="drive_history_title" formatted="false">Копии на Google Диске</string>
+    <string name="no_drive_backups" formatted="false">В папке приложения на Google Диске пока нет копий.</string>
+    <string name="auto_backup_schedule" formatted="false">Автобэкап</string>
+    <string name="schedule_manual_only" formatted="false">Вручную</string>
+    <string name="schedule_daily" formatted="false">Ежедневно</string>
+    <string name="schedule_weekly" formatted="false">Еженедельно</string>
+    <string name="not_connected" formatted="false">Не подключено</string>
+    <string name="connected_as" formatted="false">Подключено</string>
+    <string name="encrypt_with_passphrase" formatted="false">Зашифровать паролем</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">Сохраните резервную копию в приватной папке Google Диска.</string>
+    <string name="theme_system" formatted="false">Системная</string>
+    <string name="theme_light" formatted="false">Светлая</string>
+    <string name="theme_dark" formatted="false">Тёмная</string>
+    <string name="theme_amoled" formatted="false">AMOLED</string>
+    <string name="accent_color" formatted="false">Акцентный цвет</string>
+    <string name="monthly_expense_summary" formatted="false">Сводка расходов за месяц</string>
+    <string name="spending_by_category" formatted="false">Расходы по категориям</string>
+    <string name="top_spending_category" formatted="false">Главная категория</string>
+    <string name="other_category" formatted="false">Другое</string>
+    <string name="no_monthly_expenses_title" formatted="false">Нет расходов в этом месяце</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">Добавьте расход, чтобы увидеть график по категориям.</string>
+    <string name="select_specific_date" formatted="false">Выбрать дату</string>
+    <string name="select_date_range" formatted="false">Выбрать диапазон дат</string>
+    <string name="clear_selection" formatted="false">Очистить выбор</string>
+    <string name="return_to_monthly_view" formatted="false">К месячному обзору</string>
+    <string name="return_to_period_view" formatted="false">К режиму «{view_mode}»</string>
+    <string name="custom_filter_active" formatted="false">Активен свой фильтр</string>
+    <string name="invalid_date_range" formatted="false">Дата окончания не может быть раньше даты начала.</string>
+    <string name="previous_period" formatted="false">Предыдущий период</string>
+    <string name="next_period" formatted="false">Следующий период</string>
+    <string name="select_period_shortcut" formatted="false">Выбор периода и даты</string>
+    <string name="future_period_note" formatted="false">Выбран будущий период — показаны только запланированные записи.</string>
+    <string name="mixed_currency_note" formatted="false">В периоде несколько валют (итоги показаны по каждой валюте отдельно).</string>
+    <string name="previous_month" formatted="false">Предыдущий месяц</string>
+    <string name="next_month" formatted="false">Следующий месяц</string>
+    <string name="budgets_exceeded_banner" formatted="false">Превышен лимит по {count} бюджету(ам).</string>
+    <string name="budgets_warning_banner" formatted="false">{count} бюджет(а) близки к лимиту.</string>
+    <string name="view_mode_settings" formatted="false">Режим просмотра</string>
+    <string name="appearance_settings" formatted="false">Оформление</string>
+    <string name="language_settings" formatted="false">Язык</string>
+    <string name="currency_settings" formatted="false">Валюта</string>
+    <string name="search_languages" formatted="false">Поиск языка...</string>
+    <string name="search_currencies" formatted="false">Поиск по коду, названию или стране...</string>
+    <string name="no_matching_languages" formatted="false">Языки не найдены</string>
+    <string name="no_matching_currencies" formatted="false">Валюты не найдены</string>
+    <string name="selected_label" formatted="false">Выбрано</string>
+    <string name="appearance_theme_section" formatted="false">Тема</string>
+    <string name="biometric_not_configured" formatted="false">Биометрическая блокировка не настроена на устройстве.</string>
+    <string name="reminder_time" formatted="false">Время напоминания</string>
+    <string name="tap_to_change_time" formatted="false">Нажмите, чтобы изменить время</string>
+    <string name="notification_permission_required" formatted="false">Требуется разрешение на уведомления.</string>
+    <string name="category_name_primary" formatted="false">Название (англ.)</string>
+    <string name="category_name_secondary" formatted="false">Локальное название (необяз.)</string>
+    <string name="categories_count_fmt" formatted="false">{count} категорий</string>
+    <string name="clear_all_data_confirm" formatted="false">Все операции, бюджеты и пользовательские счета будут удалены.</string>
+    <string name="about_license_summary" formatted="false">Apache License 2.0 • Открытые компоненты</string>
+    <string name="about_license_detail" formatted="false">Лицензия Apache 2.0. Локальное хранение с шифрованием AES-256-GCM.</string>
+    <string name="encrypted_label" formatted="false">Зашифровано</string>
+    <string name="copyright_label" formatted="false">Авторские права</string>
+    <string name="ok" formatted="false">ОК</string>
+    <string name="daily_reminder_title" formatted="false">Напоминание Daily Expenses</string>
+    <string name="daily_reminder_body" formatted="false">Не забудьте записать свои расходы за сегодня.</string>
+    <string name="budget_monthly_default" formatted="false">Месячный бюджет</string>
+    <string name="budget_exceeded_notif_title" formatted="false">Превышен бюджет: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">Предупреждение о бюджете: {cat}</string>
+    <string name="budget_notif_body" formatted="false">Потрачено {spent} из {limit} ({pct}%)</string>
+    <string name="restore_backup_preview" formatted="false">Копия от {date} (v{version}): {accounts} счетов, {categories} категорий, {transactions} операций, {budgets} бюджетов.</string>
+    <string name="transactions_count_single" formatted="false">{count} операция</string>
+    <string name="transactions_count_plural" formatted="false">{count} операций</string>
+    <string name="budget_alert_single" formatted="false">{count} бюджет достиг 80% или более месячного лимита</string>
+    <string name="budget_alert_plural" formatted="false">{count} бюджетов достигли 80% или более месячного лимита</string>
+    <string name="sort_newest" formatted="false">Сначала новые</string>
+    <string name="sort_oldest" formatted="false">Сначала старые</string>
+    <string name="sort_highest" formatted="false">По убыванию суммы</string>
+    <string name="sort_lowest" formatted="false">По возрастанию суммы</string>
+    <string name="err_invalid_amount" formatted="false">Введите корректную сумму больше 0.</string>
+    <string name="err_select_account" formatted="false">Сначала создайте или выберите счёт.</string>
+    <string name="err_different_to_account" formatted="false">Выберите другой счёт назначения.</string>
+    <string name="err_save_tx_failed" formatted="false">Не удалось сохранить операцию.</string>
+    <string name="account_type_cash" formatted="false">Наличные</string>
+    <string name="account_type_bank" formatted="false">Банковский счёт</string>
+    <string name="account_type_savings" formatted="false">Сбережения</string>
+    <string name="account_type_credit_card" formatted="false">Кредитная карта</string>
+    <string name="account_type_mobile_banking" formatted="false">Мобильный банк</string>
+    <string name="account_type_custom" formatted="false">Другой</string>
+    <string name="recurrence_none" formatted="false">Один раз</string>
+    <string name="recurrence_daily" formatted="false">Ежедневно</string>
+    <string name="recurrence_weekly" formatted="false">Еженедельно</string>
+    <string name="recurrence_monthly" formatted="false">Ежемесячно</string>
+    <string name="recurrence_yearly" formatted="false">Ежегодно</string>
+    <string name="accent_emerald" formatted="false">Изумрудный</string>
+    <string name="accent_ocean_blue" formatted="false">Океанский синий</string>
+    <string name="accent_indigo" formatted="false">Индиго</string>
+    <string name="accent_violet" formatted="false">Фиолетовый</string>
+    <string name="accent_coral_red" formatted="false">Коралловый</string>
+    <string name="accent_amber_gold" formatted="false">Янтарный</string>
+    <string name="accent_teal_cyan" formatted="false">Бирюзовый</string>
+    <string name="accent_rose_pink" formatted="false">Розовый</string>
+    <string name="cat_food_dining" formatted="false">Еда и кафе</string>
+    <string name="cat_groceries" formatted="false">Продукты</string>
+    <string name="cat_transport" formatted="false">Транспорт</string>
+    <string name="cat_house_rent" formatted="false">Аренда жилья</string>
+    <string name="cat_utilities_bills" formatted="false">ЖКХ и счета</string>
+    <string name="cat_mobile_internet" formatted="false">Связь и интернет</string>
+    <string name="cat_healthcare" formatted="false">Здоровье</string>
+    <string name="cat_shopping" formatted="false">Покупки</string>
+    <string name="cat_education" formatted="false">Образование</string>
+    <string name="cat_entertainment" formatted="false">Развлечения</string>
+    <string name="cat_travel" formatted="false">Путешествия</string>
+    <string name="cat_other_expense" formatted="false">Прочие расходы</string>
+    <string name="cat_salary" formatted="false">Зарплата</string>
+    <string name="cat_freelance" formatted="false">Фриланс</string>
+    <string name="cat_business" formatted="false">Бизнес</string>
+    <string name="cat_investment" formatted="false">Инвестиции</string>
+    <string name="cat_gift_bonus" formatted="false">Подарки и бонусы</string>
+    <string name="cat_other_income" formatted="false">Прочие доходы</string>
+</resources>

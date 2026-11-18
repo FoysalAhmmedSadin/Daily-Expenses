@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">ผู้จัดการการเงินส่วนบุคคล</string>
+    <string name="widget_description" formatted="false">ดูยอดคงเหลือรวม รายจ่ายรายเดือน และบันทึกรายการได้อย่างรวดเร็ว</string>
+    <string name="notification_channel_reminders_name" formatted="false">เตือนการบันทึกรายจ่ายประจำวัน</string>
+    <string name="notification_channel_reminders_desc" formatted="false">แจ้งเตือนให้คุณบันทึกรายจ่ายประจำวัน</string>
+    <string name="notification_channel_budgets_name" formatted="false">การแจ้งเตือนงบประมาณ</string>
+    <string name="notification_channel_budgets_desc" formatted="false">แจ้งเตือนเมื่อรายจ่ายใกล้ถึงหรือเกินวงเงินงบประมาณ</string>
+    <string name="nav_home" formatted="false">หน้าหลัก</string>
+    <string name="nav_transactions" formatted="false">รายการ</string>
+    <string name="nav_analytics" formatted="false">วิเคราะห์</string>
+    <string name="nav_budgets" formatted="false">งบประมาณ</string>
+    <string name="nav_settings" formatted="false">ตั้งค่า</string>
+    <string name="total_balance" formatted="false">ยอดคงเหลือรวม</string>
+    <string name="total_income" formatted="false">รายรับรวม</string>
+    <string name="total_expenses" formatted="false">รายจ่ายรวม</string>
+    <string name="monthly_savings" formatted="false">เงินออมรายเดือน</string>
+    <string name="net_cash_flow" formatted="false">กระแสเงินสดสุทธิ</string>
+    <string name="accounts" formatted="false">บัญชี</string>
+    <string name="manage" formatted="false">จัดการ</string>
+    <string name="spending_overview" formatted="false">ภาพรวมรายจ่าย</string>
+    <string name="income_vs_expense" formatted="false">รายรับ เทียบ รายจ่าย</string>
+    <string name="category_breakdown" formatted="false">สัดส่วนรายจ่าย</string>
+    <string name="recent_transactions" formatted="false">รายการล่าสุด</string>
+    <string name="budget_progress" formatted="false">ความคืบหน้างบประมาณ</string>
+    <string name="see_all" formatted="false">ดูทั้งหมด</string>
+    <string name="today" formatted="false">วันนี้</string>
+    <string name="yesterday" formatted="false">เมื่อวาน</string>
+    <string name="this_week" formatted="false">สัปดาห์นี้</string>
+    <string name="this_month" formatted="false">เดือนนี้</string>
+    <string name="this_year" formatted="false">ปีนี้</string>
+    <string name="custom_range" formatted="false">กำหนดเอง</string>
+    <string name="add_transaction" formatted="false">เพิ่มรายการ</string>
+    <string name="edit_transaction" formatted="false">แก้ไขรายการ</string>
+    <string name="transaction_details" formatted="false">รายละเอียดรายการ</string>
+    <string name="expense" formatted="false">รายจ่าย</string>
+    <string name="income" formatted="false">รายรับ</string>
+    <string name="transfer" formatted="false">โอนเงิน</string>
+    <string name="all" formatted="false">ทั้งหมด</string>
+    <string name="amount" formatted="false">จำนวนเงิน</string>
+    <string name="category" formatted="false">หมวดหมู่</string>
+    <string name="account" formatted="false">บัญชี</string>
+    <string name="from_account" formatted="false">จากบัญชี</string>
+    <string name="to_account" formatted="false">ไปยังบัญชี</string>
+    <string name="date_time" formatted="false">วันที่และเวลา</string>
+    <string name="note_optional" formatted="false">บันทึกช่วยจำ (ไม่บังคับ)</string>
+    <string name="recurring" formatted="false">รายการประจำ</string>
+    <string name="receipt_attachment" formatted="false">แนบใบเสร็จ</string>
+    <string name="attach_receipt" formatted="false">แนบรูปใบเสร็จ</string>
+    <string name="remove_receipt" formatted="false">ลบรูปภาพ</string>
+    <string name="save" formatted="false">บันทึก</string>
+    <string name="cancel" formatted="false">ยกเลิก</string>
+    <string name="delete" formatted="false">ลบ</string>
+    <string name="edit" formatted="false">แก้ไข</string>
+    <string name="search_transactions" formatted="false">ค้นหาบันทึก หมวดหมู่ บัญชี...</string>
+    <string name="filters" formatted="false">ตัวกรอง</string>
+    <string name="reset" formatted="false">รีเซ็ต</string>
+    <string name="apply" formatted="false">นำไปใช้</string>
+    <string name="recurring_only" formatted="false">เฉพาะรายการประจำ</string>
+    <string name="no_transactions_title" formatted="false">ยังไม่มีรายการ</string>
+    <string name="no_transactions_subtitle" formatted="false">แตะ + เพื่อบันทึกรายจ่าย รายรับ หรือการโอนเงิน</string>
+    <string name="add_account" formatted="false">เพิ่มบัญชี</string>
+    <string name="edit_account" formatted="false">แก้ไขบัญชี</string>
+    <string name="account_name" formatted="false">ชื่อบัญชี</string>
+    <string name="account_type" formatted="false">ประเภทบัญชี</string>
+    <string name="opening_balance" formatted="false">ยอดยกมา</string>
+    <string name="quick_transfer" formatted="false">โอนเงิน</string>
+    <string name="analytics" formatted="false">การวิเคราะห์และรายงาน</string>
+    <string name="daily" formatted="false">รายวัน</string>
+    <string name="weekly" formatted="false">รายสัปดาห์</string>
+    <string name="monthly" formatted="false">รายเดือน</string>
+    <string name="yearly" formatted="false">รายปี</string>
+    <string name="savings_rate" formatted="false">อัตราการออม</string>
+    <string name="avg_daily_spend" formatted="false">เฉลี่ยต่อวัน</string>
+    <string name="vs_last_month" formatted="false">เทียบเดือนที่แล้ว</string>
+    <string name="spending_trends" formatted="false">แนวโน้มรายจ่าย</string>
+    <string name="budgets" formatted="false">งบประมาณ</string>
+    <string name="add_budget" formatted="false">เพิ่มงบประมาณ</string>
+    <string name="edit_budget" formatted="false">แก้ไขงบประมาณ</string>
+    <string name="monthly_limit" formatted="false">วงเงินรายเดือน</string>
+    <string name="overall_monthly_budget" formatted="false">งบประมาณรวมรายเดือน</string>
+    <string name="spent" formatted="false">ใช้ไปแล้ว</string>
+    <string name="remaining" formatted="false">คงเหลือ</string>
+    <string name="overspent_by" formatted="false">เกินงบ</string>
+    <string name="alert_threshold" formatted="false">เกณฑ์แจ้งเตือน</string>
+    <string name="no_budgets_title" formatted="false">ยังไม่ได้ตั้งงบประมาณ</string>
+    <string name="no_budgets_subtitle" formatted="false">ตั้งวงเงินรายเดือนหรือรายหมวดหมู่เพื่อติดตามความคืบหน้าและรับการแจ้งเตือน</string>
+    <string name="settings" formatted="false">ตั้งค่า</string>
+    <string name="preferences" formatted="false">การกำหนดลักษณะ</string>
+    <string name="view_mode" formatted="false">โหมดมุมมอง</string>
+    <string name="appearance" formatted="false">รูปลักษณ์</string>
+    <string name="localization_display" formatted="false">ภาษาและการแสดงผล</string>
+    <string name="language" formatted="false">ภาษา</string>
+    <string name="currency" formatted="false">สกุลเงิน</string>
+    <string name="number_format" formatted="false">รูปแบบตัวเลข</string>
+    <string name="hide_balances" formatted="false">ซ่อนยอดเงิน</string>
+    <string name="security_privacy" formatted="false">ความปลอดภัยและความเป็นส่วนตัว</string>
+    <string name="biometric_lock" formatted="false">ล็อกแอปด้วยไบโอเมตริกซ์</string>
+    <string name="notifications_reminders" formatted="false">การแจ้งเตือน</string>
+    <string name="daily_reminder" formatted="false">เตือนบันทึกรายจ่ายรายวัน</string>
+    <string name="budget_alerts" formatted="false">แจ้งเตือนงบประมาณเกิน</string>
+    <string name="categories" formatted="false">หมวดหมู่</string>
+    <string name="manage_categories" formatted="false">จัดการหมวดหมู่ที่กำหนดเอง</string>
+    <string name="add_category" formatted="false">เพิ่มหมวดหมู่</string>
+    <string name="data_backup_export" formatted="false">ส่งออกและสำรองข้อมูลแบบเข้ารหัส</string>
+    <string name="export_csv" formatted="false">ส่งออก CSV</string>
+    <string name="export_pdf" formatted="false">ส่งออกใบแจ้งยอด PDF</string>
+    <string name="encrypted_backup" formatted="false">สร้างไฟล์สำรองเข้ารหัส</string>
+    <string name="restore_backup" formatted="false">กู้คืนจากไฟล์สำรองเข้ารหัส</string>
+    <string name="clear_all_data" formatted="false">ล้างข้อมูลทั้งหมด</string>
+    <string name="about_license" formatted="false">เกี่ยวกับและสัญญาอนุญาตโอเพนซอร์ส</string>
+    <string name="unlock_title" formatted="false">Daily Expenses ถูกล็อกอยู่</string>
+    <string name="unlock_subtitle" formatted="false">ยืนยันตัวตนด้วยไบโอเมตริกซ์หรือรหัสผ่านอุปกรณ์เพื่อเข้าถึงข้อมูลการเงินของคุณ</string>
+    <string name="unlock_button" formatted="false">ปลดล็อก</string>
+    <string name="passphrase_title" formatted="false">รหัสผ่านสำรองข้อมูล</string>
+    <string name="passphrase_hint" formatted="false">ป้อนรหัสผ่าน (อย่างน้อย 4 ตัวอักษร)</string>
+    <string name="confirm_action" formatted="false">ยืนยัน</string>
+    <string name="export_monthly_csv" formatted="false">ส่งออก CSV รายเดือน</string>
+    <string name="selected_month" formatted="false">เดือนที่เลือก</string>
+    <string name="all_months" formatted="false">ทุกเดือน</string>
+    <string name="no_transactions_in_month" formatted="false">ไม่มีรายการบันทึกในเดือนนี้</string>
+    <string name="about_developer" formatted="false">เกี่ยวกับผู้พัฒนา</string>
+    <string name="contact_developer" formatted="false">ติดต่อผู้พัฒนา</string>
+    <string name="app_version_label" formatted="false">เวอร์ชันแอป</string>
+    <string name="open_source_licenses" formatted="false">สัญญาอนุญาตโอเพนซอร์สภายนอก</string>
+    <string name="no_email_app_error" formatted="false">ไม่พบแอปอีเมลบนอุปกรณ์นี้ โปรดส่งอีเมลไปที่ foysal24x7@gmail.com</string>
+    <string name="next_scheduled" formatted="false">รายการถัดไป</string>
+    <string name="budget_alert_header" formatted="false">แจ้งเตือนวงเงินงบประมาณ 80%</string>
+    <string name="approaching_limit" formatted="false">ถึง 80%+ แล้ว</string>
+    <string name="limit_exceeded" formatted="false">เกินวงเงิน</string>
+    <string name="category_spending_cap" formatted="false">วงเงินรายจ่ายหมวดหมู่</string>
+    <string name="updates_existing_cap" formatted="false">มีวงเงินของเดือนนี้อยู่แล้ว การบันทึกจะเป็นการอัปเดต</string>
+    <string name="google_drive_backup" formatted="false">สำรองข้อมูล Google Drive</string>
+    <string name="google_drive_subtitle" formatted="false">ซิงค์โฟลเดอร์ข้อมูลแอปส่วนตัวและกู้คืนจากคลาวด์</string>
+    <string name="connect_google_drive" formatted="false">เชื่อมต่อ Google Drive</string>
+    <string name="switch_account" formatted="false">สลับบัญชี</string>
+    <string name="disconnect" formatted="false">ยกเลิกการเชื่อมต่อ</string>
+    <string name="back_up_now" formatted="false">สำรองข้อมูลทันที</string>
+    <string name="restore_from_drive" formatted="false">กู้คืนจาก Drive</string>
+    <string name="drive_history_title" formatted="false">ไฟล์สำรอง Google Drive</string>
+    <string name="no_drive_backups" formatted="false">ยังไม่มีไฟล์สำรองบนคลาวด์ในโฟลเดอร์ข้อมูลแอป Google Drive ของคุณ</string>
+    <string name="auto_backup_schedule" formatted="false">สำรองข้อมูลอัตโนมัติ</string>
+    <string name="schedule_manual_only" formatted="false">กำหนดเอง</string>
+    <string name="schedule_daily" formatted="false">ทุกวัน</string>
+    <string name="schedule_weekly" formatted="false">ทุกสัปดาห์</string>
+    <string name="not_connected" formatted="false">ยังไม่เชื่อมต่อ</string>
+    <string name="connected_as" formatted="false">เชื่อมต่อแล้ว</string>
+    <string name="encrypt_with_passphrase" formatted="false">เข้ารหัสด้วยรหัสผ่าน</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">เก็บไฟล์สำรองแบบเข้ารหัสหรือมาตรฐานไว้อย่างเป็นส่วนตัวในโฟลเดอร์ข้อมูลแอป Google Drive</string>
+    <string name="theme_system" formatted="false">ค่าเริ่มต้นระบบ</string>
+    <string name="theme_light" formatted="false">สว่าง</string>
+    <string name="theme_dark" formatted="false">มืด</string>
+    <string name="theme_amoled" formatted="false">AMOLED</string>
+    <string name="accent_color" formatted="false">สีเน้น</string>
+    <string name="monthly_expense_summary" formatted="false">สรุปรายจ่ายรายเดือน</string>
+    <string name="spending_by_category" formatted="false">รายจ่ายตามหมวดหมู่</string>
+    <string name="top_spending_category" formatted="false">หมวดหมู่สูงสุด</string>
+    <string name="other_category" formatted="false">อื่นๆ</string>
+    <string name="no_monthly_expenses_title" formatted="false">ไม่มีรายจ่ายในเดือนนี้</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">เพิ่มรายการรายจ่ายเพื่อดูแนวโน้มตามหมวดหมู่</string>
+    <string name="select_specific_date" formatted="false">เลือกวันที่เฉพาะเจาะจง</string>
+    <string name="select_date_range" formatted="false">เลือกช่วงวันที่</string>
+    <string name="clear_selection" formatted="false">ล้างการเลือก</string>
+    <string name="return_to_monthly_view" formatted="false">กลับสู่มุมมองรายเดือน</string>
+    <string name="return_to_period_view" formatted="false">กลับสู่มุมมอง{view_mode}</string>
+    <string name="custom_filter_active" formatted="false">เปิดใช้ตัวกรองแบบกำหนดเอง</string>
+    <string name="invalid_date_range" formatted="false">วันที่สิ้นสุดต้องไม่ก่อนวันที่เริ่มต้น</string>
+    <string name="previous_period" formatted="false">ช่วงก่อนหน้า</string>
+    <string name="next_period" formatted="false">ช่วงถัดไป</string>
+    <string name="select_period_shortcut" formatted="false">เลือกช่วงเวลาและวันที่</string>
+    <string name="future_period_note" formatted="false">เลือกช่วงเวลาในอนาคต — แสดงเฉพาะรายการที่กำหนดเวลาไว้หรือลงวันที่ในอนาคต</string>
+    <string name="mixed_currency_note" formatted="false">มีการบันทึกหลายสกุลเงินในช่วงนี้ (แสดงยอดรวมแยกตามสกุลเงินโดยไม่แปลงค่า)</string>
+    <string name="previous_month" formatted="false">เดือนก่อนหน้า</string>
+    <string name="next_month" formatted="false">เดือนถัดไป</string>
+    <string name="budgets_exceeded_banner" formatted="false">มี {count} งบประมาณเกินวงเงินในเดือนนี้</string>
+    <string name="budgets_warning_banner" formatted="false">มี {count} งบประมาณใกล้ถึงวงเงินรายจ่าย</string>
+    <string name="view_mode_settings" formatted="false">โหมดมุมมอง</string>
+    <string name="appearance_settings" formatted="false">รูปลักษณ์</string>
+    <string name="language_settings" formatted="false">ภาษา</string>
+    <string name="currency_settings" formatted="false">สกุลเงิน</string>
+    <string name="search_languages" formatted="false">ค้นหาภาษา...</string>
+    <string name="search_currencies" formatted="false">ค้นหารหัสสกุลเงิน ชื่อ หรือประเทศ...</string>
+    <string name="no_matching_languages" formatted="false">ไม่พบภาษาที่ตรงกัน</string>
+    <string name="no_matching_currencies" formatted="false">ไม่พบสกุลเงินที่ตรงกัน</string>
+    <string name="selected_label" formatted="false">เลือกอยู่</string>
+    <string name="appearance_theme_section" formatted="false">ธีม</string>
+    <string name="biometric_not_configured" formatted="false">ไม่ได้ตั้งค่าไบโอเมตริกซ์หรือการล็อกหน้าจอบนอุปกรณ์นี้</string>
+    <string name="reminder_time" formatted="false">เวลาแจ้งเตือน</string>
+    <string name="tap_to_change_time" formatted="false">แตะเพื่อเปลี่ยนเวลาแจ้งเตือน</string>
+    <string name="notification_permission_required" formatted="false">ต้องได้รับอนุญาตการแจ้งเตือนเพื่อเปิดใช้งานเตือนความจำ</string>
+    <string name="category_name_primary" formatted="false">ชื่อ (อังกฤษ)</string>
+    <string name="category_name_secondary" formatted="false">ชื่อท้องถิ่น (ไม่บังคับ)</string>
+    <string name="categories_count_fmt" formatted="false">{count} หมวดหมู่</string>
+    <string name="clear_all_data_confirm" formatted="false">การดำเนินการนี้จะลบรายการ งบประมาณ และบัญชีที่กำหนดเองทั้งหมด แล้วกู้คืนบัญชีเริ่มต้นที่มียอดเงินเป็นศูนย์</string>
+    <string name="about_license_summary" formatted="false">สัญญาอนุญาต Apache 2.0 • องค์ประกอบโอเพนซอร์ส</string>
+    <string name="about_license_detail" formatted="false">ได้รับอนุญาตภายใต้ Apache License 2.0 จัดเก็บแบบออฟไลน์ผ่าน Room พร้อมรองรับการสำรองข้อมูลเข้ารหัส AES-256-GCM</string>
+    <string name="encrypted_label" formatted="false">เข้ารหัสแล้ว</string>
+    <string name="copyright_label" formatted="false">ลิขสิทธิ์</string>
+    <string name="ok" formatted="false">ตกลง</string>
+    <string name="daily_reminder_title" formatted="false">แจ้งเตือน Daily Expenses</string>
+    <string name="daily_reminder_body" formatted="false">อย่าลืมบันทึกรายจ่ายของคุณสำหรับวันนี้</string>
+    <string name="budget_monthly_default" formatted="false">งบประมาณรายเดือน</string>
+    <string name="budget_exceeded_notif_title" formatted="false">งบประมาณเกินกำหนด: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">คำเตือนงบประมาณ: {cat}</string>
+    <string name="budget_notif_body" formatted="false">ใช้ไป {spent} จากวงเงิน {limit} ({pct}%)</string>
+    <string name="restore_backup_preview" formatted="false">ไฟล์สำรองจาก {date} (v{version}) มี {accounts} บัญชี {categories} หมวดหมู่ {transactions} รายการ และ {budgets} งบประมาณ ระบบจะสำรองข้อมูลเพื่อความปลอดภัยก่อนแทนที่</string>
+    <string name="transactions_count_single" formatted="false">{count} รายการ</string>
+    <string name="transactions_count_plural" formatted="false">{count} รายการ</string>
+    <string name="budget_alert_single" formatted="false">{count} งบประมาณใช้ถึง 80% ขึ้นไปของวงเงินรายเดือนแล้ว</string>
+    <string name="budget_alert_plural" formatted="false">{count} งบประมาณใช้ถึง 80% ขึ้นไปของวงเงินรายเดือนแล้ว</string>
+    <string name="sort_newest" formatted="false">ใหม่ล่าสุด</string>
+    <string name="sort_oldest" formatted="false">เก่าสุด</string>
+    <string name="sort_highest" formatted="false">ยอดสูงสุด</string>
+    <string name="sort_lowest" formatted="false">ยอดต่ำสุด</string>
+    <string name="err_invalid_amount" formatted="false">โปรดป้อนจำนวนเงินที่ถูกต้องมากกว่า 0</string>
+    <string name="err_select_account" formatted="false">โปรดสร้างหรือเลือกบัญชีก่อน</string>
+    <string name="err_different_to_account" formatted="false">โปรดเลือกบัญชีปลายทางที่แตกต่างกันสำหรับการโอน</string>
+    <string name="err_save_tx_failed" formatted="false">บันทึกรายการไม่สำเร็จ</string>
+    <string name="account_type_cash" formatted="false">เงินสด</string>
+    <string name="account_type_bank" formatted="false">บัญชีธนาคาร</string>
+    <string name="account_type_savings" formatted="false">ออมทรัพย์</string>
+    <string name="account_type_credit_card" formatted="false">บัตรเครดิต</string>
+    <string name="account_type_mobile_banking" formatted="false">โมบายแบงก์กิ้ง</string>
+    <string name="account_type_custom" formatted="false">กำหนดเอง</string>
+    <string name="recurrence_none" formatted="false">ครั้งเดียว</string>
+    <string name="recurrence_daily" formatted="false">ทุกวัน</string>
+    <string name="recurrence_weekly" formatted="false">ทุกสัปดาห์</string>
+    <string name="recurrence_monthly" formatted="false">ทุกเดือน</string>
+    <string name="recurrence_yearly" formatted="false">ทุกปี</string>
+    <string name="accent_emerald" formatted="false">เขียวมรกต</string>
+    <string name="accent_ocean_blue" formatted="false">น้ำเงินมหาสมุทร</string>
+    <string name="accent_indigo" formatted="false">คราม</string>
+    <string name="accent_violet" formatted="false">ม่วง</string>
+    <string name="accent_coral_red" formatted="false">แดงปะการัง</string>
+    <string name="accent_amber_gold" formatted="false">ทองอำพัน</string>
+    <string name="accent_teal_cyan" formatted="false">ฟ้าอมเขียว</string>
+    <string name="accent_rose_pink" formatted="false">ชมพูกุหลาบ</string>
+    <string name="cat_food_dining" formatted="false">อาหารและเครื่องดื่ม</string>
+    <string name="cat_groceries" formatted="false">ของชำและซูเปอร์มาร์เก็ต</string>
+    <string name="cat_transport" formatted="false">การเดินทาง</string>
+    <string name="cat_house_rent" formatted="false">ค่าเช่าและที่พัก</string>
+    <string name="cat_utilities_bills" formatted="false">ค่าน้ำไฟและบิล</string>
+    <string name="cat_mobile_internet" formatted="false">มือถือและอินเทอร์เน็ต</string>
+    <string name="cat_healthcare" formatted="false">สุขภาพและแพทย์</string>
+    <string name="cat_shopping" formatted="false">ช้อปปิ้ง</string>
+    <string name="cat_education" formatted="false">การศึกษา</string>
+    <string name="cat_entertainment" formatted="false">ความบันเทิง</string>
+    <string name="cat_travel" formatted="false">ท่องเที่ยว</string>
+    <string name="cat_other_expense" formatted="false">รายจ่ายอื่นๆ</string>
+    <string name="cat_salary" formatted="false">เงินเดือน</string>
+    <string name="cat_freelance" formatted="false">ฟรีแลนซ์</string>
+    <string name="cat_business" formatted="false">ธุรกิจ</string>
+    <string name="cat_investment" formatted="false">การลงทุน</string>
+    <string name="cat_gift_bonus" formatted="false">ของขวัญและโบนัส</string>
+    <string name="cat_other_income" formatted="false">รายรับอื่นๆ</string>
+</resources>

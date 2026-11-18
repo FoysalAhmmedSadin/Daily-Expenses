@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">Kişisel Finans Yöneticisi</string>
+    <string name="widget_description" formatted="false">Toplam bakiye, aylık harcama ve hızlı giriş özeti</string>
+    <string name="notification_channel_reminders_name" formatted="false">Günlük Harcama Hatırlatıcıları</string>
+    <string name="notification_channel_reminders_desc" formatted="false">Günlük harcamalarınızı kaydetmenizi hatırlatır</string>
+    <string name="notification_channel_budgets_name" formatted="false">Bütçe Uyarıları</string>
+    <string name="notification_channel_budgets_desc" formatted="false">Harcamalar bütçe sınırına yaklaştığında veya aştığında uyarır</string>
+    <string name="nav_home" formatted="false">Ana Sayfa</string>
+    <string name="nav_transactions" formatted="false">İşlemler</string>
+    <string name="nav_analytics" formatted="false">Analiz</string>
+    <string name="nav_budgets" formatted="false">Bütçeler</string>
+    <string name="nav_settings" formatted="false">Ayarlar</string>
+    <string name="total_balance" formatted="false">Toplam Bakiye</string>
+    <string name="total_income" formatted="false">Toplam Gelir</string>
+    <string name="total_expenses" formatted="false">Toplam Gider</string>
+    <string name="monthly_savings" formatted="false">Aylık Tasarruf</string>
+    <string name="net_cash_flow" formatted="false">Net Nakit Akışı</string>
+    <string name="accounts" formatted="false">Hesaplar</string>
+    <string name="manage" formatted="false">Yönet</string>
+    <string name="spending_overview" formatted="false">Harcama Özeti</string>
+    <string name="income_vs_expense" formatted="false">Gelir ve Gider</string>
+    <string name="category_breakdown" formatted="false">Gider Dağılımı</string>
+    <string name="recent_transactions" formatted="false">Son İşlemler</string>
+    <string name="budget_progress" formatted="false">Bütçe Durumu</string>
+    <string name="see_all" formatted="false">Tümünü Gör</string>
+    <string name="today" formatted="false">Bugün</string>
+    <string name="yesterday" formatted="false">Dün</string>
+    <string name="this_week" formatted="false">Bu Hafta</string>
+    <string name="this_month" formatted="false">Bu Ay</string>
+    <string name="this_year" formatted="false">Bu Yıl</string>
+    <string name="custom_range" formatted="false">Özel</string>
+    <string name="add_transaction" formatted="false">İşlem Ekle</string>
+    <string name="edit_transaction" formatted="false">İşlemi Düzenle</string>
+    <string name="transaction_details" formatted="false">İşlem Detayları</string>
+    <string name="expense" formatted="false">Gider</string>
+    <string name="income" formatted="false">Gelir</string>
+    <string name="transfer" formatted="false">Transfer</string>
+    <string name="all" formatted="false">Tümü</string>
+    <string name="amount" formatted="false">Tutar</string>
+    <string name="category" formatted="false">Kategori</string>
+    <string name="account" formatted="false">Hesap</string>
+    <string name="from_account" formatted="false">Kaynak Hesap</string>
+    <string name="to_account" formatted="false">Hedef Hesap</string>
+    <string name="date_time" formatted="false">Tarih ve Saat</string>
+    <string name="note_optional" formatted="false">Not (isteğe bağlı)</string>
+    <string name="recurring" formatted="false">Yinelenen</string>
+    <string name="receipt_attachment" formatted="false">Fiş Eki</string>
+    <string name="attach_receipt" formatted="false">Fiş Fotoğrafı Ekle</string>
+    <string name="remove_receipt" formatted="false">Fotoğrafı Kaldır</string>
+    <string name="save" formatted="false">Kaydet</string>
+    <string name="cancel" formatted="false">İptal</string>
+    <string name="delete" formatted="false">Sil</string>
+    <string name="edit" formatted="false">Düzenle</string>
+    <string name="search_transactions" formatted="false">Not, kategori, hesap ara...</string>
+    <string name="filters" formatted="false">Filtreler</string>
+    <string name="reset" formatted="false">Sıfırla</string>
+    <string name="apply" formatted="false">Uygula</string>
+    <string name="recurring_only" formatted="false">Yalnızca Yinelenen</string>
+    <string name="no_transactions_title" formatted="false">Henüz işlem yok</string>
+    <string name="no_transactions_subtitle" formatted="false">Gider, gelir veya hesap transferi eklemek için + dokunun.</string>
+    <string name="add_account" formatted="false">Hesap Ekle</string>
+    <string name="edit_account" formatted="false">Hesabı Düzenle</string>
+    <string name="account_name" formatted="false">Hesap Adı</string>
+    <string name="account_type" formatted="false">Hesap Türü</string>
+    <string name="opening_balance" formatted="false">Açılış Bakiyesi</string>
+    <string name="quick_transfer" formatted="false">Transfer</string>
+    <string name="analytics" formatted="false">Analiz ve Raporlar</string>
+    <string name="daily" formatted="false">Günlük</string>
+    <string name="weekly" formatted="false">Haftalık</string>
+    <string name="monthly" formatted="false">Aylık</string>
+    <string name="yearly" formatted="false">Yıllık</string>
+    <string name="savings_rate" formatted="false">Tasarruf Oranı</string>
+    <string name="avg_daily_spend" formatted="false">Günlük Ort.</string>
+    <string name="vs_last_month" formatted="false">Geçen Aya Göre</string>
+    <string name="spending_trends" formatted="false">Harcama Eğilimleri</string>
+    <string name="budgets" formatted="false">Bütçeler</string>
+    <string name="add_budget" formatted="false">Bütçe Ekle</string>
+    <string name="edit_budget" formatted="false">Bütçeyi Düzenle</string>
+    <string name="monthly_limit" formatted="false">Aylık Limit</string>
+    <string name="overall_monthly_budget" formatted="false">Genel Aylık Bütçe</string>
+    <string name="spent" formatted="false">Harcanan</string>
+    <string name="remaining" formatted="false">Kalan</string>
+    <string name="overspent_by" formatted="false">Aşım Tutarı</string>
+    <string name="alert_threshold" formatted="false">Uyarı Eşiği</string>
+    <string name="no_budgets_title" formatted="false">Tanımlı bütçe yok</string>
+    <string name="no_budgets_subtitle" formatted="false">İlerlemeyi izlemek ve uyarı almak için aylık veya kategori limiti belirleyin.</string>
+    <string name="settings" formatted="false">Ayarlar</string>
+    <string name="preferences" formatted="false">Tercihler</string>
+    <string name="view_mode" formatted="false">Görünüm Modu</string>
+    <string name="appearance" formatted="false">Görünüm</string>
+    <string name="localization_display" formatted="false">Dil ve Görünüm</string>
+    <string name="language" formatted="false">Dil</string>
+    <string name="currency" formatted="false">Para Birimi</string>
+    <string name="number_format" formatted="false">Sayı Biçimi</string>
+    <string name="hide_balances" formatted="false">Bakiyeleri Gizle</string>
+    <string name="security_privacy" formatted="false">Güvenlik ve Gizlilik</string>
+    <string name="biometric_lock" formatted="false">Biyometrik Uygulama Kilidi</string>
+    <string name="notifications_reminders" formatted="false">Bildirimler ve Hatırlatıcılar</string>
+    <string name="daily_reminder" formatted="false">Günlük Harcama Hatırlatıcısı</string>
+    <string name="budget_alerts" formatted="false">Bütçe Aşım Uyarıları</string>
+    <string name="categories" formatted="false">Kategoriler</string>
+    <string name="manage_categories" formatted="false">Özel Kategorileri Yönet</string>
+    <string name="add_category" formatted="false">Kategori Ekle</string>
+    <string name="data_backup_export" formatted="false">Dışa Aktarım ve Şifreli Yedekleme</string>
+    <string name="export_csv" formatted="false">CSV Dışa Aktar</string>
+    <string name="export_pdf" formatted="false">PDF Ekstre Dışa Aktar</string>
+    <string name="encrypted_backup" formatted="false">Şifreli Yedek Oluştur</string>
+    <string name="restore_backup" formatted="false">Şifreli Yedekten Geri Yükle</string>
+    <string name="clear_all_data" formatted="false">Tüm Verileri Temizle</string>
+    <string name="about_license" formatted="false">Hakkında ve Açık Kaynak Lisansı</string>
+    <string name="unlock_title" formatted="false">Daily Expenses Kilitli</string>
+    <string name="unlock_subtitle" formatted="false">Finansal kayıtlarınıza erişmek için biyometrik veri veya cihaz kilidiyle doğrulayın.</string>
+    <string name="unlock_button" formatted="false">Kilidi Aç</string>
+    <string name="passphrase_title" formatted="false">Yedekleme Parolası</string>
+    <string name="passphrase_hint" formatted="false">Parola girin (en az 4 karakter)</string>
+    <string name="confirm_action" formatted="false">Onayla</string>
+    <string name="export_monthly_csv" formatted="false">Aylık CSV Dışa Aktar</string>
+    <string name="selected_month" formatted="false">Seçilen Ay</string>
+    <string name="all_months" formatted="false">Tüm Aylar</string>
+    <string name="no_transactions_in_month" formatted="false">Bu ayda kayıtlı işlem yok.</string>
+    <string name="about_developer" formatted="false">Geliştirici Hakkında</string>
+    <string name="contact_developer" formatted="false">Geliştiriciyle İletişim</string>
+    <string name="app_version_label" formatted="false">Uygulama Sürümü</string>
+    <string name="open_source_licenses" formatted="false">Üçüncü Taraf Açık Kaynak Lisansları</string>
+    <string name="no_email_app_error" formatted="false">E-posta uygulaması bulunamadı. Lütfen foysal24x7@gmail.com adresine yazın.</string>
+    <string name="next_scheduled" formatted="false">Sonraki Planlı Kayıt</string>
+    <string name="budget_alert_header" formatted="false">%80 Bütçe Sınırı Uyarısı</string>
+    <string name="approaching_limit" formatted="false">%80+ Ulaşıldı</string>
+    <string name="limit_exceeded" formatted="false">Limit Aşıldı</string>
+    <string name="category_spending_cap" formatted="false">Kategori Harcama Limiti</string>
+    <string name="updates_existing_cap" formatted="false">Bu ay için bir limit zaten var; kaydetmek güncelleyecektir.</string>
+    <string name="google_drive_backup" formatted="false">Google Drive Yedekleme</string>
+    <string name="google_drive_subtitle" formatted="false">Özel uygulama veri klasörü senkronizasyonu ve bulut geri yükleme</string>
+    <string name="connect_google_drive" formatted="false">Google Drive\'a Bağlan</string>
+    <string name="switch_account" formatted="false">Hesap Değiştir</string>
+    <string name="disconnect" formatted="false">Bağlantıyı Kes</string>
+    <string name="back_up_now" formatted="false">Şimdi Yedekle</string>
+    <string name="restore_from_drive" formatted="false">Drive\'dan Geri Yükle</string>
+    <string name="drive_history_title" formatted="false">Google Drive Yedekleri</string>
+    <string name="no_drive_backups" formatted="false">Google Drive Uygulama Verileri klasörünüzde henüz yedek yok.</string>
+    <string name="auto_backup_schedule" formatted="false">Otomatik Yedekleme</string>
+    <string name="schedule_manual_only" formatted="false">Manuel</string>
+    <string name="schedule_daily" formatted="false">Günlük</string>
+    <string name="schedule_weekly" formatted="false">Haftalık</string>
+    <string name="not_connected" formatted="false">Bağlı değil</string>
+    <string name="connected_as" formatted="false">Bağlı</string>
+    <string name="encrypt_with_passphrase" formatted="false">Parola ile şifrele</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">Şifreli veya standart yedeği Google Drive Uygulama Verileri klasöründe gizli olarak saklayın.</string>
+    <string name="theme_system" formatted="false">Sistem Varsayılanı</string>
+    <string name="theme_light" formatted="false">Açık</string>
+    <string name="theme_dark" formatted="false">Koyu</string>
+    <string name="theme_amoled" formatted="false">AMOLED</string>
+    <string name="accent_color" formatted="false">Vurgu Rengi</string>
+    <string name="monthly_expense_summary" formatted="false">Aylık Harcama Özeti</string>
+    <string name="spending_by_category" formatted="false">Kategoriye göre harcama</string>
+    <string name="top_spending_category" formatted="false">En Yüksek Kategori</string>
+    <string name="other_category" formatted="false">Diğer</string>
+    <string name="no_monthly_expenses_title" formatted="false">Bu ay harcama yok</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">Kategori harcama eğilimlerini görmek için bir gider ekleyin.</string>
+    <string name="select_specific_date" formatted="false">Belirli Tarih Seç</string>
+    <string name="select_date_range" formatted="false">Tarih Aralığı Seç</string>
+    <string name="clear_selection" formatted="false">Seçimi Temizle</string>
+    <string name="return_to_monthly_view" formatted="false">Aylık Görünüme Dön</string>
+    <string name="return_to_period_view" formatted="false">{view_mode} Görünümüne Dön</string>
+    <string name="custom_filter_active" formatted="false">Özel filtre etkin</string>
+    <string name="invalid_date_range" formatted="false">Bitiş tarihi başlangıç tarihinden önce olamaz.</string>
+    <string name="previous_period" formatted="false">Önceki dönem</string>
+    <string name="next_period" formatted="false">Sonraki dönem</string>
+    <string name="select_period_shortcut" formatted="false">Dönem ve Tarih Seçimi</string>
+    <string name="future_period_note" formatted="false">Gelecek dönem seçildi — yalnızca planlanmış veya ileri tarihli kayıtlar gösteriliyor.</string>
+    <string name="mixed_currency_note" formatted="false">Bu dönemde birden fazla para birimi kaydedildi (toplamlar dönüştürülmeden para birimine göre gösterilir).</string>
+    <string name="previous_month" formatted="false">Önceki ay</string>
+    <string name="next_month" formatted="false">Sonraki ay</string>
+    <string name="budgets_exceeded_banner" formatted="false">Bu ay {count} bütçe limiti aştı.</string>
+    <string name="budgets_warning_banner" formatted="false">{count} bütçe harcama limitine yaklaşıyor.</string>
+    <string name="view_mode_settings" formatted="false">Görünüm Modu</string>
+    <string name="appearance_settings" formatted="false">Görünüm</string>
+    <string name="language_settings" formatted="false">Dil</string>
+    <string name="currency_settings" formatted="false">Para Birimi</string>
+    <string name="search_languages" formatted="false">Dil ara...</string>
+    <string name="search_currencies" formatted="false">Para birimi kodu, adı veya ülke ara...</string>
+    <string name="no_matching_languages" formatted="false">Eşleşen dil bulunamadı</string>
+    <string name="no_matching_currencies" formatted="false">Eşleşen para birimi bulunamadı</string>
+    <string name="selected_label" formatted="false">Seçili</string>
+    <string name="appearance_theme_section" formatted="false">Tema</string>
+    <string name="biometric_not_configured" formatted="false">Bu cihazda biyometrik veya ekran kilidi yapılandırılmamış.</string>
+    <string name="reminder_time" formatted="false">Hatırlatma Saati</string>
+    <string name="tap_to_change_time" formatted="false">Hatırlatma saatini değiştirmek için dokunun</string>
+    <string name="notification_permission_required" formatted="false">Hatırlatıcılar için bildirim izni gereklidir.</string>
+    <string name="category_name_primary" formatted="false">Ad (İngilizce)</string>
+    <string name="category_name_secondary" formatted="false">Yerel Ad (isteğe bağlı)</string>
+    <string name="categories_count_fmt" formatted="false">{count} kategori</string>
+    <string name="clear_all_data_confirm" formatted="false">Bu işlem tüm işlemleri, bütçeleri ve özel hesapları silecek ve sıfır bakiyeli varsayılan hesapları geri yükleyecektir.</string>
+    <string name="about_license_summary" formatted="false">Apache License 2.0 • Açık Kaynak Bileşenler</string>
+    <string name="about_license_detail" formatted="false">Apache License 2.0 kapsamında lisanslanmıştır. AES-256-GCM şifreli yedekleme destekli Room tabanlı çevrimdışı depolama.</string>
+    <string name="encrypted_label" formatted="false">Şifreli</string>
+    <string name="copyright_label" formatted="false">Telif Hakkı</string>
+    <string name="ok" formatted="false">Tamam</string>
+    <string name="daily_reminder_title" formatted="false">Daily Expenses Hatırlatıcı</string>
+    <string name="daily_reminder_body" formatted="false">Bugünkü harcamalarınızı kaydetmeyi unutmayın.</string>
+    <string name="budget_monthly_default" formatted="false">Aylık Bütçe</string>
+    <string name="budget_exceeded_notif_title" formatted="false">Bütçe Aşıldı: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">Bütçe Uyarısı: {cat}</string>
+    <string name="budget_notif_body" formatted="false">{limit} limitin {spent} tutarı harcandı (%{pct})</string>
+    <string name="restore_backup_preview" formatted="false">{date} (v{version}) tarihli yedek {accounts} hesap, {categories} kategori, {transactions} işlem ve {budgets} bütçe içeriyor. Mevcut veriler değiştirilmeden önce güvenlik yedeği alınacak.</string>
+    <string name="transactions_count_single" formatted="false">{count} işlem</string>
+    <string name="transactions_count_plural" formatted="false">{count} işlem</string>
+    <string name="budget_alert_single" formatted="false">{count} bütçe aylık limitinin %80 veya üzerine ulaştı</string>
+    <string name="budget_alert_plural" formatted="false">{count} bütçe aylık limitinin %80 veya üzerine ulaştı</string>
+    <string name="sort_newest" formatted="false">En Yeni</string>
+    <string name="sort_oldest" formatted="false">En Eski</string>
+    <string name="sort_highest" formatted="false">En Yüksek Tutar</string>
+    <string name="sort_lowest" formatted="false">En Düşük Tutar</string>
+    <string name="err_invalid_amount" formatted="false">Lütfen 0\'dan büyük geçerli bir tutar girin.</string>
+    <string name="err_select_account" formatted="false">Lütfen önce bir hesap oluşturun veya seçin.</string>
+    <string name="err_different_to_account" formatted="false">Transfer için farklı bir hedef hesap seçin.</string>
+    <string name="err_save_tx_failed" formatted="false">İşlem kaydedilemedi.</string>
+    <string name="account_type_cash" formatted="false">Nakit</string>
+    <string name="account_type_bank" formatted="false">Banka Hesabı</string>
+    <string name="account_type_savings" formatted="false">Birikim</string>
+    <string name="account_type_credit_card" formatted="false">Kredi Kartı</string>
+    <string name="account_type_mobile_banking" formatted="false">Mobil Bankacılık</string>
+    <string name="account_type_custom" formatted="false">Özel</string>
+    <string name="recurrence_none" formatted="false">Tek seferlik</string>
+    <string name="recurrence_daily" formatted="false">Günlük</string>
+    <string name="recurrence_weekly" formatted="false">Haftalık</string>
+    <string name="recurrence_monthly" formatted="false">Aylık</string>
+    <string name="recurrence_yearly" formatted="false">Yıllık</string>
+    <string name="accent_emerald" formatted="false">Zümrüt</string>
+    <string name="accent_ocean_blue" formatted="false">Okyanus Mavisi</string>
+    <string name="accent_indigo" formatted="false">Çivit Mavisi</string>
+    <string name="accent_violet" formatted="false">Mor</string>
+    <string name="accent_coral_red" formatted="false">Mercan Kırmızısı</string>
+    <string name="accent_amber_gold" formatted="false">Kehribar Altını</string>
+    <string name="accent_teal_cyan" formatted="false">Turkuaz</string>
+    <string name="accent_rose_pink" formatted="false">Gül Pembesi</string>
+    <string name="cat_food_dining" formatted="false">Yeme ve İçme</string>
+    <string name="cat_groceries" formatted="false">Market</string>
+    <string name="cat_transport" formatted="false">Ulaşım</string>
+    <string name="cat_house_rent" formatted="false">Ev Kirası</string>
+    <string name="cat_utilities_bills" formatted="false">Faturalar</string>
+    <string name="cat_mobile_internet" formatted="false">Mobil ve İnternet</string>
+    <string name="cat_healthcare" formatted="false">Sağlık</string>
+    <string name="cat_shopping" formatted="false">Alışveriş</string>
+    <string name="cat_education" formatted="false">Eğitim</string>
+    <string name="cat_entertainment" formatted="false">Eğlence</string>
+    <string name="cat_travel" formatted="false">Seyahat</string>
+    <string name="cat_other_expense" formatted="false">Diğer Gider</string>
+    <string name="cat_salary" formatted="false">Maaş</string>
+    <string name="cat_freelance" formatted="false">Serbest Çalışma</string>
+    <string name="cat_business" formatted="false">İş Geliri</string>
+    <string name="cat_investment" formatted="false">Yatırım</string>
+    <string name="cat_gift_bonus" formatted="false">Hediye ve Prim</string>
+    <string name="cat_other_income" formatted="false">Diğer Gelir</string>
+</resources>

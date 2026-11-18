@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">مدير الشؤون المالية الشخصية</string>
+    <string name="widget_description" formatted="false">نظرة سريعة على الرصيد الإجمالي والإنفاق الشهري والإدخال السريع</string>
+    <string name="notification_channel_reminders_name" formatted="false">تذكيرات المصروفات اليومية</string>
+    <string name="notification_channel_reminders_desc" formatted="false">يذكرك بتسجيل مصروفاتك اليومية</string>
+    <string name="notification_channel_budgets_name" formatted="false">تنبيهات الميزانية</string>
+    <string name="notification_channel_budgets_desc" formatted="false">ينبهك عندما يقترب الإنفاق من حد الميزانية أو يتجاوزه</string>
+    <string name="nav_home" formatted="false">الرئيسية</string>
+    <string name="nav_transactions" formatted="false">المعاملات</string>
+    <string name="nav_analytics" formatted="false">التحليلات</string>
+    <string name="nav_budgets" formatted="false">الميزانيات</string>
+    <string name="nav_settings" formatted="false">الإعدادات</string>
+    <string name="total_balance" formatted="false">إجمالي الرصيد</string>
+    <string name="total_income" formatted="false">إجمالي الدخل</string>
+    <string name="total_expenses" formatted="false">إجمالي المصروفات</string>
+    <string name="monthly_savings" formatted="false">الادخار الشهري</string>
+    <string name="net_cash_flow" formatted="false">صافي التدفق النقدي</string>
+    <string name="accounts" formatted="false">الحسابات</string>
+    <string name="manage" formatted="false">إدارة</string>
+    <string name="spending_overview" formatted="false">نظرة عامة على الإنفاق</string>
+    <string name="income_vs_expense" formatted="false">الدخل مقابل المصروفات</string>
+    <string name="category_breakdown" formatted="false">توزيع المصروفات</string>
+    <string name="recent_transactions" formatted="false">أحدث المعاملات</string>
+    <string name="budget_progress" formatted="false">تقدم الميزانية</string>
+    <string name="see_all" formatted="false">عرض الكل</string>
+    <string name="today" formatted="false">اليوم</string>
+    <string name="yesterday" formatted="false">أمس</string>
+    <string name="this_week" formatted="false">هذا الأسبوع</string>
+    <string name="this_month" formatted="false">هذا الشهر</string>
+    <string name="this_year" formatted="false">هذه السنة</string>
+    <string name="custom_range" formatted="false">مخصص</string>
+    <string name="add_transaction" formatted="false">إضافة معاملة</string>
+    <string name="edit_transaction" formatted="false">تعديل المعاملة</string>
+    <string name="transaction_details" formatted="false">تفاصيل المعاملة</string>
+    <string name="expense" formatted="false">مصروف</string>
+    <string name="income" formatted="false">دخل</string>
+    <string name="transfer" formatted="false">تحويل</string>
+    <string name="all" formatted="false">الكل</string>
+    <string name="amount" formatted="false">المبلغ</string>
+    <string name="category" formatted="false">الفئة</string>
+    <string name="account" formatted="false">الحساب</string>
+    <string name="from_account" formatted="false">من حساب</string>
+    <string name="to_account" formatted="false">إلى حساب</string>
+    <string name="date_time" formatted="false">التاريخ والوقت</string>
+    <string name="note_optional" formatted="false">ملاحظة (اختياري)</string>
+    <string name="recurring" formatted="false">متكررة</string>
+    <string name="receipt_attachment" formatted="false">صورة الإيصال</string>
+    <string name="attach_receipt" formatted="false">إرفاق صورة الإيصال</string>
+    <string name="remove_receipt" formatted="false">إزالة الصورة</string>
+    <string name="save" formatted="false">حفظ</string>
+    <string name="cancel" formatted="false">إلغاء</string>
+    <string name="delete" formatted="false">حذف</string>
+    <string name="edit" formatted="false">تعديل</string>
+    <string name="search_transactions" formatted="false">ابحث في الملاحظات أو الفئات أو الحسابات...</string>
+    <string name="filters" formatted="false">عوامل التصفية</string>
+    <string name="reset" formatted="false">إعادة تعيين</string>
+    <string name="apply" formatted="false">تطبيق</string>
+    <string name="recurring_only" formatted="false">المتكررة فقط</string>
+    <string name="no_transactions_title" formatted="false">لا توجد معاملات بعد</string>
+    <string name="no_transactions_subtitle" formatted="false">اضغط على + لتسجيل مصروف أو دخل أو تحويل.</string>
+    <string name="add_account" formatted="false">إضافة حساب</string>
+    <string name="edit_account" formatted="false">تعديل الحساب</string>
+    <string name="account_name" formatted="false">اسم الحساب</string>
+    <string name="account_type" formatted="false">نوع الحساب</string>
+    <string name="opening_balance" formatted="false">الرصيد الافتتاحي</string>
+    <string name="quick_transfer" formatted="false">تحويل</string>
+    <string name="analytics" formatted="false">التحليلات والتقارير</string>
+    <string name="daily" formatted="false">يومي</string>
+    <string name="weekly" formatted="false">أسبوعي</string>
+    <string name="monthly" formatted="false">شهري</string>
+    <string name="yearly" formatted="false">سنوي</string>
+    <string name="savings_rate" formatted="false">معدل الادخار</string>
+    <string name="avg_daily_spend" formatted="false">متوسط الإنفاق اليومي</string>
+    <string name="vs_last_month" formatted="false">مقارنة بالشهر الماضي</string>
+    <string name="spending_trends" formatted="false">اتجاهات الإنفاق</string>
+    <string name="budgets" formatted="false">الميزانيات</string>
+    <string name="add_budget" formatted="false">إضافة ميزانية</string>
+    <string name="edit_budget" formatted="false">تعديل الميزانية</string>
+    <string name="monthly_limit" formatted="false">الحد الشهري</string>
+    <string name="overall_monthly_budget" formatted="false">الميزانية الشهرية الإجمالية</string>
+    <string name="spent" formatted="false">المنفق</string>
+    <string name="remaining" formatted="false">المتبقي</string>
+    <string name="overspent_by" formatted="false">تجاوز بمقدار</string>
+    <string name="alert_threshold" formatted="false">حد التنبيه</string>
+    <string name="no_budgets_title" formatted="false">لم يتم إعداد ميزانيات</string>
+    <string name="no_budgets_subtitle" formatted="false">حدد حداً شهرياً أو لفئة لتتبع الإنفاق وتلقي التنبيهات.</string>
+    <string name="settings" formatted="false">الإعدادات</string>
+    <string name="preferences" formatted="false">التفضيلات</string>
+    <string name="view_mode" formatted="false">وضع العرض</string>
+    <string name="appearance" formatted="false">المظهر</string>
+    <string name="localization_display" formatted="false">اللغة والعرض</string>
+    <string name="language" formatted="false">اللغة</string>
+    <string name="currency" formatted="false">العملة</string>
+    <string name="number_format" formatted="false">تنسيق الأرقام</string>
+    <string name="hide_balances" formatted="false">إخفاء الأرصدة</string>
+    <string name="security_privacy" formatted="false">الأمان والخصوصية</string>
+    <string name="biometric_lock" formatted="false">قفل البصمة</string>
+    <string name="notifications_reminders" formatted="false">الإشعارات والتذكيرات</string>
+    <string name="daily_reminder" formatted="false">تذكير المصروفات اليومي</string>
+    <string name="budget_alerts" formatted="false">تنبيهات تجاوز الميزانية</string>
+    <string name="categories" formatted="false">الفئات</string>
+    <string name="manage_categories" formatted="false">إدارة الفئات المخصصة</string>
+    <string name="add_category" formatted="false">إضافة فئة</string>
+    <string name="data_backup_export" formatted="false">التصدير والنسخ الاحتياطي المشفر</string>
+    <string name="export_csv" formatted="false">تصدير CSV</string>
+    <string name="export_pdf" formatted="false">تصدير كشف PDF</string>
+    <string name="encrypted_backup" formatted="false">إنشاء نسخة احتياطية مشفرة</string>
+    <string name="restore_backup" formatted="false">استعادة نسخة مشفرة</string>
+    <string name="clear_all_data" formatted="false">مسح جميع البيانات</string>
+    <string name="about_license" formatted="false">حول التطبيق وتراخيص المصدر المفتوح</string>
+    <string name="unlock_title" formatted="false">التطبيق مقفل</string>
+    <string name="unlock_subtitle" formatted="false">تحقق باستخدام البصمة أو رمز الجهاز للوصول إلى سجلاتك المالية.</string>
+    <string name="unlock_button" formatted="false">فتح القفل</string>
+    <string name="passphrase_title" formatted="false">كلمة مرور النسخة الاحتياطية</string>
+    <string name="passphrase_hint" formatted="false">أدخل كلمة المرور (4 أحرف على الأقل)</string>
+    <string name="confirm_action" formatted="false">تأكيد</string>
+    <string name="export_monthly_csv" formatted="false">تصدير CSV الشهري</string>
+    <string name="selected_month" formatted="false">الشهر المحدد</string>
+    <string name="all_months" formatted="false">كل الأشهر</string>
+    <string name="no_transactions_in_month" formatted="false">لا توجد معاملات مسجلة في هذا الشهر.</string>
+    <string name="about_developer" formatted="false">عن المطور</string>
+    <string name="contact_developer" formatted="false">التواصل مع المطور</string>
+    <string name="app_version_label" formatted="false">إصدار التطبيق</string>
+    <string name="open_source_licenses" formatted="false">تراخيص المصادر المفتوحة</string>
+    <string name="no_email_app_error" formatted="false">لم يتم العثور على تطبيق بريد إلكتروني. يرجى المراسلة إلى foysal24x7@gmail.com.</string>
+    <string name="next_scheduled" formatted="false">الإدخال المجدول التالي</string>
+    <string name="budget_alert_header" formatted="false">تنبيه 80% من حد الميزانية</string>
+    <string name="approaching_limit" formatted="false">تم بلوغ 80%+</string>
+    <string name="limit_exceeded" formatted="false">تم تجاوز الحد</string>
+    <string name="category_spending_cap" formatted="false">حد إنفاق الفئة</string>
+    <string name="updates_existing_cap" formatted="false">يوجد حد لهذا الشهر بالفعل؛ سيؤدي الحفظ إلى تحديثه.</string>
+    <string name="google_drive_backup" formatted="false">النسخ الاحتياطي عبر Google Drive</string>
+    <string name="google_drive_subtitle" formatted="false">مزامنة سحابية في مجلد بيانات التطبيق الخاص</string>
+    <string name="connect_google_drive" formatted="false">ربط Google Drive</string>
+    <string name="switch_account" formatted="false">تبديل الحساب</string>
+    <string name="disconnect" formatted="false">إلغاء الربط</string>
+    <string name="back_up_now" formatted="false">نسخ احتياطي الآن</string>
+    <string name="restore_from_drive" formatted="false">استعادة من Drive</string>
+    <string name="drive_history_title" formatted="false">نسخ Google Drive الاحتياطية</string>
+    <string name="no_drive_backups" formatted="false">لا توجد نسخ احتياطية سحابية في مجلد Google Drive بعد.</string>
+    <string name="auto_backup_schedule" formatted="false">النسخ التلقائي</string>
+    <string name="schedule_manual_only" formatted="false">يدوي</string>
+    <string name="schedule_daily" formatted="false">يومي</string>
+    <string name="schedule_weekly" formatted="false">أسبوعي</string>
+    <string name="not_connected" formatted="false">غير متصل</string>
+    <string name="connected_as" formatted="false">متصل</string>
+    <string name="encrypt_with_passphrase" formatted="false">تشفير بكلمة مرور</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">احفظ نسخة احتياطية آمنة في مجلد بيانات تطبيق Google Drive.</string>
+    <string name="theme_system" formatted="false">افتراضي النظام</string>
+    <string name="theme_light" formatted="false">فاتح</string>
+    <string name="theme_dark" formatted="false">داكن</string>
+    <string name="theme_amoled" formatted="false">AMOLED</string>
+    <string name="accent_color" formatted="false">اللون المميز</string>
+    <string name="monthly_expense_summary" formatted="false">ملخص المصروفات الشهرية</string>
+    <string name="spending_by_category" formatted="false">الإنفاق حسب الفئة</string>
+    <string name="top_spending_category" formatted="false">أعلى فئة</string>
+    <string name="other_category" formatted="false">أخرى</string>
+    <string name="no_monthly_expenses_title" formatted="false">لا توجد مصروفات هذا الشهر</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">أضف معاملة مصروف لعرض اتجاهات الإنفاق حسب الفئة.</string>
+    <string name="select_specific_date" formatted="false">تحديد تاريخ محدد</string>
+    <string name="select_date_range" formatted="false">تحديد نطاق زمني</string>
+    <string name="clear_selection" formatted="false">مسح التحديد</string>
+    <string name="return_to_monthly_view" formatted="false">العودة إلى العرض الشهري</string>
+    <string name="return_to_period_view" formatted="false">العودة إلى عرض {view_mode}</string>
+    <string name="custom_filter_active" formatted="false">التصفية المخصصة نشطة</string>
+    <string name="invalid_date_range" formatted="false">لا يمكن أن يكون تاريخ الانتهاء قبل تاريخ البدء.</string>
+    <string name="previous_period" formatted="false">الفترة السابقة</string>
+    <string name="next_period" formatted="false">الفترة التالية</string>
+    <string name="select_period_shortcut" formatted="false">اختيار الفترة والتاريخ</string>
+    <string name="future_period_note" formatted="false">تم تحديد فترة مستقبلية — عرض الإدخالات المجدولة أو المستقبلية فقط.</string>
+    <string name="mixed_currency_note" formatted="false">توجد عملات متعددة في هذه الفترة (يتم عرض كل عملة على حدة).</string>
+    <string name="previous_month" formatted="false">الشهر السابق</string>
+    <string name="next_month" formatted="false">الشهر التالي</string>
+    <string name="budgets_exceeded_banner" formatted="false">تجاوزت {count} ميزانية الحد هذا الشهر.</string>
+    <string name="budgets_warning_banner" formatted="false">{count} ميزانية تقترب من الحد.</string>
+    <string name="view_mode_settings" formatted="false">وضع العرض</string>
+    <string name="appearance_settings" formatted="false">المظهر</string>
+    <string name="language_settings" formatted="false">اللغة</string>
+    <string name="currency_settings" formatted="false">العملة</string>
+    <string name="search_languages" formatted="false">ابحث عن لغة...</string>
+    <string name="search_currencies" formatted="false">ابحث برمز العملة أو الاسم أو البلد...</string>
+    <string name="no_matching_languages" formatted="false">لم يتم العثور على لغات مطابقة</string>
+    <string name="no_matching_currencies" formatted="false">لم يتم العثور على عملات مطابقة</string>
+    <string name="selected_label" formatted="false">محدد</string>
+    <string name="appearance_theme_section" formatted="false">السمة</string>
+    <string name="biometric_not_configured" formatted="false">قفل البصمة غير مهيأ على هذا الجهاز.</string>
+    <string name="reminder_time" formatted="false">وقت التذكير</string>
+    <string name="tap_to_change_time" formatted="false">انقر لتغيير وقت التذكير</string>
+    <string name="notification_permission_required" formatted="false">إذن الإشعارات مطلوب للتذكيرات.</string>
+    <string name="category_name_primary" formatted="false">الاسم (بالإنجليزية)</string>
+    <string name="category_name_secondary" formatted="false">الاسم المحلي (اختياري)</string>
+    <string name="categories_count_fmt" formatted="false">{count} فئة</string>
+    <string name="clear_all_data_confirm" formatted="false">سيؤدي هذا إلى حذف جميع المعاملات والميزانيات والحسابات المخصصة.</string>
+    <string name="about_license_summary" formatted="false">Apache License 2.0 • مكونات مفتوحة المصدر</string>
+    <string name="about_license_detail" formatted="false">مرخص بموجب Apache License 2.0. تخزين محلي مع دعم النسخ الاحتياطي المشفر AES-256-GCM.</string>
+    <string name="encrypted_label" formatted="false">مشفر</string>
+    <string name="copyright_label" formatted="false">حقوق النشر</string>
+    <string name="ok" formatted="false">حسناً</string>
+    <string name="daily_reminder_title" formatted="false">تذكير المصروفات اليومية</string>
+    <string name="daily_reminder_body" formatted="false">لا تنسَ تسجيل مصروفاتك لهذا اليوم.</string>
+    <string name="budget_monthly_default" formatted="false">الميزانية الشهرية</string>
+    <string name="budget_exceeded_notif_title" formatted="false">تم تجاوز الميزانية: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">تحذير الميزانية: {cat}</string>
+    <string name="budget_notif_body" formatted="false">تم إنفاق {spent} من حد {limit} ({pct}%)</string>
+    <string name="restore_backup_preview" formatted="false">نسخة من {date} (v{version}) تحتوي على {accounts} حساب و{categories} فئة و{transactions} معاملة و{budgets} ميزانية.</string>
+    <string name="transactions_count_single" formatted="false">معاملة {count}</string>
+    <string name="transactions_count_plural" formatted="false">{count} معاملات</string>
+    <string name="budget_alert_single" formatted="false">وصلت {count} ميزانية إلى 80% أو أكثر من حدها الشهري</string>
+    <string name="budget_alert_plural" formatted="false">وصلت {count} ميزانيات إلى 80% أو أكثر من حدها الشهري</string>
+    <string name="sort_newest" formatted="false">الأحدث</string>
+    <string name="sort_oldest" formatted="false">الأقدم</string>
+    <string name="sort_highest" formatted="false">الأعلى مبلغاً</string>
+    <string name="sort_lowest" formatted="false">الأقل مبلغاً</string>
+    <string name="err_invalid_amount" formatted="false">يرجى إدخال مبلغ صحيح أكبر من 0.</string>
+    <string name="err_select_account" formatted="false">يرجى إنشاء حساب أو اختياره أولاً.</string>
+    <string name="err_different_to_account" formatted="false">اختر حساباً مختلفاً للتحويل إليه.</string>
+    <string name="err_save_tx_failed" formatted="false">فشل حفظ المعاملة.</string>
+    <string name="account_type_cash" formatted="false">نقدي</string>
+    <string name="account_type_bank" formatted="false">حساب بنكي</string>
+    <string name="account_type_savings" formatted="false">مدخرات</string>
+    <string name="account_type_credit_card" formatted="false">بطاقة ائتمان</string>
+    <string name="account_type_mobile_banking" formatted="false">محفظة إلكترونية</string>
+    <string name="account_type_custom" formatted="false">مخصص</string>
+    <string name="recurrence_none" formatted="false">مرة واحدة</string>
+    <string name="recurrence_daily" formatted="false">يومي</string>
+    <string name="recurrence_weekly" formatted="false">أسبوعي</string>
+    <string name="recurrence_monthly" formatted="false">شهري</string>
+    <string name="recurrence_yearly" formatted="false">سنوي</string>
+    <string name="accent_emerald" formatted="false">زمردي</string>
+    <string name="accent_ocean_blue" formatted="false">أزرق محيطي</string>
+    <string name="accent_indigo" formatted="false">نيلي</string>
+    <string name="accent_violet" formatted="false">بنفسجي</string>
+    <string name="accent_coral_red" formatted="false">أحمر مرجاني</string>
+    <string name="accent_amber_gold" formatted="false">ذهبي عنبري</string>
+    <string name="accent_teal_cyan" formatted="false">سماوي مخضر</string>
+    <string name="accent_rose_pink" formatted="false">وردي</string>
+    <string name="cat_food_dining" formatted="false">الطعام والمطاعم</string>
+    <string name="cat_groceries" formatted="false">البقالة</string>
+    <string name="cat_transport" formatted="false">المواصلات</string>
+    <string name="cat_house_rent" formatted="false">إيجار المنزل</string>
+    <string name="cat_utilities_bills" formatted="false">الفواتير والمرافق</string>
+    <string name="cat_mobile_internet" formatted="false">الجوال والإنترنت</string>
+    <string name="cat_healthcare" formatted="false">الرعاية الصحية</string>
+    <string name="cat_shopping" formatted="false">التسوق</string>
+    <string name="cat_education" formatted="false">التعليم</string>
+    <string name="cat_entertainment" formatted="false">الترفيه</string>
+    <string name="cat_travel" formatted="false">السفر</string>
+    <string name="cat_other_expense" formatted="false">مصروفات أخرى</string>
+    <string name="cat_salary" formatted="false">الراتب</string>
+    <string name="cat_freelance" formatted="false">العمل الحر</string>
+    <string name="cat_business" formatted="false">الأعمال</string>
+    <string name="cat_investment" formatted="false">الاستثمار</string>
+    <string name="cat_gift_bonus" formatted="false">الهدايا والمكافآت</string>
+    <string name="cat_other_income" formatted="false">دخل آخر</string>
+</resources>

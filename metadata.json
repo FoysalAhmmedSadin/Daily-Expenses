@@ -1,0 +1,6 @@
+{
+  "name": "Daily Expenses",
+  "description": "Daily Expenses — Personal Finance Manager. Offline-first personal finance app with multi-account transfers, budgets, interactive analytics, BDT & Bangla localization, biometric lock, home widget, and AES-GCM encrypted backups.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

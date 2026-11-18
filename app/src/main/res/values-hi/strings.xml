@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" formatted="false">Daily Expenses</string>
+    <string name="app_subtitle" formatted="false">व्यक्तिगत वित्त प्रबंधक</string>
+    <string name="widget_description" formatted="false">कुल शेष, मासिक खर्च और त्वरित प्रविष्टि का अवलोकन</string>
+    <string name="notification_channel_reminders_name" formatted="false">दैनिक खर्च रिमाइंडर</string>
+    <string name="notification_channel_reminders_desc" formatted="false">आपको दैनिक खर्च दर्ज करने की याद दिलाता है</string>
+    <string name="notification_channel_budgets_name" formatted="false">बजट अलर्ट</string>
+    <string name="notification_channel_budgets_desc" formatted="false">जब खर्च बजट सीमा के करीब या ऊपर जाता है तो सूचित करता है</string>
+    <string name="nav_home" formatted="false">होम</string>
+    <string name="nav_transactions" formatted="false">लेन-देन</string>
+    <string name="nav_analytics" formatted="false">विश्लेषण</string>
+    <string name="nav_budgets" formatted="false">बजट</string>
+    <string name="nav_settings" formatted="false">सेटिंग्स</string>
+    <string name="total_balance" formatted="false">कुल शेष</string>
+    <string name="total_income" formatted="false">कुल आय</string>
+    <string name="total_expenses" formatted="false">कुल खर्च</string>
+    <string name="monthly_savings" formatted="false">मासिक बचत</string>
+    <string name="net_cash_flow" formatted="false">शुद्ध नकदी प्रवाह</string>
+    <string name="accounts" formatted="false">खाते</string>
+    <string name="manage" formatted="false">प्रबंधित करें</string>
+    <string name="spending_overview" formatted="false">खर्च का अवलोकन</string>
+    <string name="income_vs_expense" formatted="false">आय बनाम खर्च</string>
+    <string name="category_breakdown" formatted="false">श्रेणीवार खर्च</string>
+    <string name="recent_transactions" formatted="false">हाल के लेन-देन</string>
+    <string name="budget_progress" formatted="false">बजट प्रगति</string>
+    <string name="see_all" formatted="false">सभी देखें</string>
+    <string name="today" formatted="false">आज</string>
+    <string name="yesterday" formatted="false">कल</string>
+    <string name="this_week" formatted="false">इस सप्ताह</string>
+    <string name="this_month" formatted="false">इस महीने</string>
+    <string name="this_year" formatted="false">इस वर्ष</string>
+    <string name="custom_range" formatted="false">कस्टम</string>
+    <string name="add_transaction" formatted="false">लेन-देन जोड़ें</string>
+    <string name="edit_transaction" formatted="false">लेन-देन संपादित करें</string>
+    <string name="transaction_details" formatted="false">लेन-देन विवरण</string>
+    <string name="expense" formatted="false">खर्च</string>
+    <string name="income" formatted="false">आय</string>
+    <string name="transfer" formatted="false">ट्रांसफ़र</string>
+    <string name="all" formatted="false">सभी</string>
+    <string name="amount" formatted="false">राशि</string>
+    <string name="category" formatted="false">श्रेणी</string>
+    <string name="account" formatted="false">खाता</string>
+    <string name="from_account" formatted="false">स्रोत खाता</string>
+    <string name="to_account" formatted="false">गंतव्य खाता</string>
+    <string name="date_time" formatted="false">तिथि और समय</string>
+    <string name="note_optional" formatted="false">नोट (वैकल्पिक)</string>
+    <string name="recurring" formatted="false">आवर्ती</string>
+    <string name="receipt_attachment" formatted="false">रसीद फ़ोटो</string>
+    <string name="attach_receipt" formatted="false">रसीद फ़ोटो जोड़ें</string>
+    <string name="remove_receipt" formatted="false">फ़ोटो हटाएँ</string>
+    <string name="save" formatted="false">सहेजें</string>
+    <string name="cancel" formatted="false">रद्द करें</string>
+    <string name="delete" formatted="false">हटाएँ</string>
+    <string name="edit" formatted="false">संपादित करें</string>
+    <string name="search_transactions" formatted="false">नोट, श्रेणी, खाता खोजें...</string>
+    <string name="filters" formatted="false">फ़िल्टर</string>
+    <string name="reset" formatted="false">रीसेट</string>
+    <string name="apply" formatted="false">लागू करें</string>
+    <string name="recurring_only" formatted="false">केवल आवर्ती</string>
+    <string name="no_transactions_title" formatted="false">अभी कोई लेन-देन नहीं</string>
+    <string name="no_transactions_subtitle" formatted="false">खर्च, आय या ट्रांसफ़र जोड़ने के लिए + पर टैप करें।</string>
+    <string name="add_account" formatted="false">खाता जोड़ें</string>
+    <string name="edit_account" formatted="false">खाता संपादित करें</string>
+    <string name="account_name" formatted="false">खाते का नाम</string>
+    <string name="account_type" formatted="false">खाते का प्रकार</string>
+    <string name="opening_balance" formatted="false">प्रारंभिक शेष</string>
+    <string name="quick_transfer" formatted="false">ट्रांसफ़र</string>
+    <string name="analytics" formatted="false">विश्लेषण और रिपोर्ट</string>
+    <string name="daily" formatted="false">दैनिक</string>
+    <string name="weekly" formatted="false">साप्ताहिक</string>
+    <string name="monthly" formatted="false">मासिक</string>
+    <string name="yearly" formatted="false">वार्षिक</string>
+    <string name="savings_rate" formatted="false">बचत दर</string>
+    <string name="avg_daily_spend" formatted="false">दैनिक औसत खर्च</string>
+    <string name="vs_last_month" formatted="false">पिछले महीने की तुलना में</string>
+    <string name="spending_trends" formatted="false">खर्च के रुझान</string>
+    <string name="budgets" formatted="false">बजट</string>
+    <string name="add_budget" formatted="false">बजट जोड़ें</string>
+    <string name="edit_budget" formatted="false">बजट संपादित करें</string>
+    <string name="monthly_limit" formatted="false">मासिक सीमा</string>
+    <string name="overall_monthly_budget" formatted="false">कुल मासिक बजट</string>
+    <string name="spent" formatted="false">खर्च हुआ</string>
+    <string name="remaining" formatted="false">शेष</string>
+    <string name="overspent_by" formatted="false">अधिक खर्च</string>
+    <string name="alert_threshold" formatted="false">अलर्ट सीमा</string>
+    <string name="no_budgets_title" formatted="false">कोई बजट सेट नहीं है</string>
+    <string name="no_budgets_subtitle" formatted="false">खर्च ट्रैक करने के लिए मासिक या श्रेणी बजट सेट करें।</string>
+    <string name="settings" formatted="false">सेटिंग्स</string>
+    <string name="preferences" formatted="false">प्राथमिकताएँ</string>
+    <string name="view_mode" formatted="false">व्यू मोड</string>
+    <string name="appearance" formatted="false">रूप-रंग</string>
+    <string name="localization_display" formatted="false">भाषा और प्रदर्शन</string>
+    <string name="language" formatted="false">भाषा</string>
+    <string name="currency" formatted="false">मुद्रा</string>
+    <string name="number_format" formatted="false">संख्या प्रारूप</string>
+    <string name="hide_balances" formatted="false">शेष राशि छिपाएँ</string>
+    <string name="security_privacy" formatted="false">सुरक्षा और गोपनीयता</string>
+    <string name="biometric_lock" formatted="false">बायोमेट्रिक लॉक</string>
+    <string name="notifications_reminders" formatted="false">सूचनाएँ और रिमाइंडर</string>
+    <string name="daily_reminder" formatted="false">दैनिक खर्च रिमाइंडर</string>
+    <string name="budget_alerts" formatted="false">बजट सीमा अलर्ट</string>
+    <string name="categories" formatted="false">श्रेणियाँ</string>
+    <string name="manage_categories" formatted="false">कस्टम श्रेणियाँ प्रबंधित करें</string>
+    <string name="add_category" formatted="false">श्रेणी जोड़ें</string>
+    <string name="data_backup_export" formatted="false">एक्सपोर्ट और एन्क्रिप्टेड बैकअप</string>
+    <string name="export_csv" formatted="false">CSV एक्सपोर्ट करें</string>
+    <string name="export_pdf" formatted="false">PDF स्टेटमेंट एक्सपोर्ट करें</string>
+    <string name="encrypted_backup" formatted="false">एन्क्रिप्टेड बैकअप बनाएँ</string>
+    <string name="restore_backup" formatted="false">एन्क्रिप्टेड बैकअप पुनर्स्थापित करें</string>
+    <string name="clear_all_data" formatted="false">सभी डेटा साफ़ करें</string>
+    <string name="about_license" formatted="false">परिचय और ओपन सोर्स लाइसेंस</string>
+    <string name="unlock_title" formatted="false">ऐप लॉक है</string>
+    <string name="unlock_subtitle" formatted="false">अपने वित्तीय रिकॉर्ड देखने के लिए बायोमेट्रिक से अनलॉक करें।</string>
+    <string name="unlock_button" formatted="false">अनलॉक करें</string>
+    <string name="passphrase_title" formatted="false">बैकअप पासफ़्रेज़</string>
+    <string name="passphrase_hint" formatted="false">पासफ़्रेज़ दर्ज करें (न्यूनतम 4 अक्षर)</string>
+    <string name="confirm_action" formatted="false">पुष्टि करें</string>
+    <string name="export_monthly_csv" formatted="false">मासिक CSV एक्सपोर्ट</string>
+    <string name="selected_month" formatted="false">चयनित महीना</string>
+    <string name="all_months" formatted="false">सभी महीने</string>
+    <string name="no_transactions_in_month" formatted="false">इस महीने में कोई लेन-देन नहीं मिला।</string>
+    <string name="about_developer" formatted="false">डेवलपर के बारे में</string>
+    <string name="contact_developer" formatted="false">डेवलपर से संपर्क करें</string>
+    <string name="app_version_label" formatted="false">ऐप संस्करण</string>
+    <string name="open_source_licenses" formatted="false">ओपन सोर्स लाइसेंस</string>
+    <string name="no_email_app_error" formatted="false">कोई ईमेल ऐप नहीं मिला। कृपया foysal24x7@gmail.com पर ईमेल करें।</string>
+    <string name="next_scheduled" formatted="false">अगली निर्धारित प्रविष्टि</string>
+    <string name="budget_alert_header" formatted="false">80% बजट सीमा चेतावनी</string>
+    <string name="approaching_limit" formatted="false">80%+ पहुँच गया</string>
+    <string name="limit_exceeded" formatted="false">सीमा पार</string>
+    <string name="category_spending_cap" formatted="false">श्रेणी खर्च सीमा</string>
+    <string name="updates_existing_cap" formatted="false">इस महीने के लिए पहले से एक सीमा मौजूद है; सहेजने पर यह अपडेट होगी।</string>
+    <string name="google_drive_backup" formatted="false">Google Drive बैकअप</string>
+    <string name="google_drive_subtitle" formatted="false">निजी ऐप डेटा फ़ोल्डर में क्लाउड सिंक</string>
+    <string name="connect_google_drive" formatted="false">Google Drive जोड़ें</string>
+    <string name="switch_account" formatted="false">खाता बदलें</string>
+    <string name="disconnect" formatted="false">डिस्कनेक्ट करें</string>
+    <string name="back_up_now" formatted="false">अभी बैकअप लें</string>
+    <string name="restore_from_drive" formatted="false">Drive से पुनर्स्थापित करें</string>
+    <string name="drive_history_title" formatted="false">Google Drive बैकअप</string>
+    <string name="no_drive_backups" formatted="false">आपके Google Drive ऐप डेटा फ़ोल्डर में अभी कोई बैकअप नहीं है।</string>
+    <string name="auto_backup_schedule" formatted="false">स्वचालित बैकअप</string>
+    <string name="schedule_manual_only" formatted="false">मैनुअल</string>
+    <string name="schedule_daily" formatted="false">दैनिक</string>
+    <string name="schedule_weekly" formatted="false">साप्ताहिक</string>
+    <string name="not_connected" formatted="false">कनेक्ट नहीं</string>
+    <string name="connected_as" formatted="false">कनेक्टेड</string>
+    <string name="encrypt_with_passphrase" formatted="false">पासफ़्रेज़ से एन्क्रिप्ट करें</string>
+    <string name="cloud_backup_dialog_subtitle" formatted="false">अपने Google Drive ऐप डेटा फ़ोल्डर में सुरक्षित बैकअप सहेजें।</string>
+    <string name="theme_system" formatted="false">सिस्टम डिफ़ॉल्ट</string>
+    <string name="theme_light" formatted="false">लाइट</string>
+    <string name="theme_dark" formatted="false">डार्क</string>
+    <string name="theme_amoled" formatted="false">AMOLED</string>
+    <string name="accent_color" formatted="false">एक्सेंट रंग</string>
+    <string name="monthly_expense_summary" formatted="false">मासिक खर्च सारांश</string>
+    <string name="spending_by_category" formatted="false">श्रेणी अनुसार खर्च</string>
+    <string name="top_spending_category" formatted="false">शीर्ष श्रेणी</string>
+    <string name="other_category" formatted="false">अन्य</string>
+    <string name="no_monthly_expenses_title" formatted="false">इस महीने कोई खर्च नहीं</string>
+    <string name="no_monthly_expenses_subtitle" formatted="false">खर्च के रुझान देखने के लिए एक खर्च लेन-देन जोड़ें।</string>
+    <string name="select_specific_date" formatted="false">विशिष्ट तिथि चुनें</string>
+    <string name="select_date_range" formatted="false">तिथि सीमा चुनें</string>
+    <string name="clear_selection" formatted="false">चयन साफ़ करें</string>
+    <string name="return_to_monthly_view" formatted="false">मासिक दृश्य पर लौटें</string>
+    <string name="return_to_period_view" formatted="false">{view_mode} दृश्य पर लौटें</string>
+    <string name="custom_filter_active" formatted="false">कस्टम फ़िल्टर सक्रिय</string>
+    <string name="invalid_date_range" formatted="false">समाप्ति तिथि प्रारंभ तिथि से पहले नहीं हो सकती।</string>
+    <string name="previous_period" formatted="false">पिछली अवधि</string>
+    <string name="next_period" formatted="false">अगली अवधि</string>
+    <string name="select_period_shortcut" formatted="false">अवधि और तिथि चयन</string>
+    <string name="future_period_note" formatted="false">भविष्य की अवधि चयनित — केवल भविष्य की प्रविष्टियाँ दिख रही हैं।</string>
+    <string name="mixed_currency_note" formatted="false">इस अवधि में कई मुद्राएँ दर्ज हैं (रूपांतरण के बिना प्रति मुद्रा योग)।</string>
+    <string name="previous_month" formatted="false">पिछला महीना</string>
+    <string name="next_month" formatted="false">अगला महीना</string>
+    <string name="budgets_exceeded_banner" formatted="false">इस महीने {count} बजट सीमा पार हो गए।</string>
+    <string name="budgets_warning_banner" formatted="false">{count} बजट अपनी सीमा के करीब पहुँच रहे हैं।</string>
+    <string name="view_mode_settings" formatted="false">व्यू मोड</string>
+    <string name="appearance_settings" formatted="false">रूप-रंग</string>
+    <string name="language_settings" formatted="false">भाषा</string>
+    <string name="currency_settings" formatted="false">मुद्रा</string>
+    <string name="search_languages" formatted="false">भाषा खोजें...</string>
+    <string name="search_currencies" formatted="false">मुद्रा कोड, नाम या देश खोजें...</string>
+    <string name="no_matching_languages" formatted="false">कोई मिलती भाषा नहीं मिली</string>
+    <string name="no_matching_currencies" formatted="false">कोई मिलती मुद्रा नहीं मिली</string>
+    <string name="selected_label" formatted="false">चयनित</string>
+    <string name="appearance_theme_section" formatted="false">थीम</string>
+    <string name="biometric_not_configured" formatted="false">इस डिवाइस पर बायोमेट्रिक लॉक कॉन्फ़िगर नहीं है।</string>
+    <string name="reminder_time" formatted="false">रिमाइंडर समय</string>
+    <string name="tap_to_change_time" formatted="false">समय बदलने के लिए टैप करें</string>
+    <string name="notification_permission_required" formatted="false">रिमाइंडर के लिए सूचना अनुमति आवश्यक है।</string>
+    <string name="category_name_primary" formatted="false">नाम (अंग्रेजी)</string>
+    <string name="category_name_secondary" formatted="false">स्थानीय नाम (वैकल्पिक)</string>
+    <string name="categories_count_fmt" formatted="false">{count} श्रेणियाँ</string>
+    <string name="clear_all_data_confirm" formatted="false">यह सभी लेन-देन, बजट और कस्टम खातों को हटा देगा।</string>
+    <string name="about_license_summary" formatted="false">Apache License 2.0 • ओपन सोर्स घटक</string>
+    <string name="about_license_detail" formatted="false">Apache License 2.0 के अंतर्गत लाइसेंस प्राप्त।</string>
+    <string name="encrypted_label" formatted="false">एन्क्रिप्टेड</string>
+    <string name="copyright_label" formatted="false">कॉपीराइट</string>
+    <string name="ok" formatted="false">ठीक है</string>
+    <string name="daily_reminder_title" formatted="false">दैनिक खर्च रिमाइंडर</string>
+    <string name="daily_reminder_body" formatted="false">आज के अपने खर्च दर्ज करना न भूलें।</string>
+    <string name="budget_monthly_default" formatted="false">मासिक बजट</string>
+    <string name="budget_exceeded_notif_title" formatted="false">बजट सीमा पार: {cat}</string>
+    <string name="budget_warning_notif_title" formatted="false">बजट चेतावनी: {cat}</string>
+    <string name="budget_notif_body" formatted="false">सीमा {limit} में से {spent} खर्च हुए ({pct}%)</string>
+    <string name="restore_backup_preview" formatted="false">{date} (v{version}) बैकअप में {accounts} खाते, {categories} श्रेणियाँ, {transactions} लेन-देन और {budgets} बजट हैं।</string>
+    <string name="transactions_count_single" formatted="false">{count} लेन-देन</string>
+    <string name="transactions_count_plural" formatted="false">{count} लेन-देन</string>
+    <string name="budget_alert_single" formatted="false">{count} बजट अपनी मासिक सीमा के 80% या अधिक पर पहुँच गया है</string>
+    <string name="budget_alert_plural" formatted="false">{count} बजट अपनी मासिक सीमा के 80% या अधिक पर पहुँच गए हैं</string>
+    <string name="sort_newest" formatted="false">नवीनतम</string>
+    <string name="sort_oldest" formatted="false">सबसे पुराना</string>
+    <string name="sort_highest" formatted="false">उच्चतम राशि</string>
+    <string name="sort_lowest" formatted="false">न्यूनतम राशि</string>
+    <string name="err_invalid_amount" formatted="false">कृपया 0 से अधिक मान्य राशि दर्ज करें।</string>
+    <string name="err_select_account" formatted="false">कृपया पहले एक खाता चुनें।</string>
+    <string name="err_different_to_account" formatted="false">ट्रांसफ़र के लिए अलग गंतव्य खाता चुनें।</string>
+    <string name="err_save_tx_failed" formatted="false">लेन-देन सहेजा नहीं जा सका।</string>
+    <string name="account_type_cash" formatted="false">नकद</string>
+    <string name="account_type_bank" formatted="false">बैंक खाता</string>
+    <string name="account_type_savings" formatted="false">बचत</string>
+    <string name="account_type_credit_card" formatted="false">क्रेडिट कार्ड</string>
+    <string name="account_type_mobile_banking" formatted="false">मोबाइल बैंकिंग</string>
+    <string name="account_type_custom" formatted="false">कस्टम</string>
+    <string name="recurrence_none" formatted="false">एक बार</string>
+    <string name="recurrence_daily" formatted="false">दैनिक</string>
+    <string name="recurrence_weekly" formatted="false">साप्ताहिक</string>
+    <string name="recurrence_monthly" formatted="false">मासिक</string>
+    <string name="recurrence_yearly" formatted="false">वार्षिक</string>
+    <string name="accent_emerald" formatted="false">पन्ना हरा</string>
+    <string name="accent_ocean_blue" formatted="false">समुद्री नीला</string>
+    <string name="accent_indigo" formatted="false">इंडिगो</string>
+    <string name="accent_violet" formatted="false">बैंगनी</string>
+    <string name="accent_coral_red" formatted="false">कोरल लाल</string>
+    <string name="accent_amber_gold" formatted="false">सुनहरा पीला</string>
+    <string name="accent_teal_cyan" formatted="false">टील सियान</string>
+    <string name="accent_rose_pink" formatted="false">गुलाबी</string>
+    <string name="cat_food_dining" formatted="false">भोजन और डाइनिंग</string>
+    <string name="cat_groceries" formatted="false">किराना</string>
+    <string name="cat_transport" formatted="false">परिवहन</string>
+    <string name="cat_house_rent" formatted="false">घर का किराया</string>
+    <string name="cat_utilities_bills" formatted="false">बिजली और बिल</string>
+    <string name="cat_mobile_internet" formatted="false">मोबाइल और इंटरनेट</string>
+    <string name="cat_healthcare" formatted="false">स्वास्थ्य सेवा</string>
+    <string name="cat_shopping" formatted="false">खरीदारी</string>
+    <string name="cat_education" formatted="false">शिक्षा</string>
+    <string name="cat_entertainment" formatted="false">मनोरंजन</string>
+    <string name="cat_travel" formatted="false">यात्रा</string>
+    <string name="cat_other_expense" formatted="false">अन्य खर्च</string>
+    <string name="cat_salary" formatted="false">वेतन</string>
+    <string name="cat_freelance" formatted="false">फ़्रीलांस</string>
+    <string name="cat_business" formatted="false">व्यापार</string>
+    <string name="cat_investment" formatted="false">निवेश</string>
+    <string name="cat_gift_bonus" formatted="false">उपहार और बोनस</string>
+    <string name="cat_other_income" formatted="false">अन्य आय</string>
+</resources>

@@ -1,33 +1,68 @@
-name: Build Daily Expenses APK
+name: Build Universal Android APK
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [main, master]
+    tags: ["v*"]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
+    name: Build universal APK
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      - name: Accept Android SDK licences
+        run: yes | sdkmanager --licenses
 
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: daily-expenses-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
-        
+      - name: Install Android SDK packages
+        run: sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      # This repository does not contain gradlew/gradlew.bat. Install the
+      # exact Gradle version declared by gradle/wrapper/gradle-wrapper.properties.
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.3.1"
+
+      - name: Build universal APK
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Prepare release APK
+        run: |
+          mkdir -p release
+          cp app/build/outputs/apk/debug/app-debug.apk release/daily-expenses-universal.apk
+
+      - name: Upload APK as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-expenses-universal-apk
+          path: release/daily-expenses-universal.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish APK to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Daily Expenses ${{ github.ref_name }}
+          generate_release_notes: true
+          files: release/daily-expenses-universal.apk

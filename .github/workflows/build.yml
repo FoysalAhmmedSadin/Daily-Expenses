@@ -27,23 +27,42 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      # GitHub-hosted Ubuntu runners already include Android SDK command-line tools.
-      # Avoid setup-android here: its sdkmanager bootstrap step is failing on this runner.
-      - name: Configure Android SDK
+      # Locate sdkmanager dynamically because runner images may use different
+      # cmdline-tools versions (latest, 16.0, etc.).
+      - name: Locate Android SDK tools
+        shell: bash
         run: |
-          echo "ANDROID_HOME=${ANDROID_HOME:-/usr/local/lib/android/sdk}" >> "$GITHUB_ENV"
-          echo "${ANDROID_HOME:-/usr/local/lib/android/sdk}/cmdline-tools/16.0/bin" >> "$GITHUB_PATH"
-          echo "${ANDROID_HOME:-/usr/local/lib/android/sdk}/platform-tools" >> "$GITHUB_PATH"
+          SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          SDKMANAGER="$(command -v sdkmanager || true)"
+          if [ -z "$SDKMANAGER" ]; then
+            SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager -print -quit 2>/dev/null || true)"
+          fi
+          if [ -z "$SDKMANAGER" ]; then
+            echo "::error::sdkmanager was not found under $SDK_ROOT/cmdline-tools"
+            find "$SDK_ROOT" -maxdepth 4 -type d -print || true
+            exit 1
+          fi
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "$(dirname "$SDKMANAGER")" >> "$GITHUB_PATH"
+          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          echo "SDKMANAGER=$SDKMANAGER" >> "$GITHUB_ENV"
+          echo "Using SDK manager: $SDKMANAGER"
 
       - name: Accept Android SDK licences
         shell: bash
         run: |
-          set +o pipefail
-          yes | sdkmanager --licenses
-          set -o pipefail
+          set +e
+          yes | "$SDKMANAGER" --licenses
+          status=${PIPESTATUS[1]}
+          set -e
+          if [ "$status" -ne 0 ]; then
+            echo "::error::sdkmanager --licenses failed with exit code $status"
+            exit "$status"
+          fi
 
       - name: Install Android SDK packages
-        run: sdkmanager --install "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+        shell: bash
+        run: "$SDKMANAGER" --install "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 
       # This repository does not contain gradlew/gradlew.bat. Install the
       # exact Gradle version declared by gradle/wrapper/gradle-wrapper.properties.

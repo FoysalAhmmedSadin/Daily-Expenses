@@ -2,17 +2,17 @@ package com.example.core.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.core.model.AppAccentColor
 import com.example.core.model.AppCurrency
 import com.example.core.model.AppLanguage
-import com.example.core.model.DriveBackupSchedule
 import com.example.core.model.IsoCurrencyCatalog
 import com.example.core.model.NumberFormatStyle
 import com.example.core.model.SupportedLanguageCatalog
@@ -22,12 +22,27 @@ import com.example.core.model.ViewMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-    name = "expense_manager_prefs"
-)
+private object DataStoreRegistry {
+    private val stores = ConcurrentHashMap<String, DataStore<Preferences>>()
+
+    fun getOrCreate(context: Context): DataStore<Preferences> {
+        val appContext = context.applicationContext ?: context
+        val file = appContext.preferencesDataStoreFile("expense_manager_prefs")
+        val key = runCatching { file.canonicalPath }.getOrElse { file.absolutePath }
+        return stores.computeIfAbsent(key) {
+            PreferenceDataStoreFactory.create(
+                produceFile = { file }
+            )
+        }
+    }
+}
 
 class PreferencesDataSource(private val context: Context) {
+
+    private val dataStore: DataStore<Preferences>
+        get() = DataStoreRegistry.getOrCreate(context)
 
     private object Keys {
         val CURRENCY = stringPreferencesKey("currency")
@@ -46,14 +61,9 @@ class PreferencesDataSource(private val context: Context) {
         val HIDE_BALANCES = booleanPreferencesKey("hide_balances")
         val LAST_BACKUP_AT = longPreferencesKey("last_backup_at")
         val LAST_BACKUP_STATUS = stringPreferencesKey("last_backup_status")
-        val DRIVE_ACCOUNT_EMAIL = stringPreferencesKey("drive_account_email")
-        val DRIVE_ACCOUNT_NAME = stringPreferencesKey("drive_account_name")
-        val DRIVE_BACKUP_SCHEDULE = stringPreferencesKey("drive_backup_schedule")
-        val LAST_DRIVE_BACKUP_AT = longPreferencesKey("last_drive_backup_at")
-        val LAST_DRIVE_BACKUP_STATUS = stringPreferencesKey("last_drive_backup_status")
     }
 
-    val preferencesFlow: Flow<UserPreferences> = context.dataStore.data.map { prefs ->
+    val preferencesFlow: Flow<UserPreferences> = dataStore.data.map { prefs ->
         val legacyCurrency = prefs[Keys.CURRENCY]?.let { runCatching { AppCurrency.valueOf(it) }.getOrNull() }
             ?: AppCurrency.BDT
         val resolvedCurrencyCode = prefs[Keys.CURRENCY_CODE]?.takeIf { it.isNotBlank() }?.uppercase(Locale.US)
@@ -87,13 +97,6 @@ class PreferencesDataSource(private val context: Context) {
             hideBalances = prefs[Keys.HIDE_BALANCES] ?: false,
             lastLocalBackupAt = prefs[Keys.LAST_BACKUP_AT],
             lastLocalBackupStatus = prefs[Keys.LAST_BACKUP_STATUS] ?: "",
-            driveAccountEmail = prefs[Keys.DRIVE_ACCOUNT_EMAIL],
-            driveAccountName = prefs[Keys.DRIVE_ACCOUNT_NAME],
-            driveBackupSchedule = prefs[Keys.DRIVE_BACKUP_SCHEDULE]?.let {
-                runCatching { DriveBackupSchedule.valueOf(it) }.getOrNull()
-            } ?: DriveBackupSchedule.MANUAL_ONLY,
-            lastDriveBackupAt = prefs[Keys.LAST_DRIVE_BACKUP_AT],
-            lastDriveBackupStatus = prefs[Keys.LAST_DRIVE_BACKUP_STATUS] ?: "",
             viewMode = resolvedViewMode,
             languageTag = resolvedLangTag,
             currencyCode = resolvedCurrencyCode
@@ -101,7 +104,7 @@ class PreferencesDataSource(private val context: Context) {
     }
 
     suspend fun setCurrency(currency: AppCurrency) {
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.CURRENCY] = currency.name
             it[Keys.CURRENCY_CODE] = currency.code
         }
@@ -109,7 +112,7 @@ class PreferencesDataSource(private val context: Context) {
 
     suspend fun setCurrencyCode(code: String) {
         val resolved = IsoCurrencyCatalog.resolve(code)
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.CURRENCY_CODE] = resolved.code
             val legacy = IsoCurrencyCatalog.toAppCurrencyOrNull(resolved.code) ?: AppCurrency.BDT
             it[Keys.CURRENCY] = legacy.name
@@ -117,7 +120,7 @@ class PreferencesDataSource(private val context: Context) {
     }
 
     suspend fun setLanguage(language: AppLanguage) {
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.LANGUAGE] = language.name
             it[Keys.LANGUAGE_TAG] = language.code
         }
@@ -126,34 +129,34 @@ class PreferencesDataSource(private val context: Context) {
     suspend fun setLanguageTag(tag: String) {
         val normalized = SupportedLanguageCatalog.normalizeTag(tag)
         val legacy = SupportedLanguageCatalog.toAppLanguage(normalized)
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.LANGUAGE_TAG] = normalized
             it[Keys.LANGUAGE] = legacy.name
         }
     }
 
     suspend fun setViewMode(viewMode: ViewMode) {
-        context.dataStore.edit { it[Keys.VIEW_MODE] = viewMode.name }
+        dataStore.edit { it[Keys.VIEW_MODE] = viewMode.name }
     }
 
     suspend fun setNumberFormat(style: NumberFormatStyle) {
-        context.dataStore.edit { it[Keys.NUMBER_FORMAT] = style.name }
+        dataStore.edit { it[Keys.NUMBER_FORMAT] = style.name }
     }
 
     suspend fun setThemeMode(mode: ThemeMode) {
-        context.dataStore.edit { it[Keys.THEME_MODE] = mode.name }
+        dataStore.edit { it[Keys.THEME_MODE] = mode.name }
     }
 
     suspend fun setAccentColor(color: AppAccentColor) {
-        context.dataStore.edit { it[Keys.ACCENT_COLOR] = color.name }
+        dataStore.edit { it[Keys.ACCENT_COLOR] = color.name }
     }
 
     suspend fun setBiometricLock(enabled: Boolean) {
-        context.dataStore.edit { it[Keys.BIOMETRIC_LOCK] = enabled }
+        dataStore.edit { it[Keys.BIOMETRIC_LOCK] = enabled }
     }
 
     suspend fun setDailyReminder(enabled: Boolean, hour: Int? = null, minute: Int? = null) {
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.DAILY_REMINDER] = enabled
             if (hour != null) it[Keys.REMINDER_HOUR] = hour
             if (minute != null) it[Keys.REMINDER_MINUTE] = minute
@@ -161,44 +164,17 @@ class PreferencesDataSource(private val context: Context) {
     }
 
     suspend fun setBudgetAlerts(enabled: Boolean) {
-        context.dataStore.edit { it[Keys.BUDGET_ALERTS] = enabled }
+        dataStore.edit { it[Keys.BUDGET_ALERTS] = enabled }
     }
 
     suspend fun setHideBalances(hidden: Boolean) {
-        context.dataStore.edit { it[Keys.HIDE_BALANCES] = hidden }
+        dataStore.edit { it[Keys.HIDE_BALANCES] = hidden }
     }
 
     suspend fun setLastBackupInfo(timestamp: Long, status: String) {
-        context.dataStore.edit {
+        dataStore.edit {
             it[Keys.LAST_BACKUP_AT] = timestamp
             it[Keys.LAST_BACKUP_STATUS] = status
-        }
-    }
-
-    suspend fun setDriveAccount(email: String?, displayName: String?) {
-        context.dataStore.edit {
-            if (email.isNullOrBlank()) {
-                it.remove(Keys.DRIVE_ACCOUNT_EMAIL)
-                it.remove(Keys.DRIVE_ACCOUNT_NAME)
-            } else {
-                it[Keys.DRIVE_ACCOUNT_EMAIL] = email
-                if (displayName.isNullOrBlank()) {
-                    it.remove(Keys.DRIVE_ACCOUNT_NAME)
-                } else {
-                    it[Keys.DRIVE_ACCOUNT_NAME] = displayName
-                }
-            }
-        }
-    }
-
-    suspend fun setDriveBackupSchedule(schedule: DriveBackupSchedule) {
-        context.dataStore.edit { it[Keys.DRIVE_BACKUP_SCHEDULE] = schedule.name }
-    }
-
-    suspend fun setLastDriveBackupInfo(timestamp: Long, status: String) {
-        context.dataStore.edit {
-            it[Keys.LAST_DRIVE_BACKUP_AT] = timestamp
-            it[Keys.LAST_DRIVE_BACKUP_STATUS] = status
         }
     }
 }

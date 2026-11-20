@@ -209,7 +209,6 @@ class MonthlyExpenseSummaryAndThemeTest {
                 ),
                 preferencesRepository = prefsRepo
             )
-            vm.uiState.first { it.summary.monthlyCategoryBreakdowns.isNotEmpty() }
             foodCat.id to vm
         }
 
@@ -227,6 +226,9 @@ class MonthlyExpenseSummaryAndThemeTest {
                 )
             }
         }
+        composeRule.waitUntil(timeoutMillis = 5_000) {
+            homeViewModel.uiState.value.summary.monthlyCategoryBreakdowns.isNotEmpty()
+        }
         composeRule.waitForIdle()
 
         composeRule.onNodeWithTag("home_dashboard_list")
@@ -234,10 +236,10 @@ class MonthlyExpenseSummaryAndThemeTest {
         composeRule.onNodeWithTag("dashboard_monthly_expense_summary_card").assertIsDisplayed()
         composeRule.onNodeWithTag("monthly_expense_total")
             .assertIsDisplayed()
-            .assertTextContains("1,200")
+            .assertTextContains("1,200", substring = true)
         composeRule.onNodeWithTag("monthly_expense_trend_badge")
             .assertIsDisplayed()
-            .assertTextContains("+20.0%")
+            .assertTextContains("+20.0%", substring = true)
         composeRule.onNodeWithTag("monthly_category_bar_chart").assertIsDisplayed()
         composeRule.onNodeWithTag("monthly_top_category_summary").assertIsDisplayed()
 
@@ -248,7 +250,7 @@ class MonthlyExpenseSummaryAndThemeTest {
 
         composeRule.onNodeWithTag("category_bar_selected_callout")
             .assertIsDisplayed()
-            .assertTextContains("Food & Dining")
+            .assertTextContains("Food & Dining", substring = true)
     }
 
     @Test

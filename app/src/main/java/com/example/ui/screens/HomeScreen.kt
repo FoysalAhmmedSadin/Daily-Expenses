@@ -71,6 +71,7 @@ import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -358,7 +359,7 @@ fun HomeScreen(
                                     } else {
                                         strings.returnToPeriodView(state.viewMode)
                                     },
-                                    maxLines = 1,
+                                    maxLines = 2,
                                     overflow = TextOverflow.Ellipsis
                                 )
                             }
@@ -719,7 +720,7 @@ fun HomeScreen(
                     ) {
                         Icon(Icons.Rounded.Today, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(strings.selectSpecificDate, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(strings.selectSpecificDate, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     }
                     FilledTonalButton(
                         onClick = {
@@ -735,7 +736,7 @@ fun HomeScreen(
                     ) {
                         Icon(Icons.Rounded.DateRange, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(strings.selectDateRange, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(strings.selectDateRange, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     }
                 }
 
@@ -963,7 +964,8 @@ private fun HeroBalanceCard(
                                 totalBalance,
                                 preferences.effectiveCurrencyCode,
                                 preferences.numberFormat,
-                                hideAmount = preferences.hideBalances
+                                hideAmount = preferences.hideBalances,
+                                languageTag = preferences.effectiveLanguageTag
                             ),
                             style = MaterialTheme.typography.displaySmall,
                             color = Color.White,
@@ -994,7 +996,8 @@ private fun HeroBalanceCard(
                                     periodCurrencyCode,
                                     preferences.numberFormat,
                                     hideAmount = preferences.hideBalances,
-                                    showSign = true
+                                    showSign = true,
+                                    languageTag = preferences.effectiveLanguageTag
                                 ),
                                 style = MaterialTheme.typography.labelLarge,
                                 color = if (savingsAmount >= 0) accent else ExpenseRed
@@ -1013,7 +1016,8 @@ private fun HeroBalanceCard(
                             periodIncome,
                             periodCurrencyCode,
                             preferences.numberFormat,
-                            hideAmount = preferences.hideBalances
+                            hideAmount = preferences.hideBalances,
+                            languageTag = preferences.effectiveLanguageTag
                         ),
                         icon = Icons.Rounded.ArrowDownward,
                         tint = IncomeGreen,
@@ -1025,7 +1029,8 @@ private fun HeroBalanceCard(
                             periodExpense,
                             periodCurrencyCode,
                             preferences.numberFormat,
-                            hideAmount = preferences.hideBalances
+                            hideAmount = preferences.hideBalances,
+                            languageTag = preferences.effectiveLanguageTag
                         ),
                         icon = Icons.Rounded.ArrowUpward,
                         tint = ExpenseRed,
@@ -1061,7 +1066,8 @@ private fun HeroBalanceCard(
                                                 ct.currencyCode,
                                                 preferences.numberFormat,
                                                 hideAmount = preferences.hideBalances,
-                                                includeDecimals = false
+                                                includeDecimals = false,
+                                                languageTag = preferences.effectiveLanguageTag
                                             )
                                         } / -${
                                             CurrencyFormatter.format(
@@ -1069,7 +1075,8 @@ private fun HeroBalanceCard(
                                                 ct.currencyCode,
                                                 preferences.numberFormat,
                                                 hideAmount = preferences.hideBalances,
-                                                includeDecimals = false
+                                                includeDecimals = false,
+                                                languageTag = preferences.effectiveLanguageTag
                                             )
                                         }",
                                         style = MaterialTheme.typography.labelSmall,
@@ -1187,7 +1194,8 @@ private fun AccountMiniCard(
                 account.balance,
                 preferences.effectiveCurrencyCode,
                 preferences.numberFormat,
-                hideAmount = preferences.hideBalances
+                hideAmount = preferences.hideBalances,
+                languageTag = preferences.effectiveLanguageTag
             ),
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
             color = if (account.balance >= 0) MaterialTheme.colorScheme.onSurface else ExpenseRed,
@@ -1248,7 +1256,8 @@ private fun MonthlyExpenseSummaryCard(
                         displayCurrencyCode,
                         preferences.numberFormat,
                         hideAmount = preferences.hideBalances,
-                        includeDecimals = false
+                        includeDecimals = false,
+                        languageTag = preferences.effectiveLanguageTag
                     ),
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = ExpenseRed,
@@ -1260,7 +1269,9 @@ private fun MonthlyExpenseSummaryCard(
                     Surface(
                         shape = RoundedCornerShape(8.dp),
                         color = deltaColor.copy(alpha = 0.14f),
-                        modifier = Modifier.testTag("monthly_expense_trend_badge")
+                        modifier = Modifier
+                            .semantics(mergeDescendants = true) {}
+                            .testTag("monthly_expense_trend_badge")
                     ) {
                         Text(
                             text = "${
@@ -1350,7 +1361,8 @@ private fun MonthlyExpenseSummaryCard(
                                 displayCurrencyCode,
                                 preferences.numberFormat,
                                 hideAmount = preferences.hideBalances,
-                                includeDecimals = false
+                                includeDecimals = false,
+                                languageTag = preferences.effectiveLanguageTag
                             ),
                             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.onSurface

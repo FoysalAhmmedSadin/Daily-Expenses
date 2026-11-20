@@ -1,6 +1,7 @@
 package com.example
 
 import android.content.Context
+import android.os.Looper
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertTextContains
@@ -10,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.room.Room
@@ -49,6 +51,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -186,7 +189,6 @@ class CategoryBudgetDashboardTest {
                 ),
                 preferencesRepository = prefsRepo
             )
-            vm.uiState.first { it.summary.budgetAlerts.isNotEmpty() }
             id to vm
         }
 
@@ -204,10 +206,15 @@ class CategoryBudgetDashboardTest {
                 )
             }
         }
+        composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
+            homeViewModel.uiState.value.summary.budgetAlerts.isNotEmpty()
+        }
         composeRule.waitForIdle()
 
         composeRule.onNodeWithTag("home_dashboard_list")
-            .performScrollToNode(hasTestTag("dashboard_budget_alert_card"))
+            .performScrollToIndex(3)
+        composeRule.waitForIdle()
         composeRule.onNodeWithTag("dashboard_budget_alert_card").assertIsDisplayed()
         composeRule.onNodeWithTag("dashboard_alert_item_$budgetId").assertIsDisplayed()
         composeRule.onNodeWithTag("dashboard_alert_budget_percent_$budgetId")
@@ -230,7 +237,6 @@ class CategoryBudgetDashboardTest {
                 categoryRepository = categoryRepo,
                 preferencesRepository = prefsRepo
             )
-            vm.uiState.first { it.expenseCategories.isNotEmpty() }
             cat to vm
         }
 
@@ -238,6 +244,10 @@ class CategoryBudgetDashboardTest {
             ExpenseManagerTheme(themeMode = ThemeMode.DARK) {
                 BudgetsScreen(viewModel = budgetsViewModel)
             }
+        }
+        composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
+            budgetsViewModel.uiState.value.expenseCategories.isNotEmpty()
         }
         composeRule.waitForIdle()
 
@@ -255,6 +265,7 @@ class CategoryBudgetDashboardTest {
             .performClick()
 
         composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
             budgetsViewModel.uiState.value.budgets.any {
                 it.budget.categoryId == shoppingCat.id && it.budget.amountLimit == 2500.0
             }

@@ -11,16 +11,10 @@ import com.example.core.datastore.PreferencesDataSource
 import com.example.core.domain.GetAnalyticsReportUseCase
 import com.example.core.domain.GetBudgetsWithProgressUseCase
 import com.example.core.domain.GetDashboardSummaryUseCase
-import com.example.core.drive.DriveAuthGateway
-import com.example.core.drive.GoogleDriveApiClient
-import com.example.core.drive.GoogleDriveAuthManager
-import com.example.core.drive.GoogleDriveBackupRepositoryImpl
-import com.example.core.drive.GoogleDriveRemoteDataSource
 import com.example.core.repository.AccountRepository
 import com.example.core.repository.BackupAndExportRepository
 import com.example.core.repository.BudgetRepository
 import com.example.core.repository.CategoryRepository
-import com.example.core.repository.GoogleDriveBackupRepository
 import com.example.core.repository.PreferencesRepository
 import com.example.core.repository.TransactionRepository
 import com.example.core.worker.BudgetAlertNotifier
@@ -54,11 +48,6 @@ val repositoryModule = module {
     single<BackupAndExportRepository> {
         BackupAndExportRepositoryImpl(androidContext(), get(), get(), get(), get(), get(), get(), get())
     }
-    single<DriveAuthGateway> { GoogleDriveAuthManager() }
-    single<GoogleDriveRemoteDataSource> { GoogleDriveApiClient() }
-    single<GoogleDriveBackupRepository> {
-        GoogleDriveBackupRepositoryImpl(androidContext(), get(), get(), get(), get(), get(), get())
-    }
     single { BudgetAlertNotifier(androidContext(), get(), get(), get()) }
 }
 
@@ -76,7 +65,7 @@ val viewModelModule = module {
     viewModel { AccountsViewModel(get(), get(), get(), androidContext()) }
     viewModel { AnalyticsViewModel(get(), get()) }
     viewModel { BudgetsViewModel(get(), get(), get(), get()) }
-    viewModel { SettingsViewModel(get(), get(), get(), get(), get(), get(), get(), androidContext()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get(), androidContext()) }
 }
 
 val allAppModules = listOf(

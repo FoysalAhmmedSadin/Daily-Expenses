@@ -6,8 +6,10 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
+import com.example.core.common.AppStrings
 import com.example.core.common.CurrencyFormatter
 import com.example.core.common.DateTimeUtils
+import com.example.core.common.EnglishStrings
 import com.example.core.model.Account
 import com.example.core.model.IsoCurrencyCatalog
 import com.example.core.model.TransactionType
@@ -21,34 +23,38 @@ object ExportManager {
     fun writeCsv(
         outputStream: OutputStream,
         transactions: List<TransactionWithDetails>,
-        preferences: UserPreferences
+        preferences: UserPreferences,
+        strings: AppStrings = EnglishStrings
     ): Int {
         val writer = outputStream.bufferedWriter(Charsets.UTF_8)
-        // UTF-8 BOM for Excel Bangla compatibility
+        // UTF-8 BOM for Excel Bangla and CJK compatibility
         writer.write("\uFEFF")
-        writer.write("Date,Time,Type,Category,Account,To Account,Amount,Currency,Note,Recurring\n")
+        writer.write(strings.csvHeaderRow)
+        writer.write("\n")
         val langTag = preferences.effectiveLanguageTag
         transactions.forEach { item ->
             val tx = item.transaction
             val txCurrency = IsoCurrencyCatalog.resolve(tx.currencyCode)
             val date = DateTimeUtils.formatDate(tx.timestamp, langTag, preferences.numberFormat)
             val time = DateTimeUtils.formatTime(tx.timestamp, preferences.numberFormat, languageTag = langTag)
-            val categoryName = item.category?.localizedName(langTag) ?: "-"
+            val typeLabel = strings.transactionTypeLabel(tx.type)
+            val categoryName = item.category?.localizedName(langTag, strings) ?: "-"
             val accountName = item.account?.name ?: "-"
             val toAccountName = item.toAccount?.name ?: "-"
             val decimals = txCurrency.fractionDigits.coerceIn(0, 3)
             val amountStr = String.format(Locale.US, "%.${decimals}f", tx.amount)
+            val recurrenceLabel = strings.recurrenceLabel(tx.recurrence)
             val row = listOf(
                 date,
                 time,
-                tx.type.name,
+                typeLabel,
                 categoryName,
                 accountName,
                 toAccountName,
                 amountStr,
                 txCurrency.code,
                 tx.note,
-                tx.recurrence.name
+                recurrenceLabel
             ).joinToString(",") { csvEscape(it) }
             writer.write(row)
             writer.write("\n")
@@ -61,7 +67,8 @@ object ExportManager {
         outputStream: OutputStream,
         accounts: List<Account>,
         transactions: List<TransactionWithDetails>,
-        preferences: UserPreferences
+        preferences: UserPreferences,
+        strings: AppStrings = EnglishStrings
     ): Int {
         val document = PdfDocument()
         val pageWidth = 595
@@ -70,11 +77,11 @@ object ExportManager {
 
         val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#17191C")
-            textSize = 20f
+            textSize = 18f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         }
         val subtitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#8A9099")
+            color = Color.parseColor("#6E747E")
             textSize = 10f
         }
         val sectionPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -87,12 +94,12 @@ object ExportManager {
             textSize = 10f
         }
         val greenPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#34C759")
-            textSize = 11f
+            color = Color.parseColor("#248A3D")
+            textSize = 10.5f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         }
         val redPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#FF3B30")
+            color = Color.parseColor("#D70015")
             textSize = 10f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         }
@@ -121,22 +128,32 @@ object ExportManager {
         // Header
         val langTag = preferences.effectiveLanguageTag
         val activeCurrencyCode = preferences.effectiveCurrencyCode
-        canvas.drawText("Daily Expenses — Financial Statement", margin, y, titlePaint)
+        canvas.drawText(ellipsizeForWidth(strings.pdfStatementTitle, titlePaint, pageWidth - 2 * margin), margin, y, titlePaint)
         y += 16f
         val generatedDate = DateTimeUtils.formatDateTime(
             System.currentTimeMillis(),
             langTag,
             preferences.numberFormat
         )
-        canvas.drawText("Generated: $generatedDate  |  Currency: $activeCurrencyCode", margin, y, subtitlePaint)
+        canvas.drawText(
+            ellipsizeForWidth(strings.pdfGeneratedMeta(generatedDate, activeCurrencyCode), subtitlePaint, pageWidth - 2 * margin),
+            margin,
+            y,
+            subtitlePaint
+        )
         y += 20f
 
         // Totals calculation
         val totalBalance = accounts.sumOf { it.balance }
-        val totalIncome = transactions.filter { it.transaction.type == TransactionType.INCOME }
-            .sumOf { it.transaction.amount }
-        val totalExpense = transactions.filter { it.transaction.type == TransactionType.EXPENSE }
-            .sumOf { it.transaction.amount }
+        var totalIncome = 0.0
+        var totalExpense = 0.0
+        transactions.forEach { item ->
+            when (item.transaction.type) {
+                TransactionType.INCOME -> totalIncome += item.transaction.amount
+                TransactionType.EXPENSE -> totalExpense += item.transaction.amount
+                TransactionType.TRANSFER -> Unit
+            }
+        }
         val netSavings = totalIncome - totalExpense
 
         // Summary box
@@ -148,27 +165,31 @@ object ExportManager {
         )
         val colWidth = (pageWidth - 2 * margin) / 4f
         val summaryItems = listOf(
-            "Total Balance" to CurrencyFormatter.format(totalBalance, activeCurrencyCode, preferences.numberFormat),
-            "Total Income" to CurrencyFormatter.format(totalIncome, activeCurrencyCode, preferences.numberFormat),
-            "Total Expense" to CurrencyFormatter.format(totalExpense, activeCurrencyCode, preferences.numberFormat),
-            "Net Savings" to CurrencyFormatter.format(netSavings, activeCurrencyCode, preferences.numberFormat)
+            strings.totalBalance to CurrencyFormatter.format(totalBalance, activeCurrencyCode, preferences.numberFormat, languageTag = langTag),
+            strings.totalIncome to CurrencyFormatter.format(totalIncome, activeCurrencyCode, preferences.numberFormat, languageTag = langTag),
+            strings.totalExpenses to CurrencyFormatter.format(totalExpense, activeCurrencyCode, preferences.numberFormat, languageTag = langTag),
+            strings.netCashFlow to CurrencyFormatter.format(netSavings, activeCurrencyCode, preferences.numberFormat, languageTag = langTag)
         )
         summaryItems.forEachIndexed { idx, (label, value) ->
-            val x = margin + 12f + idx * colWidth
-            canvas.drawText(label, x, y + 22f, subtitlePaint)
-            canvas.drawText(value, x, y + 44f, if (idx == 2) redPaint else greenPaint)
+            val x = margin + 10f + idx * colWidth
+            val maxColTextWidth = colWidth - 14f
+            canvas.drawText(ellipsizeForWidth(label, subtitlePaint, maxColTextWidth), x, y + 22f, subtitlePaint)
+            val valuePaint = if (idx == 2) redPaint else greenPaint
+            canvas.drawText(ellipsizeForWidth(value, valuePaint, maxColTextWidth), x, y + 44f, valuePaint)
         }
         y += 86f
 
         // Accounts section
-        canvas.drawText("Accounts Overview", margin, y, sectionPaint)
+        canvas.drawText(strings.pdfAccountsOverview, margin, y, sectionPaint)
         y += 16f
         accounts.forEach { acc ->
             if (y > pageHeight - 60f) newPage()
-            canvas.drawText("${acc.name} (${acc.type.name})", margin, y, bodyPaint)
-            val bal = CurrencyFormatter.format(acc.balance, activeCurrencyCode, preferences.numberFormat)
-            val w = bodyPaint.measureText(bal)
-            canvas.drawText(bal, pageWidth - margin - w, y, bodyPaint)
+            val bal = CurrencyFormatter.format(acc.balance, activeCurrencyCode, preferences.numberFormat, languageTag = langTag)
+            val balWidth = bodyPaint.measureText(bal)
+            val accMaxWidth = (pageWidth - 2 * margin - balWidth - 16f).coerceAtLeast(80f)
+            val accLabel = "${acc.name} (${strings.accountTypeLabel(acc.type)})"
+            canvas.drawText(ellipsizeForWidth(accLabel, bodyPaint, accMaxWidth), margin, y, bodyPaint)
+            canvas.drawText(bal, pageWidth - margin - balWidth, y, bodyPaint)
             y += 16f
         }
         y += 10f
@@ -176,14 +197,14 @@ object ExportManager {
         y += 20f
 
         // Transactions table
-        canvas.drawText("Transactions (${transactions.size})", margin, y, sectionPaint)
+        canvas.drawText(strings.pdfTransactionsCount(transactions.size, preferences.numberFormat), margin, y, sectionPaint)
         y += 18f
 
         fun drawTableHeader() {
-            canvas.drawText("Date", margin, y, subtitlePaint)
-            canvas.drawText("Category / Details", margin + 88f, y, subtitlePaint)
-            canvas.drawText("Account", margin + 275f, y, subtitlePaint)
-            val amtHeader = "Amount"
+            canvas.drawText(ellipsizeForWidth(strings.pdfColDate, subtitlePaint, 82f), margin, y, subtitlePaint)
+            canvas.drawText(ellipsizeForWidth(strings.pdfColDetails, subtitlePaint, 180f), margin + 88f, y, subtitlePaint)
+            canvas.drawText(ellipsizeForWidth(strings.pdfColAccount, subtitlePaint, 110f), margin + 275f, y, subtitlePaint)
+            val amtHeader = strings.pdfColAmount
             canvas.drawText(amtHeader, pageWidth - margin - subtitlePaint.measureText(amtHeader), y, subtitlePaint)
             y += 6f
             canvas.drawLine(margin, y, pageWidth - margin, y, dividerPaint)
@@ -199,16 +220,17 @@ object ExportManager {
             val tx = item.transaction
             val date = DateTimeUtils.formatShortDate(tx.timestamp, langTag, preferences.numberFormat)
             val label = when (tx.type) {
-                TransactionType.TRANSFER -> "Transfer -> ${item.toAccount?.name ?: "-"}"
-                else -> item.category?.localizedName(langTag) ?: tx.type.name
+                TransactionType.TRANSFER -> "${strings.transfer} -> ${item.toAccount?.name ?: "-"}"
+                else -> item.category?.localizedName(langTag, strings) ?: strings.transactionTypeLabel(tx.type)
             }
-            val detail = if (tx.note.isNotBlank()) "$label (${tx.note.take(20)})" else label
-            val accName = (item.account?.name ?: "-").take(18)
+            val detail = if (tx.note.isNotBlank()) "$label (${tx.note})" else label
+            val accName = item.account?.name ?: "-"
             val amtStr = CurrencyFormatter.format(
                 amount = tx.amount,
                 currencyCode = tx.currencyCode,
                 numberFormat = preferences.numberFormat,
-                showSign = tx.type != TransactionType.TRANSFER
+                showSign = tx.type != TransactionType.TRANSFER,
+                languageTag = langTag
             ).let {
                 when (tx.type) {
                     TransactionType.EXPENSE -> "-${it.removePrefix("+")}"
@@ -222,10 +244,12 @@ object ExportManager {
                 TransactionType.TRANSFER -> bodyPaint
             }
 
-            canvas.drawText(date, margin, y, bodyPaint)
-            canvas.drawText(detail.take(30), margin + 88f, y, bodyPaint)
-            canvas.drawText(accName, margin + 275f, y, bodyPaint)
             val amtWidth = amtPaint.measureText(amtStr)
+            val maxAccWidth = (pageWidth - margin - amtWidth - 10f - (margin + 275f)).coerceAtLeast(60f)
+
+            canvas.drawText(ellipsizeForWidth(date, bodyPaint, 82f), margin, y, bodyPaint)
+            canvas.drawText(ellipsizeForWidth(detail, bodyPaint, 180f), margin + 88f, y, bodyPaint)
+            canvas.drawText(ellipsizeForWidth(accName, bodyPaint, maxAccWidth), margin + 275f, y, bodyPaint)
             canvas.drawText(amtStr, pageWidth - margin - amtWidth, y, amtPaint)
             y += 18f
         }
@@ -234,6 +258,15 @@ object ExportManager {
         document.writeTo(outputStream)
         document.close()
         return transactions.size
+    }
+
+    private fun ellipsizeForWidth(text: String, paint: Paint, maxWidth: Float): String {
+        if (text.isEmpty() || paint.measureText(text) <= maxWidth) return text
+        val ellipsis = "…"
+        val ellipsisWidth = paint.measureText(ellipsis)
+        val avail = (maxWidth - ellipsisWidth).coerceAtLeast(0f)
+        val count = paint.breakText(text, true, avail, null)
+        return if (count <= 0) ellipsis else text.substring(0, count) + ellipsis
     }
 
     private fun csvEscape(value: String): String {

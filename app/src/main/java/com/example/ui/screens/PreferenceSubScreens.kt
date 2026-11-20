@@ -370,7 +370,11 @@ fun AppearanceSettingsScreen(
                     Spacer(modifier = Modifier.height(10.dp))
                     SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                         NumberFormatStyle.entries.forEachIndexed { idx, style ->
-                            val label = if (style == NumberFormatStyle.BANGLA) "বাংলা (১২৩)" else "English (123)"
+                            val label = if (style == NumberFormatStyle.BANGLA) {
+                                strings.numberFormatBanglaLabel
+                            } else {
+                                strings.numberFormatLatinLabel
+                            }
                             SegmentedButton(
                                 selected = prefs.numberFormat == style,
                                 onClick = { viewModel.setNumberFormat(style) },
@@ -513,7 +517,7 @@ fun LanguageSettingsScreen(
                     ) {
                         items(filtered, key = { it.tag }) { lang ->
                             val isSelected = activeTag.equals(lang.tag, ignoreCase = true)
-                            val subtitle = if (lang.isRtl) "${lang.englishName} • RTL" else lang.englishName
+                            val subtitle = if (lang.isRtl) "${lang.englishName} • ${strings.rtlLabel}" else lang.englishName
                             Surface(
                                 onClick = { viewModel.setLanguageTag(lang.tag) },
                                 shape = RoundedCornerShape(18.dp),
@@ -596,8 +600,15 @@ fun CurrencySettingsScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val prefs = state.preferences
     val strings = LocalAppStrings.current
+    val langTag = prefs.effectiveLanguageTag
     val activeCode = prefs.effectiveCurrencyCode
     val activeInfo = remember(activeCode) { IsoCurrencyCatalog.resolve(activeCode) }
+    val activeSymbol = remember(activeCode, langTag) {
+        IsoCurrencyCatalog.displaySymbol(activeCode, langTag).trim()
+    }
+    val activeDisplayName = remember(activeInfo, langTag) {
+        IsoCurrencyCatalog.localizedName(activeInfo, langTag)
+    }
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     val filtered = remember(searchQuery) {
@@ -657,13 +668,13 @@ fun CurrencySettingsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = activeInfo.symbol,
+                            text = activeSymbol,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "${activeInfo.code} • ${activeInfo.name}",
+                            text = activeDisplayName,
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.weight(1f),
@@ -720,6 +731,8 @@ fun CurrencySettingsScreen(
                     ) {
                         items(filtered, key = { it.code }) { info ->
                             val isSelected = activeCode.equals(info.code, ignoreCase = true)
+                            val displaySymbol = IsoCurrencyCatalog.displaySymbol(info.code, langTag).trim()
+                            val displayName = IsoCurrencyCatalog.localizedName(info, langTag)
                             Surface(
                                 onClick = { viewModel.setCurrencyCode(info.code) },
                                 shape = RoundedCornerShape(16.dp),
@@ -741,7 +754,7 @@ fun CurrencySettingsScreen(
                                     .heightIn(min = 60.dp)
                                     .semantics {
                                         selected = isSelected
-                                        contentDescription = "${info.code} (${info.symbol}) ${info.name}"
+                                        contentDescription = "$displayName ($displaySymbol)"
                                     }
                                     .testTag("currency_option_${info.code}")
                             ) {
@@ -765,7 +778,7 @@ fun CurrencySettingsScreen(
                                         contentAlignment = Alignment.Center
                                     ) {
                                         Text(
-                                            text = info.symbol,
+                                            text = displaySymbol,
                                             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                                             color = if (isSelected) {
                                                 MaterialTheme.colorScheme.primary
@@ -779,7 +792,7 @@ fun CurrencySettingsScreen(
                                     Spacer(modifier = Modifier.width(12.dp))
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
-                                            text = "${info.code} — ${info.name}",
+                                            text = displayName,
                                             style = MaterialTheme.typography.titleSmall.copy(
                                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold
                                             ),

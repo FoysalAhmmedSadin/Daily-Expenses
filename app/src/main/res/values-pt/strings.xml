@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Limite excedido</string>
     <string name="category_spending_cap" formatted="false">Limite de gasto por categoria</string>
     <string name="updates_existing_cap" formatted="false">Já existe um limite para este mês; salvar irá atualizá-lo.</string>
-    <string name="google_drive_backup" formatted="false">Backup no Google Drive</string>
-    <string name="google_drive_subtitle" formatted="false">Sincronização privada na pasta de dados do app</string>
-    <string name="connect_google_drive" formatted="false">Conectar Google Drive</string>
-    <string name="switch_account" formatted="false">Trocar conta</string>
-    <string name="disconnect" formatted="false">Desconectar</string>
-    <string name="back_up_now" formatted="false">Fazer backup</string>
-    <string name="restore_from_drive" formatted="false">Restaurar do Drive</string>
-    <string name="drive_history_title" formatted="false">Backups no Google Drive</string>
-    <string name="no_drive_backups" formatted="false">Nenhum backup na sua pasta do Google Drive ainda.</string>
-    <string name="auto_backup_schedule" formatted="false">Backup automático</string>
-    <string name="schedule_manual_only" formatted="false">Manual</string>
-    <string name="schedule_daily" formatted="false">Diário</string>
-    <string name="schedule_weekly" formatted="false">Semanal</string>
-    <string name="not_connected" formatted="false">Não conectado</string>
-    <string name="connected_as" formatted="false">Conectado</string>
-    <string name="encrypt_with_passphrase" formatted="false">Criptografar com senha</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Armazene um backup privado na pasta de dados do Google Drive.</string>
     <string name="theme_system" formatted="false">Padrão do sistema</string>
     <string name="theme_light" formatted="false">Claro</string>
     <string name="theme_dark" formatted="false">Escuro</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Investimentos</string>
     <string name="cat_gift_bonus" formatted="false">Presentes e bônus</string>
     <string name="cat_other_income" formatted="false">Outras receitas</string>
+    <string name="developer_role" formatted="false">Desenvolvedor de Apps</string>
+    <string name="developer_copyright_text" formatted="false">Copyright © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">Inglês (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Bengali (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">{count} transações de {month} exportadas para CSV.</string>
+    <string name="export_csv_all_success" formatted="false">{count} transações exportadas para CSV.</string>
+    <string name="export_csv_failed" formatted="false">Falha ao exportar CSV.</string>
+    <string name="export_pdf_success" formatted="false">Extrato em PDF exportado ({count} transações).</string>
+    <string name="export_pdf_failed" formatted="false">Falha ao exportar PDF.</string>
+    <string name="backup_saved_status" formatted="false">Backup criptografado salvo ({transactions} transações, {accounts} contas).</string>
+    <string name="backup_encryption_failed" formatted="false">Falha ao criptografar o backup.</string>
+    <string name="backup_decrypt_failed" formatted="false">Não foi possível descriptografar o backup. Verifique a senha ou o arquivo.</string>
+    <string name="restore_success_status" formatted="false">{accounts} contas e {transactions} transações restauradas.</string>
+    <string name="restore_failed_status" formatted="false">Falha na restauração.</string>
+    <string name="clear_all_data_done" formatted="false">Todos os dados financeiros foram redefinidos.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Extrato Financeiro</string>
+    <string name="pdf_generated_meta" formatted="false">Gerado: {date}  |  Moeda: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Resumo das Contas</string>
+    <string name="pdf_transactions_count" formatted="false">Transações ({count})</string>
+    <string name="pdf_col_date" formatted="false">Data</string>
+    <string name="pdf_col_details" formatted="false">Categoria / Detalhes</string>
+    <string name="pdf_col_account" formatted="false">Conta</string>
+    <string name="pdf_col_amount" formatted="false">Valor</string>
+    <string name="csv_header_row" formatted="false">Data,Hora,Tipo,Categoria,Conta,Conta de Destino,Valor,Moeda,Nota,Recorrência</string>
 </resources>

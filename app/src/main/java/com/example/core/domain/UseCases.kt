@@ -366,20 +366,34 @@ class GetAnalyticsReportUseCase(
                     add(Calendar.DAY_OF_YEAR, -(daysCount - 1))
                 }
                 rangeStart = DateTimeUtils.startOfDay(startCal.timeInMillis)
-                chartPoints = (0 until daysCount).map { offset ->
+                val endRange = DateTimeUtils.endOfDay(now)
+                val dayStarts = LongArray(daysCount)
+                val labels = Array(daysCount) { "" }
+                val sdf = SimpleDateFormat("dd", locale)
+                for (offset in 0 until daysCount) {
                     val dayCal = (startCal.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, offset) }
                     val dStart = DateTimeUtils.startOfDay(dayCal.timeInMillis)
-                    val dEnd = DateTimeUtils.endOfDay(dayCal.timeInMillis)
-                    val slice = transactions.filter { it.transaction.timestamp in dStart..dEnd }
-                    val label = CurrencyFormatter.toLocalizedDigits(
-                        SimpleDateFormat("dd", locale).format(Date(dStart)),
-                        prefs.numberFormat
-                    )
-                    ChartPoint(
-                        label = label,
-                        income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                        expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
-                    )
+                    dayStarts[offset] = dStart
+                    labels[offset] = CurrencyFormatter.toLocalizedDigits(sdf.format(Date(dStart)), prefs.numberFormat)
+                }
+                val incomeBuckets = DoubleArray(daysCount)
+                val expenseBuckets = DoubleArray(daysCount)
+                transactions.forEach { item ->
+                    val tx = item.transaction
+                    if (tx.timestamp in rangeStart..endRange) {
+                        val idx = ((tx.timestamp - rangeStart) / 86_400_000L).toInt().coerceIn(0, daysCount - 1)
+                        var bucket = idx
+                        while (bucket > 0 && tx.timestamp < dayStarts[bucket]) bucket--
+                        while (bucket < daysCount - 1 && tx.timestamp >= dayStarts[bucket + 1]) bucket++
+                        when (tx.type) {
+                            TransactionType.INCOME -> incomeBuckets[bucket] += tx.amount
+                            TransactionType.EXPENSE -> expenseBuckets[bucket] += tx.amount
+                            TransactionType.TRANSFER -> Unit
+                        }
+                    }
+                }
+                chartPoints = (0 until daysCount).map { i ->
+                    ChartPoint(label = labels[i], income = incomeBuckets[i], expense = expenseBuckets[i])
                 }
             }
             AnalyticsGranularity.WEEKLY -> {
@@ -387,14 +401,26 @@ class GetAnalyticsReportUseCase(
                 daysCount = weeks * 7
                 val endOfCurrentDay = DateTimeUtils.endOfDay(now)
                 rangeStart = DateTimeUtils.startOfDay(now - (daysCount - 1L) * 86_400_000L)
+                val incomeBuckets = DoubleArray(weeks)
+                val expenseBuckets = DoubleArray(weeks)
+                val weekMillis = 7L * 86_400_000L
+                transactions.forEach { item ->
+                    val tx = item.transaction
+                    if (tx.timestamp in rangeStart..endOfCurrentDay) {
+                        val bucket = ((tx.timestamp - rangeStart) / weekMillis).toInt().coerceIn(0, weeks - 1)
+                        when (tx.type) {
+                            TransactionType.INCOME -> incomeBuckets[bucket] += tx.amount
+                            TransactionType.EXPENSE -> expenseBuckets[bucket] += tx.amount
+                            TransactionType.TRANSFER -> Unit
+                        }
+                    }
+                }
                 chartPoints = (0 until weeks).map { idx ->
-                    val wStart = rangeStart + idx * 7L * 86_400_000L
-                    val wEnd = minOf(endOfCurrentDay, wStart + 7L * 86_400_000L - 1L)
-                    val slice = transactions.filter { it.transaction.timestamp in wStart..wEnd }
+                    val wStart = rangeStart + idx * weekMillis
                     ChartPoint(
                         label = DateTimeUtils.formatShortDate(wStart, langTag, prefs.numberFormat),
-                        income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                        expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+                        income = incomeBuckets[idx],
+                        expense = expenseBuckets[idx]
                     )
                 }
             }
@@ -417,48 +443,91 @@ class GetAnalyticsReportUseCase(
                     set(Calendar.MILLISECOND, 0)
                 }
                 rangeStart = startCal.timeInMillis
+                val endCalMillis = Calendar.getInstance().apply {
+                    set(currentYear, Calendar.DECEMBER, 31, 23, 59, 59)
+                    set(Calendar.MILLISECOND, 999)
+                }.timeInMillis
                 daysCount = (((now - rangeStart) / 86_400_000L).toInt() + 1).coerceAtLeast(1)
-                chartPoints = (firstYear..currentYear).map { yr ->
-                    val yStart = Calendar.getInstance().apply {
-                        set(yr, Calendar.JANUARY, 1, 0, 0, 0)
-                        set(Calendar.MILLISECOND, 0)
-                    }.timeInMillis
-                    val yEnd = Calendar.getInstance().apply {
-                        set(yr, Calendar.DECEMBER, 31, 23, 59, 59)
-                        set(Calendar.MILLISECOND, 999)
-                    }.timeInMillis
-                    val slice = transactions.filter { it.transaction.timestamp in yStart..yEnd }
+                val incomeBuckets = DoubleArray(years)
+                val expenseBuckets = DoubleArray(years)
+                val tmpCal = Calendar.getInstance()
+                transactions.forEach { item ->
+                    val tx = item.transaction
+                    if (tx.timestamp in rangeStart..endCalMillis) {
+                        tmpCal.timeInMillis = tx.timestamp
+                        val idx = (tmpCal.get(Calendar.YEAR) - firstYear).coerceIn(0, years - 1)
+                        when (tx.type) {
+                            TransactionType.INCOME -> incomeBuckets[idx] += tx.amount
+                            TransactionType.EXPENSE -> expenseBuckets[idx] += tx.amount
+                            TransactionType.TRANSFER -> Unit
+                        }
+                    }
+                }
+                chartPoints = (0 until years).map { i ->
+                    val yr = firstYear + i
                     ChartPoint(
                         label = CurrencyFormatter.toLocalizedDigits(yr.toString(), prefs.numberFormat),
-                        income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                        expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+                        income = incomeBuckets[i],
+                        expense = expenseBuckets[i]
                     )
                 }
             }
         }
-
-        val periodTx = transactions.filter { it.transaction.timestamp in rangeStart..now }
-        val totalIncome = periodTx.filter { it.transaction.type == TransactionType.INCOME }
-            .sumOf { it.transaction.amount }
-        val totalExpense = periodTx.filter { it.transaction.type == TransactionType.EXPENSE }
-            .sumOf { it.transaction.amount }
-        val netSavings = totalIncome - totalExpense
-        val savingsRate = if (totalIncome > 0.0) (netSavings / totalIncome) * 100.0 else 0.0
-        val avgDailyExpense = if (daysCount > 0) totalExpense / daysCount else 0.0
 
         val curMonth = DateTimeUtils.currentMonthYear(now)
         val prevMonth = DateTimeUtils.previousMonthYear(curMonth)
         val (curMStart, curMEnd) = DateTimeUtils.monthYearRange(curMonth)
         val (prevMStart, prevMEnd) = DateTimeUtils.monthYearRange(prevMonth)
 
-        val curMonthTx = transactions.filter { it.transaction.timestamp in curMStart..curMEnd }
-        val prevMonthTx = transactions.filter { it.transaction.timestamp in prevMStart..prevMEnd }
+        var totalIncome = 0.0
+        var totalExpense = 0.0
+        var curIncome = 0.0
+        var curExpense = 0.0
+        var prevIncome = 0.0
+        var prevExpense = 0.0
+        val periodExpenses = ArrayList<TransactionWithDetails>()
+        val periodIncomes = ArrayList<TransactionWithDetails>()
+
+        transactions.forEach { item ->
+            val tx = item.transaction
+            val ts = tx.timestamp
+            if (ts in rangeStart..now) {
+                when (tx.type) {
+                    TransactionType.INCOME -> {
+                        totalIncome += tx.amount
+                        periodIncomes.add(item)
+                    }
+                    TransactionType.EXPENSE -> {
+                        totalExpense += tx.amount
+                        periodExpenses.add(item)
+                    }
+                    TransactionType.TRANSFER -> Unit
+                }
+            }
+            if (ts in curMStart..curMEnd) {
+                when (tx.type) {
+                    TransactionType.INCOME -> curIncome += tx.amount
+                    TransactionType.EXPENSE -> curExpense += tx.amount
+                    TransactionType.TRANSFER -> Unit
+                }
+            } else if (ts in prevMStart..prevMEnd) {
+                when (tx.type) {
+                    TransactionType.INCOME -> prevIncome += tx.amount
+                    TransactionType.EXPENSE -> prevExpense += tx.amount
+                    TransactionType.TRANSFER -> Unit
+                }
+            }
+        }
+
+        val netSavings = totalIncome - totalExpense
+        val savingsRate = if (totalIncome > 0.0) (netSavings / totalIncome) * 100.0 else 0.0
+        val avgDailyExpense = if (daysCount > 0) totalExpense / daysCount else 0.0
 
         val comparison = PeriodComparison(
-            currentIncome = curMonthTx.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-            previousIncome = prevMonthTx.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-            currentExpense = curMonthTx.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount },
-            previousExpense = prevMonthTx.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+            currentIncome = curIncome,
+            previousIncome = prevIncome,
+            currentExpense = curExpense,
+            previousExpense = prevExpense
         )
 
         AnalyticsReport(
@@ -469,14 +538,8 @@ class GetAnalyticsReportUseCase(
             savingsRatePercent = savingsRate,
             averageDailyExpense = avgDailyExpense,
             chartPoints = chartPoints,
-            expenseBreakdown = buildCategoryBreakdown(
-                periodTx.filter { it.transaction.type == TransactionType.EXPENSE },
-                totalExpense
-            ),
-            incomeBreakdown = buildCategoryBreakdown(
-                periodTx.filter { it.transaction.type == TransactionType.INCOME },
-                totalIncome
-            ),
+            expenseBreakdown = buildCategoryBreakdown(periodExpenses, totalExpense),
+            incomeBreakdown = buildCategoryBreakdown(periodIncomes, totalIncome),
             monthComparison = comparison
         )
     }.flowOn(Dispatchers.Default)
@@ -518,16 +581,37 @@ private fun buildLastNMonthsPoints(
         add(Calendar.MONTH, -(monthsCount - 1))
         set(Calendar.DAY_OF_MONTH, 1)
     }
+    val startYear = startCal.get(Calendar.YEAR)
+    val startMonth = startCal.get(Calendar.MONTH)
+    val firstRangeStart = startCal.timeInMillis
+    val lastYm = String.format(Locale.US, "%04d-%02d", endCal.get(Calendar.YEAR), endCal.get(Calendar.MONTH) + 1)
+    val lastRangeEnd = DateTimeUtils.monthYearRange(lastYm).second
+
+    val incomeBuckets = DoubleArray(monthsCount)
+    val expenseBuckets = DoubleArray(monthsCount)
+    val tmpCal = Calendar.getInstance()
+    transactions.forEach { item ->
+        val tx = item.transaction
+        if (tx.timestamp in firstRangeStart..lastRangeEnd) {
+            tmpCal.timeInMillis = tx.timestamp
+            val idx = (tmpCal.get(Calendar.YEAR) - startYear) * 12 + (tmpCal.get(Calendar.MONTH) - startMonth)
+            if (idx in 0 until monthsCount) {
+                when (tx.type) {
+                    TransactionType.INCOME -> incomeBuckets[idx] += tx.amount
+                    TransactionType.EXPENSE -> expenseBuckets[idx] += tx.amount
+                    TransactionType.TRANSFER -> Unit
+                }
+            }
+        }
+    }
+
     return (0 until monthsCount).map { offset ->
         val mCal = (startCal.clone() as Calendar).apply { add(Calendar.MONTH, offset) }
         val ym = String.format(Locale.US, "%04d-%02d", mCal.get(Calendar.YEAR), mCal.get(Calendar.MONTH) + 1)
-        val (mStart, mEnd) = DateTimeUtils.monthYearRange(ym)
-        val slice = transactions.filter { it.transaction.timestamp in mStart..mEnd }
-        val label = DateTimeUtils.formatShortMonthLabel(ym, languageTag, numberFormat)
         ChartPoint(
-            label = label,
-            income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-            expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+            label = DateTimeUtils.formatShortMonthLabel(ym, languageTag, numberFormat),
+            income = incomeBuckets[offset],
+            expense = expenseBuckets[offset]
         )
     }
 }
@@ -544,81 +628,137 @@ private fun buildPeriodChartPoints(
     val locale = SupportedLanguageCatalog.localeForTag(norm)
     return when (period) {
         DateFilterPeriod.TODAY -> {
-            val labels = if (norm == "bn") {
-                listOf("ভোর", "সকাল", "দুপুর", "রাত")
-            } else {
-                listOf("00–06", "06–12", "12–18", "18–24").map {
+            val labels = when {
+                norm == "bn" -> listOf("ভোর", "সকাল", "দুপুর", "রাত")
+                norm.startsWith("zh-") -> listOf("凌晨", "上午", "下午", "夜晚")
+                else -> listOf("00–06", "06–12", "12–18", "18–24").map {
                     CurrencyFormatter.toLocalizedDigits(it, numberFormat)
                 }
             }
+            val incomeBuckets = DoubleArray(4)
+            val expenseBuckets = DoubleArray(4)
             val cal = Calendar.getInstance()
-            (0..3).map { bucket ->
-                val slice = transactions.filter {
-                    cal.timeInMillis = it.transaction.timestamp
-                    cal.get(Calendar.HOUR_OF_DAY) / 6 == bucket
+            transactions.forEach { item ->
+                val tx = item.transaction
+                cal.timeInMillis = tx.timestamp
+                val bucket = (cal.get(Calendar.HOUR_OF_DAY) / 6).coerceIn(0, 3)
+                when (tx.type) {
+                    TransactionType.INCOME -> incomeBuckets[bucket] += tx.amount
+                    TransactionType.EXPENSE -> expenseBuckets[bucket] += tx.amount
+                    TransactionType.TRANSFER -> Unit
                 }
-                ChartPoint(
-                    label = labels[bucket],
-                    income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                    expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
-                )
+            }
+            (0..3).map { bucket ->
+                ChartPoint(label = labels[bucket], income = incomeBuckets[bucket], expense = expenseBuckets[bucket])
             }
         }
         DateFilterPeriod.THIS_WEEK -> {
             val sdf = SimpleDateFormat("EEE", locale)
-            (0..6).map { offset ->
+            val dayStarts = LongArray(7)
+            val labels = Array(7) { "" }
+            for (offset in 0..6) {
                 val dStart = DateTimeUtils.startOfDay(start + offset * 86_400_000L)
-                val dEnd = DateTimeUtils.endOfDay(dStart)
-                val slice = transactions.filter { it.transaction.timestamp in dStart..dEnd }
-                ChartPoint(
-                    label = sdf.format(Date(dStart)).take(3),
-                    income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                    expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
-                )
+                dayStarts[offset] = dStart
+                labels[offset] = sdf.format(Date(dStart)).take(3)
+            }
+            val incomeBuckets = DoubleArray(7)
+            val expenseBuckets = DoubleArray(7)
+            val weekEnd = DateTimeUtils.endOfDay(dayStarts[6])
+            transactions.forEach { item ->
+                val tx = item.transaction
+                if (tx.timestamp in dayStarts[0]..weekEnd) {
+                    var bucket = ((tx.timestamp - dayStarts[0]) / 86_400_000L).toInt().coerceIn(0, 6)
+                    while (bucket > 0 && tx.timestamp < dayStarts[bucket]) bucket--
+                    while (bucket < 6 && tx.timestamp >= dayStarts[bucket + 1]) bucket++
+                    when (tx.type) {
+                        TransactionType.INCOME -> incomeBuckets[bucket] += tx.amount
+                        TransactionType.EXPENSE -> expenseBuckets[bucket] += tx.amount
+                        TransactionType.TRANSFER -> Unit
+                    }
+                }
+            }
+            (0..6).map { offset ->
+                ChartPoint(label = labels[offset], income = incomeBuckets[offset], expense = expenseBuckets[offset])
             }
         }
         DateFilterPeriod.THIS_MONTH -> {
             val totalMillis = (end - start).coerceAtLeast(1L)
             val step = totalMillis / 4L
+            val incomeBuckets = DoubleArray(4)
+            val expenseBuckets = DoubleArray(4)
+            transactions.forEach { item ->
+                val tx = item.transaction
+                if (tx.timestamp in start..end) {
+                    val idx = ((tx.timestamp - start) / step.coerceAtLeast(1L)).toInt().coerceIn(0, 3)
+                    when (tx.type) {
+                        TransactionType.INCOME -> incomeBuckets[idx] += tx.amount
+                        TransactionType.EXPENSE -> expenseBuckets[idx] += tx.amount
+                        TransactionType.TRANSFER -> Unit
+                    }
+                }
+            }
             (0..3).map { idx ->
-                val bStart = start + idx * step
-                val bEnd = if (idx == 3) end else (start + (idx + 1) * step - 1L)
-                val slice = transactions.filter { it.transaction.timestamp in bStart..bEnd }
                 ChartPoint(
                     label = CurrencyFormatter.toLocalizedDigits("W${idx + 1}", numberFormat),
-                    income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                    expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+                    income = incomeBuckets[idx],
+                    expense = expenseBuckets[idx]
                 )
             }
         }
         DateFilterPeriod.THIS_YEAR -> {
             val cal = Calendar.getInstance().apply { timeInMillis = start }
             val year = cal.get(Calendar.YEAR)
+            val yearRangeStart = DateTimeUtils.monthYearRange(String.format(Locale.US, "%04d-01", year)).first
+            val yearRangeEnd = DateTimeUtils.monthYearRange(String.format(Locale.US, "%04d-12", year)).second
+            val incomeBuckets = DoubleArray(12)
+            val expenseBuckets = DoubleArray(12)
+            val tmpCal = Calendar.getInstance()
+            transactions.forEach { item ->
+                val tx = item.transaction
+                if (tx.timestamp in yearRangeStart..yearRangeEnd) {
+                    tmpCal.timeInMillis = tx.timestamp
+                    val m = tmpCal.get(Calendar.MONTH).coerceIn(0, 11)
+                    when (tx.type) {
+                        TransactionType.INCOME -> incomeBuckets[m] += tx.amount
+                        TransactionType.EXPENSE -> expenseBuckets[m] += tx.amount
+                        TransactionType.TRANSFER -> Unit
+                    }
+                }
+            }
             (0..11).map { m ->
                 val mStr = String.format(Locale.US, "%04d-%02d", year, m + 1)
-                val (mStart, mEnd) = DateTimeUtils.monthYearRange(mStr)
-                val slice = transactions.filter { it.transaction.timestamp in mStart..mEnd }
-                val mLabel = DateTimeUtils.formatShortMonthLabel(mStr, langTag = norm, numberFormat = numberFormat)
-                    .take(if (norm == "en") 1 else 2)
-                ChartPoint(
-                    label = mLabel,
-                    income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                    expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
-                )
+                val shortMonth = DateTimeUtils.formatShortMonthLabel(mStr, langTag = norm, numberFormat = numberFormat)
+                val mLabel = when {
+                    norm == "en" -> shortMonth.take(1)
+                    norm.startsWith("zh-") -> shortMonth
+                    else -> shortMonth.take(2)
+                }
+                ChartPoint(label = mLabel, income = incomeBuckets[m], expense = expenseBuckets[m])
             }
         }
         DateFilterPeriod.CUSTOM -> {
             val span = (end - start).coerceAtLeast(1L)
             val buckets = 6
-            val step = span / buckets
+            val step = (span / buckets).coerceAtLeast(1L)
+            val incomeBuckets = DoubleArray(buckets)
+            val expenseBuckets = DoubleArray(buckets)
+            transactions.forEach { item ->
+                val tx = item.transaction
+                if (tx.timestamp in start..end) {
+                    val idx = ((tx.timestamp - start) / step).toInt().coerceIn(0, buckets - 1)
+                    when (tx.type) {
+                        TransactionType.INCOME -> incomeBuckets[idx] += tx.amount
+                        TransactionType.EXPENSE -> expenseBuckets[idx] += tx.amount
+                        TransactionType.TRANSFER -> Unit
+                    }
+                }
+            }
             (0 until buckets).map { idx ->
                 val bStart = start + idx * step
-                val bEnd = if (idx == buckets - 1) end else (start + (idx + 1) * step - 1L)
-                val slice = transactions.filter { it.transaction.timestamp in bStart..bEnd }
                 ChartPoint(
                     label = DateTimeUtils.formatShortDate(bStart, norm, numberFormat),
-                    income = slice.filter { it.transaction.type == TransactionType.INCOME }.sumOf { it.transaction.amount },
-                    expense = slice.filter { it.transaction.type == TransactionType.EXPENSE }.sumOf { it.transaction.amount }
+                    income = incomeBuckets[idx],
+                    expense = expenseBuckets[idx]
                 )
             }
         }

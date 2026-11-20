@@ -56,7 +56,47 @@ abstract class ExpenseDatabase : RoomDatabase() {
 object DatabaseMigrations {
     val MIGRATION_1_2 = object : Migration(1, 2) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("ALTER TABLE transactions ADD COLUMN currencyCode TEXT NOT NULL DEFAULT 'BDT'")
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `transactions_new` (
+                    `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `type` TEXT NOT NULL,
+                    `amount` REAL NOT NULL,
+                    `categoryId` INTEGER,
+                    `accountId` INTEGER NOT NULL,
+                    `toAccountId` INTEGER,
+                    `note` TEXT NOT NULL,
+                    `timestamp` INTEGER NOT NULL,
+                    `receiptUri` TEXT,
+                    `recurrence` TEXT NOT NULL,
+                    `nextRecurrenceAt` INTEGER,
+                    `parentRecurringId` INTEGER,
+                    `currencyCode` TEXT NOT NULL,
+                    FOREIGN KEY(`categoryId`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL ,
+                    FOREIGN KEY(`accountId`) REFERENCES `accounts`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE ,
+                    FOREIGN KEY(`toAccountId`) REFERENCES `accounts`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL(
+                """
+                INSERT INTO `transactions_new` (
+                    id, type, amount, categoryId, accountId, toAccountId, note,
+                    timestamp, receiptUri, recurrence, nextRecurrenceAt, parentRecurringId, currencyCode
+                )
+                SELECT
+                    id, type, amount, categoryId, accountId, toAccountId, note,
+                    timestamp, receiptUri, recurrence, nextRecurrenceAt, parentRecurringId, 'BDT'
+                FROM `transactions`
+                """.trimIndent()
+            )
+            db.execSQL("DROP TABLE `transactions`")
+            db.execSQL("ALTER TABLE `transactions_new` RENAME TO `transactions`")
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_transactions_categoryId` ON `transactions` (`categoryId`)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_transactions_accountId` ON `transactions` (`accountId`)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_transactions_toAccountId` ON `transactions` (`toAccountId`)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_transactions_timestamp` ON `transactions` (`timestamp`)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS `index_transactions_nextRecurrenceAt` ON `transactions` (`nextRecurrenceAt`)")
         }
     }
 

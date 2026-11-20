@@ -212,7 +212,7 @@ fun AboutDeveloperScreen(
                                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.14f)
                             ) {
                                 Text(
-                                    text = DeveloperSupport.DEVELOPER_ROLE,
+                                    text = strings.developerRole,
                                     style = MaterialTheme.typography.labelLarge,
                                     color = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier
@@ -353,8 +353,8 @@ fun AboutDeveloperScreen(
                         Spacer(modifier = Modifier.height(10.dp))
                         DeveloperInfoRow(
                             icon = Icons.Rounded.Copyright,
-                            label = "Copyright",
-                            value = DeveloperSupport.COPYRIGHT_TEXT,
+                            label = strings.copyrightLabel,
+                            value = strings.developerCopyrightText,
                             valueTag = "copyright_text"
                         )
                 }

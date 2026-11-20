@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">上限超過</string>
     <string name="category_spending_cap" formatted="false">カテゴリ支出上限</string>
     <string name="updates_existing_cap" formatted="false">今月の上限は既に設定されています。保存すると更新されます。</string>
-    <string name="google_drive_backup" formatted="false">Google Drive バックアップ</string>
-    <string name="google_drive_subtitle" formatted="false">非公開アプリデータフォルダ同期とクラウド復元</string>
-    <string name="connect_google_drive" formatted="false">Google Drive に接続</string>
-    <string name="switch_account" formatted="false">アカウント切替</string>
-    <string name="disconnect" formatted="false">接続解除</string>
-    <string name="back_up_now" formatted="false">今すぐバックアップ</string>
-    <string name="restore_from_drive" formatted="false">Drive から復元</string>
-    <string name="drive_history_title" formatted="false">Google Drive バックアップ履歴</string>
-    <string name="no_drive_backups" formatted="false">Google Drive のアプリデータフォルダにバックアップはまだありません。</string>
-    <string name="auto_backup_schedule" formatted="false">自動バックアップ</string>
-    <string name="schedule_manual_only" formatted="false">手動</string>
-    <string name="schedule_daily" formatted="false">毎日</string>
-    <string name="schedule_weekly" formatted="false">毎週</string>
-    <string name="not_connected" formatted="false">未接続</string>
-    <string name="connected_as" formatted="false">接続済み</string>
-    <string name="encrypt_with_passphrase" formatted="false">パスフレーズで暗号化</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">暗号化または標準バックアップを Google Drive アプリデータフォルダに非公開保存します。</string>
     <string name="theme_system" formatted="false">システムデフォルト</string>
     <string name="theme_light" formatted="false">ライト</string>
     <string name="theme_dark" formatted="false">ダーク</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">投資</string>
     <string name="cat_gift_bonus" formatted="false">賞与・贈与</string>
     <string name="cat_other_income" formatted="false">その他の収入</string>
+    <string name="developer_role" formatted="false">アプリ開発者</string>
+    <string name="developer_copyright_text" formatted="false">Copyright © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">英数字 (123)</string>
+    <string name="number_format_bangla_label" formatted="false">ベンガル数字 (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">{month} の取引 {count} 件を CSV に書き出しました。</string>
+    <string name="export_csv_all_success" formatted="false">{count} 件の取引を CSV に書き出しました。</string>
+    <string name="export_csv_failed" formatted="false">CSV の書き出しに失敗しました。</string>
+    <string name="export_pdf_success" formatted="false">PDF 明細を書き出しました（{count} 件）。</string>
+    <string name="export_pdf_failed" formatted="false">PDF の書き出しに失敗しました。</string>
+    <string name="backup_saved_status" formatted="false">暗号化バックアップを保存しました（取引 {transactions} 件、口座 {accounts} 件）。</string>
+    <string name="backup_encryption_failed" formatted="false">バックアップの暗号化に失敗しました。</string>
+    <string name="backup_decrypt_failed" formatted="false">復号できませんでした。パスフレーズまたはファイルを確認してください。</string>
+    <string name="restore_success_status" formatted="false">{accounts} 件の口座と {transactions} 件の取引を復元しました。</string>
+    <string name="restore_failed_status" formatted="false">復元に失敗しました。</string>
+    <string name="clear_all_data_done" formatted="false">すべての財務データをリセットしました。</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — 収支明細書</string>
+    <string name="pdf_generated_meta" formatted="false">作成日：{date}  |  通貨：{currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">口座一覧</string>
+    <string name="pdf_transactions_count" formatted="false">取引履歴（{count} 件）</string>
+    <string name="pdf_col_date" formatted="false">日付</string>
+    <string name="pdf_col_details" formatted="false">カテゴリ / 詳細</string>
+    <string name="pdf_col_account" formatted="false">口座</string>
+    <string name="pdf_col_amount" formatted="false">金額</string>
+    <string name="csv_header_row" formatted="false">日付,時刻,種別,カテゴリ,口座,振替先口座,金額,通貨,メモ,繰り返し</string>
 </resources>

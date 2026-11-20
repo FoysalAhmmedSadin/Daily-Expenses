@@ -195,9 +195,10 @@ fun AddEditTransactionScreen(
                 }
 
                 // Amount Input Card
+                val displaySymbol = IsoCurrencyCatalog.displaySymbol(activeCurrencyInfo.code, langTag).trim()
                 PremiumCard {
                     Text(
-                        text = "${strings.amount} (${activeCurrencyInfo.code} ${activeCurrencyInfo.symbol})",
+                        text = "${strings.amount} (${activeCurrencyInfo.code} $displaySymbol)",
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -208,7 +209,7 @@ fun AddEditTransactionScreen(
                         placeholder = { Text("0.00") },
                         prefix = {
                             Text(
-                                text = "${activeCurrencyInfo.symbol} ",
+                                text = "$displaySymbol ",
                                 style = MaterialTheme.typography.headlineMedium,
                                 color = MaterialTheme.colorScheme.primary
                             )
@@ -277,7 +278,8 @@ fun AddEditTransactionScreen(
                                                 prefs.effectiveCurrencyCode,
                                                 prefs.numberFormat,
                                                 hideAmount = prefs.hideBalances,
-                                                includeDecimals = false
+                                                includeDecimals = false,
+                                                languageTag = langTag
                                             )
                                         })"
                                     )

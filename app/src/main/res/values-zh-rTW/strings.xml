@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">已超上限</string>
     <string name="category_spending_cap" formatted="false">分類支出上限</string>
     <string name="updates_existing_cap" formatted="false">本月已設定上限；儲存將會更新。</string>
-    <string name="google_drive_backup" formatted="false">Google Drive 備份</string>
-    <string name="google_drive_subtitle" formatted="false">私人應用程式資料夾同步與雲端還原</string>
-    <string name="connect_google_drive" formatted="false">連結 Google Drive</string>
-    <string name="switch_account" formatted="false">切換帳號</string>
-    <string name="disconnect" formatted="false">中斷連線</string>
-    <string name="back_up_now" formatted="false">立即備份</string>
-    <string name="restore_from_drive" formatted="false">從 Drive 還原</string>
-    <string name="drive_history_title" formatted="false">Google Drive 備份記錄</string>
-    <string name="no_drive_backups" formatted="false">您的 Google Drive 應用程式資料夾中尚無雲端備份。</string>
-    <string name="auto_backup_schedule" formatted="false">自動備份</string>
-    <string name="schedule_manual_only" formatted="false">手動</string>
-    <string name="schedule_daily" formatted="false">每日</string>
-    <string name="schedule_weekly" formatted="false">每週</string>
-    <string name="not_connected" formatted="false">未連線</string>
-    <string name="connected_as" formatted="false">已連線</string>
-    <string name="encrypt_with_passphrase" formatted="false">使用密碼加密</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">將加密或標準備份私密儲存在 Google Drive 應用程式資料夾中。</string>
     <string name="theme_system" formatted="false">跟隨系統</string>
     <string name="theme_light" formatted="false">淺色</string>
     <string name="theme_dark" formatted="false">深色</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">投資理財</string>
     <string name="cat_gift_bonus" formatted="false">禮金獎金</string>
     <string name="cat_other_income" formatted="false">其他收入</string>
+    <string name="developer_role" formatted="false">應用程式開發者</string>
+    <string name="developer_copyright_text" formatted="false">版權所有 © 2026 Foysal Ahmmed Sadin。</string>
+    <string name="number_format_latin_label" formatted="false">英文數字 (123)</string>
+    <string name="number_format_bangla_label" formatted="false">孟加拉數字 (১২৩)</string>
+    <string name="rtl_label" formatted="false">從右至左</string>
+    <string name="export_csv_month_success" formatted="false">已將 {month} 的 {count} 筆交易匯出為 CSV。</string>
+    <string name="export_csv_all_success" formatted="false">已將 {count} 筆交易匯出為 CSV。</string>
+    <string name="export_csv_failed" formatted="false">匯出 CSV 失敗。</string>
+    <string name="export_pdf_success" formatted="false">已匯出 PDF 對帳單（{count} 筆交易）。</string>
+    <string name="export_pdf_failed" formatted="false">匯出 PDF 失敗。</string>
+    <string name="backup_saved_status" formatted="false">已儲存加密備份（{transactions} 筆交易，{accounts} 個帳戶）。</string>
+    <string name="backup_encryption_failed" formatted="false">備份加密失敗。</string>
+    <string name="backup_decrypt_failed" formatted="false">無法解密備份。請確認密碼或檔案。</string>
+    <string name="restore_success_status" formatted="false">已還原 {accounts} 個帳戶與 {transactions} 筆交易。</string>
+    <string name="restore_failed_status" formatted="false">還原失敗。</string>
+    <string name="clear_all_data_done" formatted="false">已重設所有財務資料。</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — 財務對帳單</string>
+    <string name="pdf_generated_meta" formatted="false">產生日期：{date}  |  幣別：{currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">帳戶總覽</string>
+    <string name="pdf_transactions_count" formatted="false">交易明細（{count}）</string>
+    <string name="pdf_col_date" formatted="false">日期</string>
+    <string name="pdf_col_details" formatted="false">分類 / 詳情</string>
+    <string name="pdf_col_account" formatted="false">帳戶</string>
+    <string name="pdf_col_amount" formatted="false">金額</string>
+    <string name="csv_header_row" formatted="false">日期,時間,類型,分類,帳戶,轉入帳戶,金額,幣別,備註,週期性</string>
 </resources>

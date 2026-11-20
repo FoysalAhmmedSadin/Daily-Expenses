@@ -21,8 +21,8 @@ import com.example.core.model.AppCurrency
 import com.example.core.model.AppLanguage
 import com.example.core.model.BackupPayload
 import com.example.core.model.Budget
+import com.example.core.common.stringsFor
 import com.example.core.model.Category
-import com.example.core.model.DriveBackupSchedule
 import com.example.core.model.NumberFormatStyle
 import com.example.core.model.RecurrenceFrequency
 import com.example.core.model.ThemeMode
@@ -326,12 +326,6 @@ class PreferencesRepositoryImpl(
     override suspend fun setHideBalances(hidden: Boolean) = dataSource.setHideBalances(hidden)
     override suspend fun setLastBackupInfo(timestamp: Long, status: String) =
         dataSource.setLastBackupInfo(timestamp, status)
-    override suspend fun setDriveAccount(email: String?, displayName: String?) =
-        dataSource.setDriveAccount(email, displayName)
-    override suspend fun setDriveBackupSchedule(schedule: DriveBackupSchedule) =
-        dataSource.setDriveBackupSchedule(schedule)
-    override suspend fun setLastDriveBackupInfo(timestamp: Long, status: String) =
-        dataSource.setLastDriveBackupInfo(timestamp, status)
 }
 
 class BackupAndExportRepositoryImpl(
@@ -361,8 +355,9 @@ class BackupAndExportRepositoryImpl(
                 allTransactions
             }
             val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(context, prefs.effectiveLanguageTag)
             context.contentResolver.openOutputStream(uri)?.use { out ->
-                ExportManager.writeCsv(out, transactions, prefs)
+                ExportManager.writeCsv(out, transactions, prefs, strings)
             } ?: error("Unable to open destination file.")
         }
     }
@@ -372,8 +367,9 @@ class BackupAndExportRepositoryImpl(
             val accounts = accountDao.getAll().map { it.toDomain() }
             val transactions = transactionRepository.getTransactionsWithDetails()
             val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(context, prefs.effectiveLanguageTag)
             context.contentResolver.openOutputStream(uri)?.use { out ->
-                ExportManager.writePdf(out, accounts, transactions, prefs)
+                ExportManager.writePdf(out, accounts, transactions, prefs, strings)
             } ?: error("Unable to open destination file.")
         }
     }
@@ -514,9 +510,27 @@ object BackupPayloadValidator {
     fun validate(payload: BackupPayload) {
         require(payload.schemaVersion in 1..3) { "Unsupported backup schema version: ${payload.schemaVersion}" }
         require(payload.accounts.isNotEmpty()) { "Backup contains no accounts." }
+        require(payload.accounts.distinctBy { it.id }.size == payload.accounts.size) {
+            "Backup contains duplicate account IDs."
+        }
+        require(payload.categories.distinctBy { it.id }.size == payload.categories.size) {
+            "Backup contains duplicate category IDs."
+        }
+        require(payload.transactions.distinctBy { it.id }.size == payload.transactions.size) {
+            "Backup contains duplicate transaction IDs."
+        }
+        require(payload.budgets.distinctBy { it.id }.size == payload.budgets.size) {
+            "Backup contains duplicate budget IDs."
+        }
+        payload.accounts.forEach { acc ->
+            require(acc.name.isNotBlank()) { "Backup contains an account with blank name." }
+            require(acc.balance.isFinite() && acc.initialBalance.isFinite()) {
+                "Backup contains invalid account balance."
+            }
+        }
         val accountIds = payload.accounts.map { it.id }.toSet()
         payload.transactions.forEach { tx ->
-            require(tx.amount > 0.0) { "Backup contains invalid transaction amount." }
+            require(tx.amount.isFinite() && tx.amount > 0.0) { "Backup contains invalid transaction amount." }
             require(tx.accountId in accountIds) { "Backup transaction references missing account." }
             if (tx.type == TransactionType.TRANSFER) {
                 require(tx.toAccountId != null && tx.toAccountId in accountIds && tx.toAccountId != tx.accountId) {

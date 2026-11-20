@@ -71,19 +71,22 @@ class ExpenseSummaryWidget : GlanceAppWidget() {
                     totalBalance,
                     currencyCode,
                     prefs.numberFormat,
-                    hideAmount = prefs.hideBalances
+                    hideAmount = prefs.hideBalances,
+                    languageTag = prefs.effectiveLanguageTag
                 ),
                 todayExpenseText = CurrencyFormatter.format(
                     todayExpense,
                     currencyCode,
                     prefs.numberFormat,
-                    hideAmount = prefs.hideBalances
+                    hideAmount = prefs.hideBalances,
+                    languageTag = prefs.effectiveLanguageTag
                 ),
                 monthExpenseText = CurrencyFormatter.format(
                     monthExpense,
                     currencyCode,
                     prefs.numberFormat,
-                    hideAmount = prefs.hideBalances
+                    hideAmount = prefs.hideBalances,
+                    languageTag = prefs.effectiveLanguageTag
                 ),
                 balanceLabel = strings.totalBalance,
                 todayLabel = strings.today,

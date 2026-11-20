@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Лимит превышен</string>
     <string name="category_spending_cap" formatted="false">Лимит категории</string>
     <string name="updates_existing_cap" formatted="false">Лимит на этот месяц уже задан; сохранение обновит его.</string>
-    <string name="google_drive_backup" formatted="false">Бэкап в Google Диск</string>
-    <string name="google_drive_subtitle" formatted="false">Синхронизация в личную папку приложения</string>
-    <string name="connect_google_drive" formatted="false">Подключить Google Диск</string>
-    <string name="switch_account" formatted="false">Сменить аккаунт</string>
-    <string name="disconnect" formatted="false">Отключить</string>
-    <string name="back_up_now" formatted="false">Создать копию</string>
-    <string name="restore_from_drive" formatted="false">Восстановить</string>
-    <string name="drive_history_title" formatted="false">Копии на Google Диске</string>
-    <string name="no_drive_backups" formatted="false">В папке приложения на Google Диске пока нет копий.</string>
-    <string name="auto_backup_schedule" formatted="false">Автобэкап</string>
-    <string name="schedule_manual_only" formatted="false">Вручную</string>
-    <string name="schedule_daily" formatted="false">Ежедневно</string>
-    <string name="schedule_weekly" formatted="false">Еженедельно</string>
-    <string name="not_connected" formatted="false">Не подключено</string>
-    <string name="connected_as" formatted="false">Подключено</string>
-    <string name="encrypt_with_passphrase" formatted="false">Зашифровать паролем</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Сохраните резервную копию в приватной папке Google Диска.</string>
     <string name="theme_system" formatted="false">Системная</string>
     <string name="theme_light" formatted="false">Светлая</string>
     <string name="theme_dark" formatted="false">Тёмная</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Инвестиции</string>
     <string name="cat_gift_bonus" formatted="false">Подарки и бонусы</string>
     <string name="cat_other_income" formatted="false">Прочие доходы</string>
+    <string name="developer_role" formatted="false">Разработчик приложений</string>
+    <string name="developer_copyright_text" formatted="false">Copyright © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">Латинские (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Бенгальские (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">Экспортировано {count} операций за {month} в CSV.</string>
+    <string name="export_csv_all_success" formatted="false">Экспортировано {count} операций в CSV.</string>
+    <string name="export_csv_failed" formatted="false">Ошибка экспорта CSV.</string>
+    <string name="export_pdf_success" formatted="false">PDF-выписка экспортирована ({count} операций).</string>
+    <string name="export_pdf_failed" formatted="false">Ошибка экспорта PDF.</string>
+    <string name="backup_saved_status" formatted="false">Зашифрованная копия сохранена ({transactions} операций, {accounts} счетов).</string>
+    <string name="backup_encryption_failed" formatted="false">Ошибка шифрования копии.</string>
+    <string name="backup_decrypt_failed" formatted="false">Не удалось расшифровать копию. Проверьте пароль или файл.</string>
+    <string name="restore_success_status" formatted="false">Восстановлено {accounts} счетов и {transactions} операций.</string>
+    <string name="restore_failed_status" formatted="false">Ошибка восстановления.</string>
+    <string name="clear_all_data_done" formatted="false">Все финансовые данные сброшены.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Финансовая выписка</string>
+    <string name="pdf_generated_meta" formatted="false">Создано: {date}  |  Валюта: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Обзор счетов</string>
+    <string name="pdf_transactions_count" formatted="false">Операции ({count})</string>
+    <string name="pdf_col_date" formatted="false">Дата</string>
+    <string name="pdf_col_details" formatted="false">Категория / Детали</string>
+    <string name="pdf_col_account" formatted="false">Счет</string>
+    <string name="pdf_col_amount" formatted="false">Сумма</string>
+    <string name="csv_header_row" formatted="false">Дата,Время,Тип,Категория,Счет,Счет получатель,Сумма,Валюта,Заметка,Повтор</string>
 </resources>

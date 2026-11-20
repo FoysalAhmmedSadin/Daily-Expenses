@@ -1,12 +1,10 @@
 package com.example.ui.screens
 
 import android.Manifest
-import android.app.Activity
 import android.os.Build
 import android.text.format.DateFormat
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -143,25 +141,7 @@ fun SettingsScreen(
     var showReminderTimePicker by remember { mutableStateOf(false) }
     var showCsvExportDialog by remember { mutableStateOf(false) }
     var pendingCsvMonthYear by remember { mutableStateOf<String?>(null) }
-    var showDriveBackupOptionsDialog by remember { mutableStateOf(false) }
     var localNotice by remember { mutableStateOf<String?>(null) }
-
-    val driveResolutionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartIntentSenderForResult(),
-        onResult = { result ->
-            viewModel.onDriveResolutionResult(
-                activityContext = context,
-                resultOk = result.resultCode == Activity.RESULT_OK,
-                data = result.data
-            )
-        }
-    )
-
-    LaunchedEffect(state.pendingDriveResolution) {
-        state.pendingDriveResolution?.let { sender ->
-            driveResolutionLauncher.launch(IntentSenderRequest.Builder(sender).build())
-        }
-    }
 
     LaunchedEffect(localNotice) {
         localNotice?.let {
@@ -464,20 +444,6 @@ fun SettingsScreen(
                     }
                 }
 
-                // Google Drive Cloud Backup
-                item {
-                    GoogleDriveBackupCard(
-                        prefs = prefs,
-                        isBusy = state.isDriveBusy,
-                        onConnect = { viewModel.connectGoogleDrive(context, isSwitchAccount = false) },
-                        onSwitchAccount = { viewModel.connectGoogleDrive(context, isSwitchAccount = true) },
-                        onDisconnect = { viewModel.disconnectGoogleDrive(context) },
-                        onBackUpNowClick = { showDriveBackupOptionsDialog = true },
-                        onOpenHistoryClick = { viewModel.openDriveHistory(context) },
-                        onScheduleChange = viewModel::setDriveBackupSchedule
-                    )
-                }
-
                 // About Developer
                 item {
                     PremiumCard(
@@ -498,7 +464,7 @@ fun SettingsScreen(
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(strings.aboutDeveloper, style = MaterialTheme.typography.titleSmall)
                                 Text(
-                                    text = "${DeveloperSupport.DEVELOPER_NAME} • ${DeveloperSupport.DEVELOPER_ROLE}",
+                                    text = "${DeveloperSupport.DEVELOPER_NAME} • ${strings.developerRole}",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -675,34 +641,6 @@ fun SettingsScreen(
             dismissButton = {
                 TextButton(onClick = { showReminderTimePicker = false }) { Text(strings.cancel) }
             }
-        )
-    }
-
-    if (showDriveBackupOptionsDialog) {
-        DriveUploadOptionsDialog(
-            onDismiss = { showDriveBackupOptionsDialog = false },
-            onConfirmBackup = { passphrase ->
-                showDriveBackupOptionsDialog = false
-                viewModel.backupToGoogleDrive(context, passphrase)
-            }
-        )
-    }
-
-    if (state.driveHistoryVisible) {
-        DriveBackupHistoryDialog(
-            backups = state.driveBackups,
-            isBusy = state.isDriveBusy,
-            prefs = prefs,
-            onDismiss = viewModel::closeDriveHistory,
-            onRestore = { entry -> viewModel.restoreFromDriveEntry(context, entry) },
-            onDelete = { entry -> viewModel.deleteDriveBackupEntry(context, entry) }
-        )
-    }
-
-    if (state.showDriveDecryptPassphraseDialog) {
-        DriveDecryptPassphraseDialog(
-            onDismiss = viewModel::cancelDriveDecryptDialog,
-            onConfirm = viewModel::decryptPendingDriveBackup
         )
     }
 

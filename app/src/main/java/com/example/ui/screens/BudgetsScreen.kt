@@ -289,6 +289,11 @@ private fun BudgetEditorDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
+        properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
+            .widthIn(max = 520.dp),
         title = { Text(if (initial == null) strings.addBudget else strings.editBudget) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {

@@ -141,7 +141,8 @@ fun AccountsScreen(
                                 state.totalBalance,
                                 prefs.effectiveCurrencyCode,
                                 prefs.numberFormat,
-                                hideAmount = prefs.hideBalances
+                                hideAmount = prefs.hideBalances,
+                                languageTag = prefs.effectiveLanguageTag
                             ),
                             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.primary
@@ -182,7 +183,8 @@ fun AccountsScreen(
                                     account.balance,
                                     prefs.effectiveCurrencyCode,
                                     prefs.numberFormat,
-                                    hideAmount = prefs.hideBalances
+                                    hideAmount = prefs.hideBalances,
+                                    languageTag = prefs.effectiveLanguageTag
                                 ),
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                 color = if (account.balance >= 0) MaterialTheme.colorScheme.onSurface else ExpenseRed
@@ -333,7 +335,8 @@ fun AccountDetailScreen(
                                     account.balance,
                                     prefs.effectiveCurrencyCode,
                                     prefs.numberFormat,
-                                    hideAmount = prefs.hideBalances
+                                    hideAmount = prefs.hideBalances,
+                                    languageTag = prefs.effectiveLanguageTag
                                 ),
                                 style = MaterialTheme.typography.displaySmall,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -354,7 +357,8 @@ fun AccountDetailScreen(
                                             totalInflow,
                                             prefs.effectiveCurrencyCode,
                                             prefs.numberFormat,
-                                            hideAmount = prefs.hideBalances
+                                            hideAmount = prefs.hideBalances,
+                                            languageTag = prefs.effectiveLanguageTag
                                         ),
                                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                                         color = IncomeGreen
@@ -371,7 +375,8 @@ fun AccountDetailScreen(
                                             totalOutflow,
                                             prefs.effectiveCurrencyCode,
                                             prefs.numberFormat,
-                                            hideAmount = prefs.hideBalances
+                                            hideAmount = prefs.hideBalances,
+                                            languageTag = prefs.effectiveLanguageTag
                                         ),
                                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                                         color = ExpenseRed

@@ -16,6 +16,77 @@ import com.example.core.model.TransactionSortOrder
 import com.example.core.model.TransactionType
 import com.example.core.model.ViewMode
 
+data class CategoryLabelStrings(
+    val catFoodDining: String,
+    val catGroceries: String,
+    val catTransport: String,
+    val catHouseRent: String,
+    val catUtilitiesBills: String,
+    val catMobileInternet: String,
+    val catHealthcare: String,
+    val catShopping: String,
+    val catEducation: String,
+    val catEntertainment: String,
+    val catTravel: String,
+    val catOtherExpense: String,
+    val catSalary: String,
+    val catFreelance: String,
+    val catBusiness: String,
+    val catInvestment: String,
+    val catGiftBonus: String,
+    val catOtherIncome: String
+)
+
+data class EnumLabelStrings(
+    val accountTypeCash: String,
+    val accountTypeBank: String,
+    val accountTypeSavings: String,
+    val accountTypeCreditCard: String,
+    val accountTypeMobileBanking: String,
+    val accountTypeCustom: String,
+    val recurrenceNone: String,
+    val recurrenceDaily: String,
+    val recurrenceWeekly: String,
+    val recurrenceMonthly: String,
+    val recurrenceYearly: String,
+    val accentEmerald: String,
+    val accentOceanBlue: String,
+    val accentIndigo: String,
+    val accentViolet: String,
+    val accentCoralRed: String,
+    val accentAmberGold: String,
+    val accentTealCyan: String,
+    val accentRosePink: String
+)
+
+data class ExportBackupStrings(
+    val developerRole: String,
+    val developerCopyrightText: String,
+    val numberFormatLatinLabel: String,
+    val numberFormatBanglaLabel: String,
+    val rtlLabel: String,
+    val exportCsvMonthSuccessTemplate: String,
+    val exportCsvAllSuccessTemplate: String,
+    val exportCsvFailed: String,
+    val exportPdfSuccessTemplate: String,
+    val exportPdfFailed: String,
+    val backupSavedStatusTemplate: String,
+    val backupEncryptionFailed: String,
+    val backupDecryptFailed: String,
+    val restoreSuccessStatusTemplate: String,
+    val restoreFailedStatus: String,
+    val clearAllDataDone: String,
+    val pdfStatementTitle: String,
+    val pdfGeneratedMetaTemplate: String,
+    val pdfAccountsOverview: String,
+    val pdfTransactionsCountTemplate: String,
+    val pdfColDate: String,
+    val pdfColDetails: String,
+    val pdfColAccount: String,
+    val pdfColAmount: String,
+    val csvHeaderRow: String
+)
+
 data class AppStrings(
     val appName: String,
     val appSubtitle: String,
@@ -143,23 +214,6 @@ data class AppStrings(
     val limitExceeded: String,
     val categorySpendingCap: String,
     val updatesExistingCap: String,
-    val googleDriveBackup: String,
-    val googleDriveSubtitle: String,
-    val connectGoogleDrive: String,
-    val switchAccount: String,
-    val disconnect: String,
-    val backUpNow: String,
-    val restoreFromDrive: String,
-    val driveHistoryTitle: String,
-    val noDriveBackups: String,
-    val autoBackupSchedule: String,
-    val scheduleManualOnly: String,
-    val scheduleDaily: String,
-    val scheduleWeekly: String,
-    val notConnected: String,
-    val connectedAs: String,
-    val encryptWithPassphrase: String,
-    val cloudBackupDialogSubtitle: String,
     val themeSystem: String,
     val themeLight: String,
     val themeDark: String,
@@ -230,44 +284,116 @@ data class AppStrings(
     val errSelectAccount: String,
     val errDifferentToAccount: String,
     val errSaveTxFailed: String,
-    val accountTypeCash: String,
-    val accountTypeBank: String,
-    val accountTypeSavings: String,
-    val accountTypeCreditCard: String,
-    val accountTypeMobileBanking: String,
-    val accountTypeCustom: String,
-    val recurrenceNone: String,
-    val recurrenceDaily: String,
-    val recurrenceWeekly: String,
-    val recurrenceMonthly: String,
-    val recurrenceYearly: String,
-    val accentEmerald: String,
-    val accentOceanBlue: String,
-    val accentIndigo: String,
-    val accentViolet: String,
-    val accentCoralRed: String,
-    val accentAmberGold: String,
-    val accentTealCyan: String,
-    val accentRosePink: String,
-    val catFoodDining: String,
-    val catGroceries: String,
-    val catTransport: String,
-    val catHouseRent: String,
-    val catUtilitiesBills: String,
-    val catMobileInternet: String,
-    val catHealthcare: String,
-    val catShopping: String,
-    val catEducation: String,
-    val catEntertainment: String,
-    val catTravel: String,
-    val catOtherExpense: String,
-    val catSalary: String,
-    val catFreelance: String,
-    val catBusiness: String,
-    val catInvestment: String,
-    val catGiftBonus: String,
-    val catOtherIncome: String
+    val enumLabels: EnumLabelStrings,
+    val categoryLabels: CategoryLabelStrings,
+    val exportBackup: ExportBackupStrings
 ) {
+    val accountTypeCash: String get() = enumLabels.accountTypeCash
+    val accountTypeBank: String get() = enumLabels.accountTypeBank
+    val accountTypeSavings: String get() = enumLabels.accountTypeSavings
+    val accountTypeCreditCard: String get() = enumLabels.accountTypeCreditCard
+    val accountTypeMobileBanking: String get() = enumLabels.accountTypeMobileBanking
+    val accountTypeCustom: String get() = enumLabels.accountTypeCustom
+    val recurrenceNone: String get() = enumLabels.recurrenceNone
+    val recurrenceDaily: String get() = enumLabels.recurrenceDaily
+    val recurrenceWeekly: String get() = enumLabels.recurrenceWeekly
+    val recurrenceMonthly: String get() = enumLabels.recurrenceMonthly
+    val recurrenceYearly: String get() = enumLabels.recurrenceYearly
+    val accentEmerald: String get() = enumLabels.accentEmerald
+    val accentOceanBlue: String get() = enumLabels.accentOceanBlue
+    val accentIndigo: String get() = enumLabels.accentIndigo
+    val accentViolet: String get() = enumLabels.accentViolet
+    val accentCoralRed: String get() = enumLabels.accentCoralRed
+    val accentAmberGold: String get() = enumLabels.accentAmberGold
+    val accentTealCyan: String get() = enumLabels.accentTealCyan
+    val accentRosePink: String get() = enumLabels.accentRosePink
+
+    val catFoodDining: String get() = categoryLabels.catFoodDining
+    val catGroceries: String get() = categoryLabels.catGroceries
+    val catTransport: String get() = categoryLabels.catTransport
+    val catHouseRent: String get() = categoryLabels.catHouseRent
+    val catUtilitiesBills: String get() = categoryLabels.catUtilitiesBills
+    val catMobileInternet: String get() = categoryLabels.catMobileInternet
+    val catHealthcare: String get() = categoryLabels.catHealthcare
+    val catShopping: String get() = categoryLabels.catShopping
+    val catEducation: String get() = categoryLabels.catEducation
+    val catEntertainment: String get() = categoryLabels.catEntertainment
+    val catTravel: String get() = categoryLabels.catTravel
+    val catOtherExpense: String get() = categoryLabels.catOtherExpense
+    val catSalary: String get() = categoryLabels.catSalary
+    val catFreelance: String get() = categoryLabels.catFreelance
+    val catBusiness: String get() = categoryLabels.catBusiness
+    val catInvestment: String get() = categoryLabels.catInvestment
+    val catGiftBonus: String get() = categoryLabels.catGiftBonus
+    val catOtherIncome: String get() = categoryLabels.catOtherIncome
+
+    val developerRole: String get() = exportBackup.developerRole
+    val developerCopyrightText: String get() = exportBackup.developerCopyrightText
+    val numberFormatLatinLabel: String get() = exportBackup.numberFormatLatinLabel
+    val numberFormatBanglaLabel: String get() = exportBackup.numberFormatBanglaLabel
+    val rtlLabel: String get() = exportBackup.rtlLabel
+    val exportCsvMonthSuccessTemplate: String get() = exportBackup.exportCsvMonthSuccessTemplate
+    val exportCsvAllSuccessTemplate: String get() = exportBackup.exportCsvAllSuccessTemplate
+    val exportCsvFailed: String get() = exportBackup.exportCsvFailed
+    val exportPdfSuccessTemplate: String get() = exportBackup.exportPdfSuccessTemplate
+    val exportPdfFailed: String get() = exportBackup.exportPdfFailed
+    val backupSavedStatusTemplate: String get() = exportBackup.backupSavedStatusTemplate
+    val backupEncryptionFailed: String get() = exportBackup.backupEncryptionFailed
+    val backupDecryptFailed: String get() = exportBackup.backupDecryptFailed
+    val restoreSuccessStatusTemplate: String get() = exportBackup.restoreSuccessStatusTemplate
+    val restoreFailedStatus: String get() = exportBackup.restoreFailedStatus
+    val clearAllDataDone: String get() = exportBackup.clearAllDataDone
+    val pdfStatementTitle: String get() = exportBackup.pdfStatementTitle
+    val pdfGeneratedMetaTemplate: String get() = exportBackup.pdfGeneratedMetaTemplate
+    val pdfAccountsOverview: String get() = exportBackup.pdfAccountsOverview
+    val pdfTransactionsCountTemplate: String get() = exportBackup.pdfTransactionsCountTemplate
+    val pdfColDate: String get() = exportBackup.pdfColDate
+    val pdfColDetails: String get() = exportBackup.pdfColDetails
+    val pdfColAccount: String get() = exportBackup.pdfColAccount
+    val pdfColAmount: String get() = exportBackup.pdfColAmount
+    val csvHeaderRow: String get() = exportBackup.csvHeaderRow
+    fun exportCsvMonthSuccess(count: Int, monthLabel: String, numberFormat: NumberFormatStyle): String {
+        val num = CurrencyFormatter.toLocalizedDigits(count.toString(), numberFormat)
+        return exportCsvMonthSuccessTemplate
+            .replace("{count}", num)
+            .replace("{month}", monthLabel)
+    }
+
+    fun exportCsvAllSuccess(count: Int, numberFormat: NumberFormatStyle): String {
+        val num = CurrencyFormatter.toLocalizedDigits(count.toString(), numberFormat)
+        return exportCsvAllSuccessTemplate.replace("{count}", num)
+    }
+
+    fun exportPdfSuccess(count: Int, numberFormat: NumberFormatStyle): String {
+        val num = CurrencyFormatter.toLocalizedDigits(count.toString(), numberFormat)
+        return exportPdfSuccessTemplate.replace("{count}", num)
+    }
+
+    fun backupSavedStatus(txCount: Int, accountCount: Int, numberFormat: NumberFormatStyle): String {
+        val tx = CurrencyFormatter.toLocalizedDigits(txCount.toString(), numberFormat)
+        val acc = CurrencyFormatter.toLocalizedDigits(accountCount.toString(), numberFormat)
+        return backupSavedStatusTemplate
+            .replace("{transactions}", tx)
+            .replace("{accounts}", acc)
+    }
+
+    fun restoreSuccessStatus(accountCount: Int, txCount: Int, numberFormat: NumberFormatStyle): String {
+        val acc = CurrencyFormatter.toLocalizedDigits(accountCount.toString(), numberFormat)
+        val tx = CurrencyFormatter.toLocalizedDigits(txCount.toString(), numberFormat)
+        return restoreSuccessStatusTemplate
+            .replace("{accounts}", acc)
+            .replace("{transactions}", tx)
+    }
+
+    fun pdfGeneratedMeta(date: String, currencyCode: String): String =
+        pdfGeneratedMetaTemplate
+            .replace("{date}", date)
+            .replace("{currency}", currencyCode)
+
+    fun pdfTransactionsCount(count: Int, numberFormat: NumberFormatStyle): String {
+        val num = CurrencyFormatter.toLocalizedDigits(count.toString(), numberFormat)
+        return pdfTransactionsCountTemplate.replace("{count}", num)
+    }
     fun transactionsCount(count: Int, numberFormat: NumberFormatStyle): String {
         val num = CurrencyFormatter.toLocalizedDigits(count.toString(), numberFormat)
         val tmpl = if (count == 1) transactionsCountSingleTemplate else transactionsCountPluralTemplate
@@ -552,23 +678,6 @@ val EnglishStrings = AppStrings(
     limitExceeded = "Limit Exceeded",
     categorySpendingCap = "Category Spending Cap",
     updatesExistingCap = "A cap already exists for this month; saving will update it.",
-    googleDriveBackup = "Google Drive Backup",
-    googleDriveSubtitle = "Private App Data folder sync & cloud restore",
-    connectGoogleDrive = "Connect Google Drive",
-    switchAccount = "Switch Account",
-    disconnect = "Disconnect",
-    backUpNow = "Back Up Now",
-    restoreFromDrive = "Restore from Drive",
-    driveHistoryTitle = "Google Drive Backups",
-    noDriveBackups = "No cloud backups found in your Google Drive App Data folder yet.",
-    autoBackupSchedule = "Automatic Backup",
-    scheduleManualOnly = "Manual",
-    scheduleDaily = "Daily",
-    scheduleWeekly = "Weekly",
-    notConnected = "Not connected",
-    connectedAs = "Connected",
-    encryptWithPassphrase = "Encrypt with passphrase",
-    cloudBackupDialogSubtitle = "Store an encrypted or standard backup privately in your Google Drive App Data folder.",
     themeSystem = "System Default",
     themeLight = "Light",
     themeDark = "Dark",
@@ -638,43 +747,74 @@ val EnglishStrings = AppStrings(
     errSelectAccount = "Please create or select an account first.",
     errDifferentToAccount = "Select a different destination account for transfer.",
     errSaveTxFailed = "Failed to save transaction.",
-    accountTypeCash = "Cash",
-    accountTypeBank = "Bank Account",
-    accountTypeSavings = "Savings",
-    accountTypeCreditCard = "Credit Card",
-    accountTypeMobileBanking = "Mobile Banking",
-    accountTypeCustom = "Custom",
-    recurrenceNone = "One-time",
-    recurrenceDaily = "Daily",
-    recurrenceWeekly = "Weekly",
-    recurrenceMonthly = "Monthly",
-    recurrenceYearly = "Yearly",
-    accentEmerald = "Emerald",
-    accentOceanBlue = "Ocean Blue",
-    accentIndigo = "Indigo",
-    accentViolet = "Violet",
-    accentCoralRed = "Coral Red",
-    accentAmberGold = "Amber Gold",
-    accentTealCyan = "Teal Cyan",
-    accentRosePink = "Rose Pink",
-    catFoodDining = "Food & Dining",
-    catGroceries = "Groceries",
-    catTransport = "Transport",
-    catHouseRent = "House Rent",
-    catUtilitiesBills = "Utilities & Bills",
-    catMobileInternet = "Mobile & Internet",
-    catHealthcare = "Healthcare",
-    catShopping = "Shopping",
-    catEducation = "Education",
-    catEntertainment = "Entertainment",
-    catTravel = "Travel",
-    catOtherExpense = "Other Expense",
-    catSalary = "Salary",
-    catFreelance = "Freelance",
-    catBusiness = "Business",
-    catInvestment = "Investment",
-    catGiftBonus = "Gift & Bonus",
-    catOtherIncome = "Other Income"
+    enumLabels = EnumLabelStrings(
+        accountTypeCash = "Cash",
+        accountTypeBank = "Bank Account",
+        accountTypeSavings = "Savings",
+        accountTypeCreditCard = "Credit Card",
+        accountTypeMobileBanking = "Mobile Banking",
+        accountTypeCustom = "Custom",
+        recurrenceNone = "One-time",
+        recurrenceDaily = "Daily",
+        recurrenceWeekly = "Weekly",
+        recurrenceMonthly = "Monthly",
+        recurrenceYearly = "Yearly",
+        accentEmerald = "Emerald",
+        accentOceanBlue = "Ocean Blue",
+        accentIndigo = "Indigo",
+        accentViolet = "Violet",
+        accentCoralRed = "Coral Red",
+        accentAmberGold = "Amber Gold",
+        accentTealCyan = "Teal Cyan",
+        accentRosePink = "Rose Pink"
+    ),
+    categoryLabels = CategoryLabelStrings(
+        catFoodDining = "Food & Dining",
+        catGroceries = "Groceries",
+        catTransport = "Transport",
+        catHouseRent = "House Rent",
+        catUtilitiesBills = "Utilities & Bills",
+        catMobileInternet = "Mobile & Internet",
+        catHealthcare = "Healthcare",
+        catShopping = "Shopping",
+        catEducation = "Education",
+        catEntertainment = "Entertainment",
+        catTravel = "Travel",
+        catOtherExpense = "Other Expense",
+        catSalary = "Salary",
+        catFreelance = "Freelance",
+        catBusiness = "Business",
+        catInvestment = "Investment",
+        catGiftBonus = "Gift & Bonus",
+        catOtherIncome = "Other Income"
+    ),
+    exportBackup = ExportBackupStrings(
+        developerRole = "App Developer",
+        developerCopyrightText = "Copyright © 2026 Foysal Ahmmed Sadin.",
+        numberFormatLatinLabel = "English (123)",
+        numberFormatBanglaLabel = "বাংলা (১২৩)",
+        rtlLabel = "RTL",
+        exportCsvMonthSuccessTemplate = "Exported {count} transactions for {month} to CSV.",
+        exportCsvAllSuccessTemplate = "Exported {count} transactions to CSV.",
+        exportCsvFailed = "CSV export failed.",
+        exportPdfSuccessTemplate = "Exported PDF statement ({count} transactions).",
+        exportPdfFailed = "PDF export failed.",
+        backupSavedStatusTemplate = "Encrypted backup saved ({transactions} transactions, {accounts} accounts).",
+        backupEncryptionFailed = "Backup encryption failed.",
+        backupDecryptFailed = "Could not decrypt backup. Check passphrase or file.",
+        restoreSuccessStatusTemplate = "Restored {accounts} accounts and {transactions} transactions.",
+        restoreFailedStatus = "Restore failed.",
+        clearAllDataDone = "All financial data reset.",
+        pdfStatementTitle = "Daily Expenses — Financial Statement",
+        pdfGeneratedMetaTemplate = "Generated: {date}  |  Currency: {currency}",
+        pdfAccountsOverview = "Accounts Overview",
+        pdfTransactionsCountTemplate = "Transactions ({count})",
+        pdfColDate = "Date",
+        pdfColDetails = "Category / Details",
+        pdfColAccount = "Account",
+        pdfColAmount = "Amount",
+        csvHeaderRow = "Date,Time,Type,Category,Account,To Account,Amount,Currency,Note,Recurring"
+    )
 )
 
 val BanglaStrings = AppStrings(
@@ -804,23 +944,6 @@ val BanglaStrings = AppStrings(
     limitExceeded = "সীমা অতিক্রম করেছে",
     categorySpendingCap = "ক্যাটাগরি খরচের সীমা",
     updatesExistingCap = "এই মাসের জন্য একটি সীমা সেট করা আছে; সংরক্ষণ করলে তা আপডেট হবে।",
-    googleDriveBackup = "গুগল ড্রাইভ ব্যাকআপ",
-    googleDriveSubtitle = "ব্যক্তিগত অ্যাপ ডেটা ফোল্ডারে নিরাপদ ক্লাউড সিঙ্ক",
-    connectGoogleDrive = "গুগল ড্রাইভ যুক্ত করুন",
-    switchAccount = "অ্যাকাউন্ট পরিবর্তন",
-    disconnect = "সংযোগ বিচ্ছিন্ন",
-    backUpNow = "এখনই ব্যাকআপ নিন",
-    restoreFromDrive = "ড্রাইভ থেকে পুনরুদ্ধার",
-    driveHistoryTitle = "গুগল ড্রাইভ ব্যাকআপ তালিকা",
-    noDriveBackups = "আপনার গুগল ড্রাইভ অ্যাপ ডেটা ফোল্ডারে এখনো কোনো ব্যাকআপ নেই।",
-    autoBackupSchedule = "স্বয়ংক্রিয় ব্যাকআপ",
-    scheduleManualOnly = "ম্যানুয়াল",
-    scheduleDaily = "দৈনিক",
-    scheduleWeekly = "সাপ্তাহিক",
-    notConnected = "সংযুক্ত নয়",
-    connectedAs = "সংযুক্ত",
-    encryptWithPassphrase = "পাসওয়ার্ড দিয়ে এনক্রিপ্ট করুন",
-    cloudBackupDialogSubtitle = "আপনার গুগল ড্রাইভের ব্যক্তিগত অ্যাপ ডেটা ফোল্ডারে নিরাপদ ব্যাকআপ সংরক্ষণ করুন।",
     themeSystem = "সিস্টেম ডিফল্ট",
     themeLight = "লাইট",
     themeDark = "ডার্ক",
@@ -890,43 +1013,74 @@ val BanglaStrings = AppStrings(
     errSelectAccount = "অনুগ্রহ করে আগে একটি অ্যাকাউন্ট তৈরি বা নির্বাচন করুন।",
     errDifferentToAccount = "ট্রান্সফারের জন্য ভিন্ন একটি গন্তব্য অ্যাকাউন্ট নির্বাচন করুন।",
     errSaveTxFailed = "লেনদেন সংরক্ষণ করা যায়নি।",
-    accountTypeCash = "নগদ",
-    accountTypeBank = "ব্যাংক অ্যাকাউন্ট",
-    accountTypeSavings = "সঞ্চয়",
-    accountTypeCreditCard = "ক্রেডিট কার্ড",
-    accountTypeMobileBanking = "মোবাইল ব্যাংকিং",
-    accountTypeCustom = "কাস্টম",
-    recurrenceNone = "একবার",
-    recurrenceDaily = "প্রতিদিন",
-    recurrenceWeekly = "সাপ্তাহিক",
-    recurrenceMonthly = "মাসিক",
-    recurrenceYearly = "বার্ষিক",
-    accentEmerald = "এমেরাল্ড",
-    accentOceanBlue = "ওশান ব্লু",
-    accentIndigo = "ইন্ডিগো",
-    accentViolet = "ভায়োলেট",
-    accentCoralRed = "কোরাল রেড",
-    accentAmberGold = "অ্যাম্বার গোল্ড",
-    accentTealCyan = "টিল সায়ান",
-    accentRosePink = "রোজ পিংক",
-    catFoodDining = "খাবার ও রেস্টুরেন্ট",
-    catGroceries = "বাজার ও মুদিখানা",
-    catTransport = "যাতায়াত",
-    catHouseRent = "বাড়ি ভাড়া",
-    catUtilitiesBills = "বিদ্যুৎ ও বিল",
-    catMobileInternet = "মোবাইল ও ইন্টারনেট",
-    catHealthcare = "চিকিৎসা ও ওষুধ",
-    catShopping = "কেনাকাটা",
-    catEducation = "শিক্ষা",
-    catEntertainment = "বিনোদন",
-    catTravel = "ভ্রমণ",
-    catOtherExpense = "অন্যান্য খরচ",
-    catSalary = "বেতন",
-    catFreelance = "ফ্রিল্যান্সিং",
-    catBusiness = "ব্যবসা",
-    catInvestment = "বিনিয়োগ",
-    catGiftBonus = "উপহার ও বোনাস",
-    catOtherIncome = "অন্যান্য আয়"
+    enumLabels = EnumLabelStrings(
+        accountTypeCash = "নগদ",
+        accountTypeBank = "ব্যাংক অ্যাকাউন্ট",
+        accountTypeSavings = "সঞ্চয়",
+        accountTypeCreditCard = "ক্রেডিট কার্ড",
+        accountTypeMobileBanking = "মোবাইল ব্যাংকিং",
+        accountTypeCustom = "কাস্টম",
+        recurrenceNone = "একবার",
+        recurrenceDaily = "প্রতিদিন",
+        recurrenceWeekly = "সাপ্তাহিক",
+        recurrenceMonthly = "মাসিক",
+        recurrenceYearly = "বার্ষিক",
+        accentEmerald = "এমেরাল্ড",
+        accentOceanBlue = "ওশান ব্লু",
+        accentIndigo = "ইন্ডিগো",
+        accentViolet = "ভায়োলেট",
+        accentCoralRed = "কোরাল রেড",
+        accentAmberGold = "অ্যাম্বার গোল্ড",
+        accentTealCyan = "টিল সায়ান",
+        accentRosePink = "রোজ পিংক"
+    ),
+    categoryLabels = CategoryLabelStrings(
+        catFoodDining = "খাবার ও রেস্টুরেন্ট",
+        catGroceries = "বাজার ও মুদিখানা",
+        catTransport = "যাতায়াত",
+        catHouseRent = "বাড়ি ভাড়া",
+        catUtilitiesBills = "বিদ্যুৎ ও বিল",
+        catMobileInternet = "মোবাইল ও ইন্টারনেট",
+        catHealthcare = "চিকিৎসা ও ওষুধ",
+        catShopping = "কেনাকাটা",
+        catEducation = "শিক্ষা",
+        catEntertainment = "বিনোদন",
+        catTravel = "ভ্রমণ",
+        catOtherExpense = "অন্যান্য খরচ",
+        catSalary = "বেতন",
+        catFreelance = "ফ্রিল্যান্সিং",
+        catBusiness = "ব্যবসা",
+        catInvestment = "বিনিয়োগ",
+        catGiftBonus = "উপহার ও বোনাস",
+        catOtherIncome = "অন্যান্য আয়"
+    ),
+    exportBackup = ExportBackupStrings(
+        developerRole = "অ্যাপ ডেভেলপার",
+        developerCopyrightText = "কপিরাইট © ২০২৬ ফয়সাল আহমেদ সাদিন।",
+        numberFormatLatinLabel = "ইংরেজি (123)",
+        numberFormatBanglaLabel = "বাংলা (১২৩)",
+        rtlLabel = "RTL",
+        exportCsvMonthSuccessTemplate = "{month}-এর {count}টি লেনদেন CSV-তে এক্সপোর্ট করা হয়েছে।",
+        exportCsvAllSuccessTemplate = "{count}টি লেনদেন CSV-তে এক্সপোর্ট করা হয়েছে।",
+        exportCsvFailed = "CSV এক্সপোর্ট ব্যর্থ হয়েছে।",
+        exportPdfSuccessTemplate = "PDF স্টেটমেন্ট এক্সপোর্ট করা হয়েছে ({count}টি লেনদেন)।",
+        exportPdfFailed = "PDF এক্সপোর্ট ব্যর্থ হয়েছে।",
+        backupSavedStatusTemplate = "এনক্রিপ্টেড ব্যাকআপ সংরক্ষিত হয়েছে ({transactions}টি লেনদেন, {accounts}টি অ্যাকাউন্ট)।",
+        backupEncryptionFailed = "ব্যাকআপ এনক্রিপ্ট করা যায়নি।",
+        backupDecryptFailed = "ব্যাকআপ ডিক্রিপ্ট করা যায়নি। পাসওয়ার্ড বা ফাইল যাচাই করুন।",
+        restoreSuccessStatusTemplate = "{accounts}টি অ্যাকাউন্ট ও {transactions}টি লেনদেন পুনরুদ্ধার করা হয়েছে।",
+        restoreFailedStatus = "পুনরুদ্ধার ব্যর্থ হয়েছে।",
+        clearAllDataDone = "সব আর্থিক ডেটা রিসেট করা হয়েছে।",
+        pdfStatementTitle = "Daily Expenses — আর্থিক বিবরণী",
+        pdfGeneratedMetaTemplate = "তৈরির তারিখ: {date}  |  মুদ্রা: {currency}",
+        pdfAccountsOverview = "অ্যাকাউন্টের সারসংক্ষেপ",
+        pdfTransactionsCountTemplate = "লেনদেন ({count})",
+        pdfColDate = "তারিখ",
+        pdfColDetails = "ক্যাটাগরি / বিবরণ",
+        pdfColAccount = "অ্যাকাউন্ট",
+        pdfColAmount = "পরিমাণ",
+        csvHeaderRow = "তারিখ,সময়,ধরন,ক্যাটাগরি,অ্যাকাউন্ট,গন্তব্য অ্যাকাউন্ট,পরিমাণ,মুদ্রা,নোট,পুনরাবৃত্তি"
+    )
 )
 
 fun stringsFor(language: AppLanguage): AppStrings =
@@ -1067,23 +1221,6 @@ fun stringsFor(context: Context, languageTag: String): AppStrings {
         limitExceeded = s(R.string.limit_exceeded),
         categorySpendingCap = s(R.string.category_spending_cap),
         updatesExistingCap = s(R.string.updates_existing_cap),
-        googleDriveBackup = s(R.string.google_drive_backup),
-        googleDriveSubtitle = s(R.string.google_drive_subtitle),
-        connectGoogleDrive = s(R.string.connect_google_drive),
-        switchAccount = s(R.string.switch_account),
-        disconnect = s(R.string.disconnect),
-        backUpNow = s(R.string.back_up_now),
-        restoreFromDrive = s(R.string.restore_from_drive),
-        driveHistoryTitle = s(R.string.drive_history_title),
-        noDriveBackups = s(R.string.no_drive_backups),
-        autoBackupSchedule = s(R.string.auto_backup_schedule),
-        scheduleManualOnly = s(R.string.schedule_manual_only),
-        scheduleDaily = s(R.string.schedule_daily),
-        scheduleWeekly = s(R.string.schedule_weekly),
-        notConnected = s(R.string.not_connected),
-        connectedAs = s(R.string.connected_as),
-        encryptWithPassphrase = s(R.string.encrypt_with_passphrase),
-        cloudBackupDialogSubtitle = s(R.string.cloud_backup_dialog_subtitle),
         themeSystem = s(R.string.theme_system),
         themeLight = s(R.string.theme_light),
         themeDark = s(R.string.theme_dark),
@@ -1153,43 +1290,74 @@ fun stringsFor(context: Context, languageTag: String): AppStrings {
         errSelectAccount = s(R.string.err_select_account),
         errDifferentToAccount = s(R.string.err_different_to_account),
         errSaveTxFailed = s(R.string.err_save_tx_failed),
-        accountTypeCash = s(R.string.account_type_cash),
-        accountTypeBank = s(R.string.account_type_bank),
-        accountTypeSavings = s(R.string.account_type_savings),
-        accountTypeCreditCard = s(R.string.account_type_credit_card),
-        accountTypeMobileBanking = s(R.string.account_type_mobile_banking),
-        accountTypeCustom = s(R.string.account_type_custom),
-        recurrenceNone = s(R.string.recurrence_none),
-        recurrenceDaily = s(R.string.recurrence_daily),
-        recurrenceWeekly = s(R.string.recurrence_weekly),
-        recurrenceMonthly = s(R.string.recurrence_monthly),
-        recurrenceYearly = s(R.string.recurrence_yearly),
-        accentEmerald = s(R.string.accent_emerald),
-        accentOceanBlue = s(R.string.accent_ocean_blue),
-        accentIndigo = s(R.string.accent_indigo),
-        accentViolet = s(R.string.accent_violet),
-        accentCoralRed = s(R.string.accent_coral_red),
-        accentAmberGold = s(R.string.accent_amber_gold),
-        accentTealCyan = s(R.string.accent_teal_cyan),
-        accentRosePink = s(R.string.accent_rose_pink),
-        catFoodDining = s(R.string.cat_food_dining),
-        catGroceries = s(R.string.cat_groceries),
-        catTransport = s(R.string.cat_transport),
-        catHouseRent = s(R.string.cat_house_rent),
-        catUtilitiesBills = s(R.string.cat_utilities_bills),
-        catMobileInternet = s(R.string.cat_mobile_internet),
-        catHealthcare = s(R.string.cat_healthcare),
-        catShopping = s(R.string.cat_shopping),
-        catEducation = s(R.string.cat_education),
-        catEntertainment = s(R.string.cat_entertainment),
-        catTravel = s(R.string.cat_travel),
-        catOtherExpense = s(R.string.cat_other_expense),
-        catSalary = s(R.string.cat_salary),
-        catFreelance = s(R.string.cat_freelance),
-        catBusiness = s(R.string.cat_business),
-        catInvestment = s(R.string.cat_investment),
-        catGiftBonus = s(R.string.cat_gift_bonus),
-        catOtherIncome = s(R.string.cat_other_income)
+        enumLabels = EnumLabelStrings(
+            accountTypeCash = s(R.string.account_type_cash),
+            accountTypeBank = s(R.string.account_type_bank),
+            accountTypeSavings = s(R.string.account_type_savings),
+            accountTypeCreditCard = s(R.string.account_type_credit_card),
+            accountTypeMobileBanking = s(R.string.account_type_mobile_banking),
+            accountTypeCustom = s(R.string.account_type_custom),
+            recurrenceNone = s(R.string.recurrence_none),
+            recurrenceDaily = s(R.string.recurrence_daily),
+            recurrenceWeekly = s(R.string.recurrence_weekly),
+            recurrenceMonthly = s(R.string.recurrence_monthly),
+            recurrenceYearly = s(R.string.recurrence_yearly),
+            accentEmerald = s(R.string.accent_emerald),
+            accentOceanBlue = s(R.string.accent_ocean_blue),
+            accentIndigo = s(R.string.accent_indigo),
+            accentViolet = s(R.string.accent_violet),
+            accentCoralRed = s(R.string.accent_coral_red),
+            accentAmberGold = s(R.string.accent_amber_gold),
+            accentTealCyan = s(R.string.accent_teal_cyan),
+            accentRosePink = s(R.string.accent_rose_pink)
+        ),
+        categoryLabels = CategoryLabelStrings(
+            catFoodDining = s(R.string.cat_food_dining),
+            catGroceries = s(R.string.cat_groceries),
+            catTransport = s(R.string.cat_transport),
+            catHouseRent = s(R.string.cat_house_rent),
+            catUtilitiesBills = s(R.string.cat_utilities_bills),
+            catMobileInternet = s(R.string.cat_mobile_internet),
+            catHealthcare = s(R.string.cat_healthcare),
+            catShopping = s(R.string.cat_shopping),
+            catEducation = s(R.string.cat_education),
+            catEntertainment = s(R.string.cat_entertainment),
+            catTravel = s(R.string.cat_travel),
+            catOtherExpense = s(R.string.cat_other_expense),
+            catSalary = s(R.string.cat_salary),
+            catFreelance = s(R.string.cat_freelance),
+            catBusiness = s(R.string.cat_business),
+            catInvestment = s(R.string.cat_investment),
+            catGiftBonus = s(R.string.cat_gift_bonus),
+            catOtherIncome = s(R.string.cat_other_income)
+        ),
+        exportBackup = ExportBackupStrings(
+            developerRole = s(R.string.developer_role),
+            developerCopyrightText = s(R.string.developer_copyright_text),
+            numberFormatLatinLabel = s(R.string.number_format_latin_label),
+            numberFormatBanglaLabel = s(R.string.number_format_bangla_label),
+            rtlLabel = s(R.string.rtl_label),
+            exportCsvMonthSuccessTemplate = s(R.string.export_csv_month_success),
+            exportCsvAllSuccessTemplate = s(R.string.export_csv_all_success),
+            exportCsvFailed = s(R.string.export_csv_failed),
+            exportPdfSuccessTemplate = s(R.string.export_pdf_success),
+            exportPdfFailed = s(R.string.export_pdf_failed),
+            backupSavedStatusTemplate = s(R.string.backup_saved_status),
+            backupEncryptionFailed = s(R.string.backup_encryption_failed),
+            backupDecryptFailed = s(R.string.backup_decrypt_failed),
+            restoreSuccessStatusTemplate = s(R.string.restore_success_status),
+            restoreFailedStatus = s(R.string.restore_failed_status),
+            clearAllDataDone = s(R.string.clear_all_data_done),
+            pdfStatementTitle = s(R.string.pdf_statement_title),
+            pdfGeneratedMetaTemplate = s(R.string.pdf_generated_meta),
+            pdfAccountsOverview = s(R.string.pdf_accounts_overview),
+            pdfTransactionsCountTemplate = s(R.string.pdf_transactions_count),
+            pdfColDate = s(R.string.pdf_col_date),
+            pdfColDetails = s(R.string.pdf_col_details),
+            pdfColAccount = s(R.string.pdf_col_account),
+            pdfColAmount = s(R.string.pdf_col_amount),
+            csvHeaderRow = s(R.string.csv_header_row)
+        )
     )
 }
 

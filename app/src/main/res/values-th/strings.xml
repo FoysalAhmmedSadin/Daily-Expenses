@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">เกินวงเงิน</string>
     <string name="category_spending_cap" formatted="false">วงเงินรายจ่ายหมวดหมู่</string>
     <string name="updates_existing_cap" formatted="false">มีวงเงินของเดือนนี้อยู่แล้ว การบันทึกจะเป็นการอัปเดต</string>
-    <string name="google_drive_backup" formatted="false">สำรองข้อมูล Google Drive</string>
-    <string name="google_drive_subtitle" formatted="false">ซิงค์โฟลเดอร์ข้อมูลแอปส่วนตัวและกู้คืนจากคลาวด์</string>
-    <string name="connect_google_drive" formatted="false">เชื่อมต่อ Google Drive</string>
-    <string name="switch_account" formatted="false">สลับบัญชี</string>
-    <string name="disconnect" formatted="false">ยกเลิกการเชื่อมต่อ</string>
-    <string name="back_up_now" formatted="false">สำรองข้อมูลทันที</string>
-    <string name="restore_from_drive" formatted="false">กู้คืนจาก Drive</string>
-    <string name="drive_history_title" formatted="false">ไฟล์สำรอง Google Drive</string>
-    <string name="no_drive_backups" formatted="false">ยังไม่มีไฟล์สำรองบนคลาวด์ในโฟลเดอร์ข้อมูลแอป Google Drive ของคุณ</string>
-    <string name="auto_backup_schedule" formatted="false">สำรองข้อมูลอัตโนมัติ</string>
-    <string name="schedule_manual_only" formatted="false">กำหนดเอง</string>
-    <string name="schedule_daily" formatted="false">ทุกวัน</string>
-    <string name="schedule_weekly" formatted="false">ทุกสัปดาห์</string>
-    <string name="not_connected" formatted="false">ยังไม่เชื่อมต่อ</string>
-    <string name="connected_as" formatted="false">เชื่อมต่อแล้ว</string>
-    <string name="encrypt_with_passphrase" formatted="false">เข้ารหัสด้วยรหัสผ่าน</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">เก็บไฟล์สำรองแบบเข้ารหัสหรือมาตรฐานไว้อย่างเป็นส่วนตัวในโฟลเดอร์ข้อมูลแอป Google Drive</string>
     <string name="theme_system" formatted="false">ค่าเริ่มต้นระบบ</string>
     <string name="theme_light" formatted="false">สว่าง</string>
     <string name="theme_dark" formatted="false">มืด</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">การลงทุน</string>
     <string name="cat_gift_bonus" formatted="false">ของขวัญและโบนัส</string>
     <string name="cat_other_income" formatted="false">รายรับอื่นๆ</string>
+    <string name="developer_role" formatted="false">นักพัฒนาแอป</string>
+    <string name="developer_copyright_text" formatted="false">สงวนลิขสิทธิ์ © 2026 Foysal Ahmmed Sadin</string>
+    <string name="number_format_latin_label" formatted="false">อังกฤษ (123)</string>
+    <string name="number_format_bangla_label" formatted="false">เบงกาลี (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">ส่งออก {count} รายการสำหรับ {month} เป็น CSV แล้ว</string>
+    <string name="export_csv_all_success" formatted="false">ส่งออก {count} รายการเป็น CSV แล้ว</string>
+    <string name="export_csv_failed" formatted="false">ส่งออก CSV ไม่สำเร็จ</string>
+    <string name="export_pdf_success" formatted="false">ส่งออกใบแจ้งยอด PDF แล้ว ({count} รายการ)</string>
+    <string name="export_pdf_failed" formatted="false">ส่งออก PDF ไม่สำเร็จ</string>
+    <string name="backup_saved_status" formatted="false">บันทึกไฟล์สำรองแบบเข้ารหัสแล้ว ({transactions} รายการ, {accounts} บัญชี)</string>
+    <string name="backup_encryption_failed" formatted="false">การเข้ารหัสไฟล์สำรองไม่สำเร็จ</string>
+    <string name="backup_decrypt_failed" formatted="false">ไม่สามารถถอดรหัสไฟล์สำรอง กรุณาตรวจสอบรหัสผ่านหรือไฟล์</string>
+    <string name="restore_success_status" formatted="false">กู้คืน {accounts} บัญชี และ {transactions} รายการแล้ว</string>
+    <string name="restore_failed_status" formatted="false">การกู้คืนไม่สำเร็จ</string>
+    <string name="clear_all_data_done" formatted="false">รีเซ็ตข้อมูลการเงินทั้งหมดแล้ว</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — รายงานทางการเงิน</string>
+    <string name="pdf_generated_meta" formatted="false">สร้างเมื่อ: {date}  |  สกุลเงิน: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">ภาพรวมบัญชี</string>
+    <string name="pdf_transactions_count" formatted="false">รายการธุรกรรม ({count})</string>
+    <string name="pdf_col_date" formatted="false">วันที่</string>
+    <string name="pdf_col_details" formatted="false">หมวดหมู่ / รายละเอียด</string>
+    <string name="pdf_col_account" formatted="false">บัญชี</string>
+    <string name="pdf_col_amount" formatted="false">จำนวนเงิน</string>
+    <string name="csv_header_row" formatted="false">วันที่,เวลา,ประเภท,หมวดหมู่,บัญชี,บัญชีปลายทาง,จำนวนเงิน,สกุลเงิน,บันทึก,เกิดซ้ำ</string>
 </resources>

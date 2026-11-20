@@ -1,14 +1,16 @@
 package com.example
 
 import android.content.Context
-import android.content.Intent
+import android.os.Looper
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
@@ -21,15 +23,8 @@ import com.example.core.data.TransactionRepositoryImpl
 import com.example.core.database.ExpenseDatabase
 import com.example.core.database.SeedData
 import com.example.core.datastore.PreferencesDataSource
-import com.example.core.drive.DriveAuthGateway
-import com.example.core.drive.DriveAuthOutcome
-import com.example.core.drive.GoogleDriveRemoteDataSource
 import com.example.core.model.AppAccentColor
-import com.example.core.model.BackupPayload
-import com.example.core.model.DriveBackupEntry
-import com.example.core.model.GoogleDriveAccount
 import com.example.core.model.ThemeMode
-import com.example.core.repository.GoogleDriveBackupRepository
 import com.example.ui.screens.AppearanceSettingsScreen
 import com.example.ui.screens.SettingsScreen
 import com.example.ui.screens.SettingsViewModel
@@ -43,6 +38,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -80,9 +76,6 @@ class AppearanceAndSwitchTest {
             categoryRepository = categoryRepo,
             transactionRepository = txRepo,
             backupAndExportRepository = backupRepo,
-            driveAuthGateway = NoopDriveAuthGateway,
-            driveRemoteDataSource = NoopDriveRemote,
-            googleDriveBackupRepository = NoopDriveBackupRepo,
             appContext = context
         )
     }
@@ -115,7 +108,8 @@ class AppearanceAndSwitchTest {
     @Test
     fun `appearance settings screen selects amoled black and all 8 accent colors`() {
         composeRule.setContent {
-            val prefs = settingsViewModel.uiState.value.preferences
+            val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
+            val prefs = uiState.preferences
             ExpenseManagerTheme(
                 themeMode = prefs.themeMode,
                 accentColor = prefs.accentColor,
@@ -135,6 +129,7 @@ class AppearanceAndSwitchTest {
             .assertIsDisplayed()
             .performClick()
         composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
             settingsViewModel.uiState.value.preferences.themeMode == ThemeMode.AMOLED
         }
 
@@ -144,12 +139,14 @@ class AppearanceAndSwitchTest {
                 .performScrollTo()
                 .assertIsDisplayed()
         }
-        composeRule.onNodeWithTag("accent_color_ocean_blue").performClick()
+        composeRule.onNodeWithTag("accent_color_ocean_blue").performScrollTo().performClick()
         composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
             settingsViewModel.uiState.value.preferences.accentColor == AppAccentColor.OCEAN_BLUE
         }
-        composeRule.onNodeWithTag("accent_color_rose_pink").performClick()
+        composeRule.onNodeWithTag("accent_color_rose_pink").performScrollTo().performClick()
         composeRule.waitUntil(timeoutMillis = 5_000) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle()
             settingsViewModel.uiState.value.preferences.accentColor == AppAccentColor.ROSE_PINK
         }
 
@@ -162,7 +159,8 @@ class AppearanceAndSwitchTest {
     fun `compact settings screen renders preference rows and off switches cleanly`() {
         runBlocking { prefsRepo.setThemeMode(ThemeMode.AMOLED) }
         composeRule.setContent {
-            val prefs = settingsViewModel.uiState.value.preferences
+            val uiState by settingsViewModel.uiState.collectAsStateWithLifecycle()
+            val prefs = uiState.preferences
             ExpenseManagerTheme(
                 themeMode = prefs.themeMode,
                 accentColor = prefs.accentColor,
@@ -194,55 +192,4 @@ class AppearanceAndSwitchTest {
             .performScrollTo()
             .assertIsDisplayed()
     }
-}
-
-private object NoopDriveAuthGateway : DriveAuthGateway {
-    override suspend fun signInWithGoogle(activityContext: Context): Result<GoogleDriveAccount> =
-        Result.failure(UnsupportedOperationException())
-
-    override suspend fun authorizeDriveAccess(context: Context): DriveAuthOutcome =
-        DriveAuthOutcome.Failed("Noop")
-
-    override fun extractAccessTokenFromIntent(context: Context, data: Intent?): Result<String> =
-        Result.failure(UnsupportedOperationException())
-
-    override suspend fun signOut(context: Context) {}
-}
-
-private object NoopDriveRemote : GoogleDriveRemoteDataSource {
-    override suspend fun fetchUserInfo(accessToken: String): Result<GoogleDriveAccount> =
-        Result.failure(UnsupportedOperationException())
-
-    override suspend fun listBackups(accessToken: String): Result<List<DriveBackupEntry>> =
-        Result.success(emptyList())
-
-    override suspend fun uploadBackup(
-        accessToken: String,
-        fileName: String,
-        bytes: ByteArray,
-        isEncrypted: Boolean,
-        transactionCount: Int,
-        accountCount: Int,
-        exportedAt: Long
-    ): Result<DriveBackupEntry> = Result.failure(UnsupportedOperationException())
-
-    override suspend fun downloadBackup(accessToken: String, fileId: String): Result<ByteArray> =
-        Result.failure(UnsupportedOperationException())
-
-    override suspend fun deleteBackup(accessToken: String, fileId: String): Result<Unit> =
-        Result.success(Unit)
-}
-
-private object NoopDriveBackupRepo : GoogleDriveBackupRepository {
-    override fun isNetworkAvailable(): Boolean = false
-    override suspend fun backupToDrive(accessToken: String, passphrase: String?): Result<DriveBackupEntry> =
-        Result.failure(UnsupportedOperationException())
-    override suspend fun listBackups(accessToken: String): Result<List<DriveBackupEntry>> =
-        Result.success(emptyList())
-    override suspend fun downloadBackupBytes(accessToken: String, fileId: String): Result<ByteArray> =
-        Result.failure(UnsupportedOperationException())
-    override fun parseBackupBytes(bytes: ByteArray, passphrase: String?): Result<BackupPayload> =
-        Result.failure(UnsupportedOperationException())
-    override suspend fun deleteBackup(accessToken: String, fileId: String): Result<Unit> =
-        Result.success(Unit)
 }

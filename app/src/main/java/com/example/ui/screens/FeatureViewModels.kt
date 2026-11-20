@@ -1,20 +1,14 @@
 package com.example.ui.screens
 
 import android.content.Context
-import android.content.Intent
-import android.content.IntentSender
 import android.net.Uri
 import androidx.glance.appwidget.updateAll
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.common.DateTimeUtils
+import com.example.core.common.stringsFor
 import com.example.core.domain.GetAnalyticsReportUseCase
 import com.example.core.domain.GetBudgetsWithProgressUseCase
-import com.example.core.drive.DriveAuthGateway
-import com.example.core.drive.DriveAuthOutcome
-import com.example.core.drive.EncryptedDriveBackupRequiresPassphraseException
-import com.example.core.drive.GoogleDriveRemoteDataSource
-import com.example.core.drive.NoGoogleCredentialAvailableException
 import com.example.core.model.Account
 import com.example.core.model.AnalyticsGranularity
 import com.example.core.model.AnalyticsReport
@@ -25,9 +19,6 @@ import com.example.core.model.BackupPayload
 import com.example.core.model.Budget
 import com.example.core.model.BudgetWithProgress
 import com.example.core.model.Category
-import com.example.core.model.DriveBackupEntry
-import com.example.core.model.DriveBackupSchedule
-import com.example.core.model.GoogleDriveAccount
 import com.example.core.model.NumberFormatStyle
 import com.example.core.model.ThemeMode
 import com.example.core.model.TransactionType
@@ -38,7 +29,6 @@ import com.example.core.repository.AccountRepository
 import com.example.core.repository.BackupAndExportRepository
 import com.example.core.repository.BudgetRepository
 import com.example.core.repository.CategoryRepository
-import com.example.core.repository.GoogleDriveBackupRepository
 import com.example.core.repository.PreferencesRepository
 import com.example.core.repository.TransactionRepository
 import com.example.core.worker.WorkScheduler
@@ -49,6 +39,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -174,35 +165,13 @@ class BudgetsViewModel(
     }
 }
 
-private sealed interface PendingDriveAction {
-    data object FetchAccountAndRefresh : PendingDriveAction
-    data class RefreshAfterConnect(val account: GoogleDriveAccount) : PendingDriveAction
-    data object OpenHistory : PendingDriveAction
-    data class Backup(val passphrase: String?) : PendingDriveAction
-    data class Restore(val entry: DriveBackupEntry) : PendingDriveAction
-    data class Delete(val entry: DriveBackupEntry) : PendingDriveAction
-}
-
-private data class DriveUiSubState(
-    val backups: List<DriveBackupEntry> = emptyList(),
-    val isBusy: Boolean = false,
-    val historyVisible: Boolean = false,
-    val pendingResolution: IntentSender? = null,
-    val showDecryptPassphraseDialog: Boolean = false
-)
-
 data class SettingsUiState(
     val preferences: UserPreferences = UserPreferences(),
     val categories: List<Category> = emptyList(),
     val allTransactions: List<TransactionWithDetails> = emptyList(),
     val statusMessage: String? = null,
     val pendingRestorePayload: BackupPayload? = null,
-    val isBusy: Boolean = false,
-    val driveBackups: List<DriveBackupEntry> = emptyList(),
-    val isDriveBusy: Boolean = false,
-    val driveHistoryVisible: Boolean = false,
-    val pendingDriveResolution: IntentSender? = null,
-    val showDriveDecryptPassphraseDialog: Boolean = false
+    val isBusy: Boolean = false
 )
 
 class SettingsViewModel(
@@ -210,19 +179,12 @@ class SettingsViewModel(
     private val categoryRepository: CategoryRepository,
     private val transactionRepository: TransactionRepository,
     private val backupAndExportRepository: BackupAndExportRepository,
-    private val driveAuthGateway: DriveAuthGateway,
-    private val driveRemoteDataSource: GoogleDriveRemoteDataSource,
-    private val googleDriveBackupRepository: GoogleDriveBackupRepository,
     private val appContext: Context
 ) : ViewModel() {
 
     private val _statusMessage = MutableStateFlow<String?>(null)
     private val _pendingRestore = MutableStateFlow<BackupPayload?>(null)
     private val _isBusy = MutableStateFlow(false)
-    private val _driveState = MutableStateFlow(DriveUiSubState())
-
-    private var pendingDriveAction: PendingDriveAction? = null
-    private var pendingEncryptedDriveBytes: ByteArray? = null
 
     val uiState: StateFlow<SettingsUiState> = combine(
         preferencesRepository.preferences,
@@ -230,8 +192,7 @@ class SettingsViewModel(
         transactionRepository.observeTransactionsWithDetails(),
         _statusMessage,
         _pendingRestore,
-        _isBusy,
-        _driveState
+        _isBusy
     ) { values ->
         val prefs = values[0] as UserPreferences
         @Suppress("UNCHECKED_CAST")
@@ -241,19 +202,13 @@ class SettingsViewModel(
         val status = values[3] as String?
         val pendingRestore = values[4] as BackupPayload?
         val busy = values[5] as Boolean
-        val drive = values[6] as DriveUiSubState
         SettingsUiState(
             preferences = prefs,
             categories = categories,
             allTransactions = transactions,
             statusMessage = status,
             pendingRestorePayload = pendingRestore,
-            isBusy = busy,
-            driveBackups = drive.backups,
-            isDriveBusy = drive.isBusy,
-            driveHistoryVisible = drive.historyVisible,
-            pendingDriveResolution = drive.pendingResolution,
-            showDriveDecryptPassphraseDialog = drive.showDecryptPassphraseDialog
+            isBusy = busy
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), SettingsUiState())
 
@@ -357,8 +312,9 @@ class SettingsViewModel(
 
     fun exportCsv(uri: Uri, monthYear: String? = null) {
         _isBusy.update { true }
-        val prefs = uiState.value.preferences
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.exportCsvToUri(uri, monthYear)
                 .onSuccess { count ->
                     _statusMessage.value = if (monthYear != null) {
@@ -367,12 +323,12 @@ class SettingsViewModel(
                             prefs.effectiveLanguageTag,
                             prefs.numberFormat
                         )
-                        "Exported $count transactions for $label to CSV."
+                        strings.exportCsvMonthSuccess(count, label, prefs.numberFormat)
                     } else {
-                        "Exported $count transactions to CSV."
+                        strings.exportCsvAllSuccess(count, prefs.numberFormat)
                     }
                 }
-                .onFailure { err -> _statusMessage.value = err.message ?: "CSV export failed." }
+                .onFailure { err -> _statusMessage.value = err.message ?: strings.exportCsvFailed }
             _isBusy.update { false }
         }
     }
@@ -380,9 +336,13 @@ class SettingsViewModel(
     fun exportPdf(uri: Uri) {
         _isBusy.update { true }
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.exportPdfToUri(uri)
-                .onSuccess { count -> _statusMessage.value = "Exported PDF statement ($count transactions)." }
-                .onFailure { err -> _statusMessage.value = err.message ?: "PDF export failed." }
+                .onSuccess { count ->
+                    _statusMessage.value = strings.exportPdfSuccess(count, prefs.numberFormat)
+                }
+                .onFailure { err -> _statusMessage.value = err.message ?: strings.exportPdfFailed }
             _isBusy.update { false }
         }
     }
@@ -390,13 +350,18 @@ class SettingsViewModel(
     fun createEncryptedBackup(uri: Uri, passphrase: String) {
         _isBusy.update { true }
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.createEncryptedBackupToUri(uri, passphrase)
                 .onSuccess { payload ->
-                    _statusMessage.value =
-                        "Encrypted backup saved (${payload.transactions.size} transactions, ${payload.accounts.size} accounts)."
+                    _statusMessage.value = strings.backupSavedStatus(
+                        txCount = payload.transactions.size,
+                        accountCount = payload.accounts.size,
+                        numberFormat = prefs.numberFormat
+                    )
                 }
                 .onFailure { err ->
-                    _statusMessage.value = err.message ?: "Backup encryption failed."
+                    _statusMessage.value = err.message ?: strings.backupEncryptionFailed
                 }
             _isBusy.update { false }
         }
@@ -405,9 +370,11 @@ class SettingsViewModel(
     fun readEncryptedBackup(uri: Uri, passphrase: String) {
         _isBusy.update { true }
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.readEncryptedBackupFromUri(uri, passphrase)
                 .onSuccess { payload -> _pendingRestore.value = payload }
-                .onFailure { _statusMessage.value = "Could not decrypt backup. Check passphrase or file." }
+                .onFailure { _statusMessage.value = strings.backupDecryptFailed }
             _isBusy.update { false }
         }
     }
@@ -417,14 +384,19 @@ class SettingsViewModel(
         _pendingRestore.value = null
         _isBusy.update { true }
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.restoreBackup(payload)
                 .onSuccess {
                     runCatching { ExpenseSummaryWidget().updateAll(appContext) }
-                    _statusMessage.value =
-                        "Restored ${payload.accounts.size} accounts and ${payload.transactions.size} transactions."
+                    _statusMessage.value = strings.restoreSuccessStatus(
+                        accountCount = payload.accounts.size,
+                        txCount = payload.transactions.size,
+                        numberFormat = prefs.numberFormat
+                    )
                 }
                 .onFailure { err ->
-                    _statusMessage.value = err.message ?: "Restore failed."
+                    _statusMessage.value = err.message ?: strings.restoreFailedStatus
                 }
             _isBusy.update { false }
         }
@@ -437,263 +409,15 @@ class SettingsViewModel(
     fun clearAllData() {
         _isBusy.update { true }
         viewModelScope.launch {
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.clearAllFinancialData()
                 .onSuccess {
                     runCatching { ExpenseSummaryWidget().updateAll(appContext) }
-                    _statusMessage.value = "All financial data reset."
+                    _statusMessage.value = strings.clearAllDataDone
                 }
                 .onFailure { err -> _statusMessage.value = err.message }
             _isBusy.update { false }
-        }
-    }
-
-    fun connectGoogleDrive(activityContext: Context, isSwitchAccount: Boolean = false) {
-        if (!googleDriveBackupRepository.isNetworkAvailable()) {
-            _statusMessage.value = "No internet connection. Check your network and try again."
-            return
-        }
-        viewModelScope.launch {
-            _driveState.update { it.copy(isBusy = true) }
-            if (isSwitchAccount) {
-                driveAuthGateway.signOut(activityContext)
-            }
-            val signInResult = driveAuthGateway.signInWithGoogle(activityContext)
-            if (signInResult.isSuccess) {
-                val account = signInResult.getOrThrow()
-                authorizeAndRun(activityContext, PendingDriveAction.RefreshAfterConnect(account))
-            } else {
-                val err = signInResult.exceptionOrNull()
-                if (err is NoGoogleCredentialAvailableException) {
-                    authorizeAndRun(activityContext, PendingDriveAction.FetchAccountAndRefresh)
-                } else {
-                    _statusMessage.value = err?.message ?: "Google Sign-In failed."
-                    _driveState.update { it.copy(isBusy = false) }
-                }
-            }
-        }
-    }
-
-    fun disconnectGoogleDrive(context: Context) {
-        viewModelScope.launch {
-            driveAuthGateway.signOut(context)
-            preferencesRepository.setDriveAccount(null, null)
-            preferencesRepository.setDriveBackupSchedule(DriveBackupSchedule.MANUAL_ONLY)
-            WorkScheduler.updateDriveBackupSchedule(appContext, DriveBackupSchedule.MANUAL_ONLY)
-            _driveState.value = DriveUiSubState()
-            _statusMessage.value = "Google Drive disconnected."
-        }
-    }
-
-    fun setDriveBackupSchedule(schedule: DriveBackupSchedule) {
-        viewModelScope.launch {
-            preferencesRepository.setDriveBackupSchedule(schedule)
-            WorkScheduler.updateDriveBackupSchedule(appContext, schedule)
-        }
-    }
-
-    fun backupToGoogleDrive(activityContext: Context, passphrase: String? = null) {
-        if (uiState.value.preferences.driveAccountEmail.isNullOrBlank()) {
-            connectGoogleDrive(activityContext)
-            return
-        }
-        if (!googleDriveBackupRepository.isNetworkAvailable()) {
-            _statusMessage.value = "No internet connection. Check your network and try again."
-            return
-        }
-        viewModelScope.launch {
-            _driveState.update { it.copy(isBusy = true) }
-            authorizeAndRun(activityContext, PendingDriveAction.Backup(passphrase))
-        }
-    }
-
-    fun openDriveHistory(activityContext: Context) {
-        if (!googleDriveBackupRepository.isNetworkAvailable()) {
-            _statusMessage.value = "No internet connection. Check your network and try again."
-            return
-        }
-        viewModelScope.launch {
-            _driveState.update { it.copy(isBusy = true) }
-            authorizeAndRun(activityContext, PendingDriveAction.OpenHistory)
-        }
-    }
-
-    fun closeDriveHistory() {
-        _driveState.update { it.copy(historyVisible = false) }
-    }
-
-    fun restoreFromDriveEntry(activityContext: Context, entry: DriveBackupEntry) {
-        if (!googleDriveBackupRepository.isNetworkAvailable()) {
-            _statusMessage.value = "No internet connection. Check your network and try again."
-            return
-        }
-        viewModelScope.launch {
-            _driveState.update { it.copy(isBusy = true) }
-            authorizeAndRun(activityContext, PendingDriveAction.Restore(entry))
-        }
-    }
-
-    fun deleteDriveBackupEntry(activityContext: Context, entry: DriveBackupEntry) {
-        if (!googleDriveBackupRepository.isNetworkAvailable()) {
-            _statusMessage.value = "No internet connection. Check your network and try again."
-            return
-        }
-        viewModelScope.launch {
-            _driveState.update { it.copy(isBusy = true) }
-            authorizeAndRun(activityContext, PendingDriveAction.Delete(entry))
-        }
-    }
-
-    fun onDriveResolutionResult(activityContext: Context, resultOk: Boolean, data: Intent?) {
-        val action = pendingDriveAction
-        pendingDriveAction = null
-        _driveState.update { it.copy(pendingResolution = null) }
-        if (!resultOk) {
-            _driveState.update { it.copy(isBusy = false) }
-            _statusMessage.value = "Google Drive permission request was cancelled."
-            return
-        }
-        viewModelScope.launch {
-            val tokenResult = driveAuthGateway.extractAccessTokenFromIntent(activityContext, data)
-            tokenResult
-                .onSuccess { token ->
-                    if (action != null) executeDriveAction(token, action)
-                    else _driveState.update { it.copy(isBusy = false) }
-                }
-                .onFailure { err ->
-                    _driveState.update { it.copy(isBusy = false) }
-                    _statusMessage.value = err.message ?: "Google Drive authorization failed."
-                }
-        }
-    }
-
-    fun decryptPendingDriveBackup(passphrase: String) {
-        val bytes = pendingEncryptedDriveBytes ?: return
-        googleDriveBackupRepository.parseBackupBytes(bytes, passphrase)
-            .onSuccess { payload ->
-                pendingEncryptedDriveBytes = null
-                _driveState.update { it.copy(showDecryptPassphraseDialog = false, historyVisible = false) }
-                _pendingRestore.value = payload
-            }
-            .onFailure { err ->
-                _statusMessage.value = err.message ?: "Incorrect passphrase or corrupted Drive backup."
-            }
-    }
-
-    fun cancelDriveDecryptDialog() {
-        pendingEncryptedDriveBytes = null
-        _driveState.update { it.copy(showDecryptPassphraseDialog = false) }
-    }
-
-    private suspend fun authorizeAndRun(context: Context, action: PendingDriveAction) {
-        when (val outcome = driveAuthGateway.authorizeDriveAccess(context)) {
-            is DriveAuthOutcome.Authorized -> executeDriveAction(outcome.accessToken, action)
-            is DriveAuthOutcome.NeedsResolution -> {
-                pendingDriveAction = action
-                _driveState.update { it.copy(pendingResolution = outcome.intentSender) }
-            }
-            is DriveAuthOutcome.Failed -> {
-                _driveState.update { it.copy(isBusy = false) }
-                _statusMessage.value = outcome.message
-            }
-        }
-    }
-
-    private suspend fun executeDriveAction(token: String, action: PendingDriveAction) {
-        when (action) {
-            is PendingDriveAction.FetchAccountAndRefresh -> {
-                driveRemoteDataSource.fetchUserInfo(token)
-                    .onSuccess { account ->
-                        googleDriveBackupRepository.listBackups(token)
-                            .onSuccess { list ->
-                                preferencesRepository.setDriveAccount(account.email, account.displayName)
-                                _driveState.update { it.copy(backups = list, isBusy = false) }
-                                _statusMessage.value = "Connected Google Drive (${account.email})."
-                            }
-                            .onFailure { err ->
-                                _driveState.update { it.copy(isBusy = false) }
-                                _statusMessage.value = err.message ?: "Google Drive permission check failed."
-                            }
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Unable to fetch Google account info."
-                    }
-            }
-            is PendingDriveAction.RefreshAfterConnect -> {
-                googleDriveBackupRepository.listBackups(token)
-                    .onSuccess { list ->
-                        preferencesRepository.setDriveAccount(action.account.email, action.account.displayName)
-                        _driveState.update { it.copy(backups = list, isBusy = false) }
-                        _statusMessage.value = "Connected Google Drive (${action.account.email})."
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Google Drive permission check failed."
-                    }
-            }
-            is PendingDriveAction.OpenHistory -> {
-                googleDriveBackupRepository.listBackups(token)
-                    .onSuccess { list ->
-                        _driveState.update { it.copy(backups = list, isBusy = false, historyVisible = true) }
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Failed to load Google Drive backups."
-                    }
-            }
-            is PendingDriveAction.Backup -> {
-                googleDriveBackupRepository.backupToDrive(token, action.passphrase)
-                    .onSuccess { entry ->
-                        val updatedList = googleDriveBackupRepository.listBackups(token).getOrNull()
-                            ?: listOf(entry) + _driveState.value.backups
-                        _driveState.update { it.copy(backups = updatedList, isBusy = false) }
-                        val txLabel = entry.transactionCount?.let { " ($it transactions)" }.orEmpty()
-                        _statusMessage.value = "Backed up to Google Drive$txLabel."
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Google Drive backup failed."
-                    }
-            }
-            is PendingDriveAction.Restore -> {
-                googleDriveBackupRepository.downloadBackupBytes(token, action.entry.fileId)
-                    .onSuccess { bytes ->
-                        googleDriveBackupRepository.parseBackupBytes(bytes, passphrase = null)
-                            .onSuccess { payload ->
-                                _driveState.update { it.copy(isBusy = false, historyVisible = false) }
-                                _pendingRestore.value = payload
-                            }
-                            .onFailure { parseErr ->
-                                _driveState.update { it.copy(isBusy = false) }
-                                if (parseErr is EncryptedDriveBackupRequiresPassphraseException) {
-                                    pendingEncryptedDriveBytes = bytes
-                                    _driveState.update { it.copy(showDecryptPassphraseDialog = true) }
-                                } else {
-                                    _statusMessage.value = parseErr.message ?: "Invalid backup file."
-                                }
-                            }
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Failed to download backup from Google Drive."
-                    }
-            }
-            is PendingDriveAction.Delete -> {
-                googleDriveBackupRepository.deleteBackup(token, action.entry.fileId)
-                    .onSuccess {
-                        _driveState.update { state ->
-                            state.copy(
-                                backups = state.backups.filterNot { it.fileId == action.entry.fileId },
-                                isBusy = false
-                            )
-                        }
-                        _statusMessage.value = "Backup deleted from Google Drive."
-                    }
-                    .onFailure { err ->
-                        _driveState.update { it.copy(isBusy = false) }
-                        _statusMessage.value = err.message ?: "Failed to delete Google Drive backup."
-                    }
-            }
         }
     }
 }

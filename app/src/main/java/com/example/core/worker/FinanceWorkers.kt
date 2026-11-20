@@ -13,10 +13,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.glance.appwidget.updateAll
-import androidx.work.Constraints
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
@@ -26,13 +24,8 @@ import com.example.core.common.CurrencyFormatter
 import com.example.core.common.DateTimeUtils
 import com.example.core.common.stringsFor
 import com.example.core.datastore.PreferencesDataSource
-import com.example.core.drive.DriveAuthGateway
-import com.example.core.drive.DriveAuthOutcome
-import com.example.core.drive.DriveNetworkException
-import com.example.core.model.DriveBackupSchedule
 import com.example.core.model.TransactionType
 import com.example.core.repository.BudgetRepository
-import com.example.core.repository.GoogleDriveBackupRepository
 import com.example.core.repository.PreferencesRepository
 import com.example.core.repository.TransactionRepository
 import com.example.widget.ExpenseSummaryWidget
@@ -123,8 +116,8 @@ class BudgetAlertNotifier(
                     monthExpenses.firstOrNull { it.category?.id == cid }?.category?.localizedName(langTag, strings)
                 } ?: strings.budgetMonthlyDefault
 
-                val spentText = CurrencyFormatter.format(spent, currencyCode, prefs.numberFormat)
-                val limitText = CurrencyFormatter.format(budget.amountLimit, currencyCode, prefs.numberFormat)
+                val spentText = CurrencyFormatter.format(spent, currencyCode, prefs.numberFormat, languageTag = langTag)
+                val limitText = CurrencyFormatter.format(budget.amountLimit, currencyCode, prefs.numberFormat, languageTag = langTag)
                 val isOver = spent > budget.amountLimit
                 val title = strings.budgetNotifTitle(categoryName, isOver)
                 val body = strings.budgetNotifBody(spentText, limitText, ratio.toInt(), prefs.numberFormat)
@@ -219,69 +212,14 @@ class RecurringTransactionWorker(
     }
 }
 
-class DriveBackupWorker(
-    appContext: Context,
-    params: WorkerParameters
-) : CoroutineWorker(appContext, params), KoinComponent {
-
-    private val preferencesRepository: PreferencesRepository by inject()
-    private val driveAuthGateway: DriveAuthGateway by inject()
-    private val driveBackupRepository: GoogleDriveBackupRepository by inject()
-
-    override suspend fun doWork(): Result {
-        val prefs = preferencesRepository.preferences.first()
-        if (prefs.driveAccountEmail.isNullOrBlank() ||
-            prefs.driveBackupSchedule == DriveBackupSchedule.MANUAL_ONLY
-        ) {
-            return Result.success()
-        }
-        if (!driveBackupRepository.isNetworkAvailable()) {
-            return Result.retry()
-        }
-
-        return when (val auth = driveAuthGateway.authorizeDriveAccess(applicationContext)) {
-            is DriveAuthOutcome.Authorized -> {
-                val upload = driveBackupRepository.backupToDrive(auth.accessToken, passphrase = null)
-                if (upload.isSuccess) {
-                    Result.success()
-                } else {
-                    val err = upload.exceptionOrNull()
-                    if (err is DriveNetworkException) {
-                        Result.retry()
-                    } else {
-                        preferencesRepository.setLastDriveBackupInfo(
-                            timestamp = System.currentTimeMillis(),
-                            status = err?.message ?: "Auto-backup failed"
-                        )
-                        Result.success()
-                    }
-                }
-            }
-            is DriveAuthOutcome.NeedsResolution -> {
-                preferencesRepository.setLastDriveBackupInfo(
-                    timestamp = System.currentTimeMillis(),
-                    status = "Authorization required — reconnect Google Drive in Settings"
-                )
-                Result.success()
-            }
-            is DriveAuthOutcome.Failed -> {
-                preferencesRepository.setLastDriveBackupInfo(
-                    timestamp = System.currentTimeMillis(),
-                    status = auth.message
-                )
-                Result.success()
-            }
-        }
-    }
-}
-
 class BootCompletedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         val action = intent?.action ?: return
         if (action != Intent.ACTION_BOOT_COMPLETED && action != Intent.ACTION_MY_PACKAGE_REPLACED) {
             return
         }
-        val pendingResult = goAsync()
+        val pendingResult: PendingResult? = goAsync()
+        val appContext = context.applicationContext ?: context
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val prefs = runCatching {
@@ -290,27 +228,23 @@ class BootCompletedReceiver : BroadcastReceiver() {
                     if (repo != null) {
                         repo.preferences.first()
                     } else {
-                        PreferencesDataSource(context.applicationContext).preferencesFlow.first()
+                        PreferencesDataSource(appContext).preferencesFlow.first()
                     }
                 }.getOrNull()
 
-                WorkScheduler.scheduleRecurringWorker(context.applicationContext)
+                runCatching { WorkScheduler.scheduleRecurringWorker(appContext) }
                 if (prefs != null) {
-                    WorkScheduler.updateDailyReminder(
-                        context = context.applicationContext,
-                        enabled = prefs.dailyReminderEnabled,
-                        hour = prefs.reminderHour,
-                        minute = prefs.reminderMinute
-                    )
-                    if (!prefs.driveAccountEmail.isNullOrBlank()) {
-                        WorkScheduler.updateDriveBackupSchedule(
-                            context.applicationContext,
-                            prefs.driveBackupSchedule
+                    runCatching {
+                        WorkScheduler.updateDailyReminder(
+                            context = appContext,
+                            enabled = prefs.dailyReminderEnabled,
+                            hour = prefs.reminderHour,
+                            minute = prefs.reminderMinute
                         )
                     }
                 }
             } finally {
-                pendingResult.finish()
+                pendingResult?.finish()
             }
         }
     }
@@ -319,7 +253,6 @@ class BootCompletedReceiver : BroadcastReceiver() {
 object WorkScheduler {
     private const val DAILY_REMINDER_WORK = "daily_expense_reminder_work"
     private const val RECURRING_TX_WORK = "recurring_transactions_work"
-    private const val DRIVE_BACKUP_WORK = "google_drive_auto_backup_work"
 
     fun scheduleRecurringWorker(context: Context) {
         val request = PeriodicWorkRequestBuilder<RecurringTransactionWorker>(12, TimeUnit.HOURS)
@@ -351,26 +284,6 @@ object WorkScheduler {
             .build()
         wm.enqueueUniquePeriodicWork(
             DAILY_REMINDER_WORK,
-            ExistingPeriodicWorkPolicy.UPDATE,
-            request
-        )
-    }
-
-    fun updateDriveBackupSchedule(context: Context, schedule: DriveBackupSchedule) {
-        val wm = WorkManager.getInstance(context)
-        if (schedule == DriveBackupSchedule.MANUAL_ONLY) {
-            wm.cancelUniqueWork(DRIVE_BACKUP_WORK)
-            return
-        }
-        val intervalDays = if (schedule == DriveBackupSchedule.WEEKLY) 7L else 1L
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val request = PeriodicWorkRequestBuilder<DriveBackupWorker>(intervalDays, TimeUnit.DAYS)
-            .setConstraints(constraints)
-            .build()
-        wm.enqueueUniquePeriodicWork(
-            DRIVE_BACKUP_WORK,
             ExistingPeriodicWorkPolicy.UPDATE,
             request
         )

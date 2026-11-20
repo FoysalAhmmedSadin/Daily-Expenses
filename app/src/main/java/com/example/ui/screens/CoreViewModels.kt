@@ -356,7 +356,8 @@ class TransactionsViewModel(
 
     fun exportCsv(uri: Uri, monthYear: String?) {
         viewModelScope.launch {
-            val prefs = uiState.value.preferences
+            val prefs = preferencesRepository.preferences.first()
+            val strings = stringsFor(appContext, prefs.effectiveLanguageTag)
             backupAndExportRepository.exportCsvToUri(uri, monthYear)
                 .onSuccess { count ->
                     _statusMessage.value = if (monthYear != null) {
@@ -365,13 +366,13 @@ class TransactionsViewModel(
                             prefs.effectiveLanguageTag,
                             prefs.numberFormat
                         )
-                        "Exported $count transactions for $label to CSV."
+                        strings.exportCsvMonthSuccess(count, label, prefs.numberFormat)
                     } else {
-                        "Exported $count transactions to CSV."
+                        strings.exportCsvAllSuccess(count, prefs.numberFormat)
                     }
                 }
                 .onFailure { err ->
-                    _statusMessage.value = err.message ?: "CSV export failed."
+                    _statusMessage.value = err.message ?: strings.exportCsvFailed
                 }
         }
     }

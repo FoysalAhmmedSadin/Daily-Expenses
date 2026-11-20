@@ -312,7 +312,8 @@ fun TransactionsScreen(
                                     code,
                                     prefs.numberFormat,
                                     hideAmount = prefs.hideBalances,
-                                    showSign = true
+                                    showSign = true,
+                                    languageTag = langTag
                                 )
                             } else {
                                 byCurrency.entries.joinToString(" • ") { (code, list) ->
@@ -328,7 +329,8 @@ fun TransactionsScreen(
                                         code,
                                         prefs.numberFormat,
                                         hideAmount = prefs.hideBalances,
-                                        showSign = true
+                                        showSign = true,
+                                        languageTag = langTag
                                     )
                                 }
                             }
@@ -401,7 +403,8 @@ fun TransactionsScreen(
                             tx.amount,
                             txCurrency,
                             prefs.numberFormat,
-                            hideAmount = prefs.hideBalances
+                            hideAmount = prefs.hideBalances,
+                            languageTag = langTag
                         ),
                         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                         color = when (tx.type) {

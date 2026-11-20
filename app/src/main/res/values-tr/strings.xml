@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Limit Aşıldı</string>
     <string name="category_spending_cap" formatted="false">Kategori Harcama Limiti</string>
     <string name="updates_existing_cap" formatted="false">Bu ay için bir limit zaten var; kaydetmek güncelleyecektir.</string>
-    <string name="google_drive_backup" formatted="false">Google Drive Yedekleme</string>
-    <string name="google_drive_subtitle" formatted="false">Özel uygulama veri klasörü senkronizasyonu ve bulut geri yükleme</string>
-    <string name="connect_google_drive" formatted="false">Google Drive\'a Bağlan</string>
-    <string name="switch_account" formatted="false">Hesap Değiştir</string>
-    <string name="disconnect" formatted="false">Bağlantıyı Kes</string>
-    <string name="back_up_now" formatted="false">Şimdi Yedekle</string>
-    <string name="restore_from_drive" formatted="false">Drive\'dan Geri Yükle</string>
-    <string name="drive_history_title" formatted="false">Google Drive Yedekleri</string>
-    <string name="no_drive_backups" formatted="false">Google Drive Uygulama Verileri klasörünüzde henüz yedek yok.</string>
-    <string name="auto_backup_schedule" formatted="false">Otomatik Yedekleme</string>
-    <string name="schedule_manual_only" formatted="false">Manuel</string>
-    <string name="schedule_daily" formatted="false">Günlük</string>
-    <string name="schedule_weekly" formatted="false">Haftalık</string>
-    <string name="not_connected" formatted="false">Bağlı değil</string>
-    <string name="connected_as" formatted="false">Bağlı</string>
-    <string name="encrypt_with_passphrase" formatted="false">Parola ile şifrele</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Şifreli veya standart yedeği Google Drive Uygulama Verileri klasöründe gizli olarak saklayın.</string>
     <string name="theme_system" formatted="false">Sistem Varsayılanı</string>
     <string name="theme_light" formatted="false">Açık</string>
     <string name="theme_dark" formatted="false">Koyu</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Yatırım</string>
     <string name="cat_gift_bonus" formatted="false">Hediye ve Prim</string>
     <string name="cat_other_income" formatted="false">Diğer Gelir</string>
+    <string name="developer_role" formatted="false">Uygulama Geliştiricisi</string>
+    <string name="developer_copyright_text" formatted="false">Telif Hakkı © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">İngilizce (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Bengalce (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">{month} için {count} işlem CSV olarak dışa aktarıldı.</string>
+    <string name="export_csv_all_success" formatted="false">{count} işlem CSV olarak dışa aktarıldı.</string>
+    <string name="export_csv_failed" formatted="false">CSV dışa aktarımı başarısız.</string>
+    <string name="export_pdf_success" formatted="false">PDF özeti dışa aktarıldı ({count} işlem).</string>
+    <string name="export_pdf_failed" formatted="false">PDF dışa aktarımı başarısız.</string>
+    <string name="backup_saved_status" formatted="false">Şifreli yedek kaydedildi ({transactions} işlem, {accounts} hesap).</string>
+    <string name="backup_encryption_failed" formatted="false">Yedek şifreleme başarısız.</string>
+    <string name="backup_decrypt_failed" formatted="false">Yedek çözülemedi. Parolayı veya dosyayı kontrol edin.</string>
+    <string name="restore_success_status" formatted="false">{accounts} hesap ve {transactions} işlem geri yüklendi.</string>
+    <string name="restore_failed_status" formatted="false">Geri yükleme başarısız.</string>
+    <string name="clear_all_data_done" formatted="false">Tüm finansal veriler sıfırlandı.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Finansal Özet</string>
+    <string name="pdf_generated_meta" formatted="false">Oluşturulma: {date}  |  Para Birimi: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Hesap Özeti</string>
+    <string name="pdf_transactions_count" formatted="false">İşlemler ({count})</string>
+    <string name="pdf_col_date" formatted="false">Tarih</string>
+    <string name="pdf_col_details" formatted="false">Kategori / Detaylar</string>
+    <string name="pdf_col_account" formatted="false">Hesap</string>
+    <string name="pdf_col_amount" formatted="false">Tutar</string>
+    <string name="csv_header_row" formatted="false">Tarih,Saat,Tür,Kategori,Hesap,Hedef Hesap,Tutar,Para Birimi,Not,Tekrar</string>
 </resources>

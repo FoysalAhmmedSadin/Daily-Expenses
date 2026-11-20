@@ -118,7 +118,8 @@ fun AnalyticsScreen(
                                 report.totalIncome,
                                 currencyCode,
                                 prefs.numberFormat,
-                                hideAmount = prefs.hideBalances
+                                hideAmount = prefs.hideBalances,
+                                languageTag = langTag
                             ),
                             accent = IncomeGreen,
                             modifier = Modifier.weight(1f)
@@ -129,7 +130,8 @@ fun AnalyticsScreen(
                                 report.totalExpense,
                                 currencyCode,
                                 prefs.numberFormat,
-                                hideAmount = prefs.hideBalances
+                                hideAmount = prefs.hideBalances,
+                                languageTag = langTag
                             ),
                             accent = ExpenseRed,
                             modifier = Modifier.weight(1f)
@@ -155,7 +157,8 @@ fun AnalyticsScreen(
                                 report.averageDailyExpense,
                                 currencyCode,
                                 prefs.numberFormat,
-                                hideAmount = prefs.hideBalances
+                                hideAmount = prefs.hideBalances,
+                                languageTag = langTag
                             ),
                             accent = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.weight(1f)
@@ -184,7 +187,8 @@ fun AnalyticsScreen(
                                 currencyCode,
                                 prefs.numberFormat,
                                 hideAmount = prefs.hideBalances,
-                                includeDecimals = false
+                                includeDecimals = false,
+                                languageTag = langTag
                             ),
                             changePercent = comp.incomeChangePercent,
                             positiveIsGood = true,
@@ -198,7 +202,8 @@ fun AnalyticsScreen(
                                 currencyCode,
                                 prefs.numberFormat,
                                 hideAmount = prefs.hideBalances,
-                                includeDecimals = false
+                                includeDecimals = false,
+                                languageTag = langTag
                             ),
                             changePercent = comp.expenseChangePercent,
                             positiveIsGood = false,
@@ -335,7 +340,8 @@ fun AnalyticsScreen(
                                                 item.totalAmount,
                                                 currencyCode,
                                                 prefs.numberFormat,
-                                                hideAmount = prefs.hideBalances
+                                                hideAmount = prefs.hideBalances,
+                                                languageTag = langTag
                                             ),
                                             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                                         )

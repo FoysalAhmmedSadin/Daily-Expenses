@@ -42,14 +42,16 @@ object CurrencyFormatter {
         numberFormat: NumberFormatStyle,
         hideAmount: Boolean = false,
         showSign: Boolean = false,
-        includeDecimals: Boolean = true
+        includeDecimals: Boolean = true,
+        languageTag: String? = null
     ): String = format(
         amount = amount,
         currencyInfo = IsoCurrencyCatalog.fromAppCurrency(currency),
         numberFormat = numberFormat,
         hideAmount = hideAmount,
         showSign = showSign,
-        includeDecimals = includeDecimals
+        includeDecimals = includeDecimals,
+        languageTag = languageTag
     )
 
     fun format(
@@ -58,14 +60,16 @@ object CurrencyFormatter {
         numberFormat: NumberFormatStyle,
         hideAmount: Boolean = false,
         showSign: Boolean = false,
-        includeDecimals: Boolean = true
+        includeDecimals: Boolean = true,
+        languageTag: String? = null
     ): String = format(
         amount = amount,
         currencyInfo = IsoCurrencyCatalog.resolve(currencyCode),
         numberFormat = numberFormat,
         hideAmount = hideAmount,
         showSign = showSign,
-        includeDecimals = includeDecimals
+        includeDecimals = includeDecimals,
+        languageTag = languageTag
     )
 
     fun format(
@@ -74,9 +78,13 @@ object CurrencyFormatter {
         numberFormat: NumberFormatStyle,
         hideAmount: Boolean = false,
         showSign: Boolean = false,
-        includeDecimals: Boolean = true
+        includeDecimals: Boolean = true,
+        languageTag: String? = null
     ): String {
-        if (hideAmount) return "${currencyInfo.symbol} ••••••"
+        val displaySymbol = IsoCurrencyCatalog.displaySymbol(currencyInfo.code, languageTag)
+        if (hideAmount) {
+            return if (displaySymbol.endsWith(" ")) "${displaySymbol}••••••" else "$displaySymbol ••••••"
+        }
 
         val negative = amount < 0
         val absValue = abs(amount)
@@ -99,7 +107,7 @@ object CurrencyFormatter {
             showSign && amount > 0.0 -> "+"
             else -> ""
         }
-        val raw = "$signPrefix${currencyInfo.symbol}$formattedNumber"
+        val raw = "$signPrefix$displaySymbol$formattedNumber"
         return toLocalizedDigits(raw, numberFormat)
     }
 
@@ -305,7 +313,9 @@ object DateTimeUtils {
             }
             ViewMode.YEARLY -> {
                 val cal = Calendar.getInstance().apply { timeInMillis = anchorMillis }
-                CurrencyFormatter.toLocalizedDigits(cal.get(Calendar.YEAR).toString(), numberFormat)
+                val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
+                val yrText = if (norm.startsWith("zh-")) "${cal.get(Calendar.YEAR)}年" else cal.get(Calendar.YEAR).toString()
+                CurrencyFormatter.toLocalizedDigits(yrText, numberFormat)
             }
         }
     }
@@ -323,14 +333,21 @@ object DateTimeUtils {
     ): String {
         val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
         val cal = Calendar.getInstance().apply { timeInMillis = millis }
-        val text = if (norm == "bn") {
-            val day = cal.get(Calendar.DAY_OF_MONTH)
-            val month = banglaMonthsShort[cal.get(Calendar.MONTH)]
-            val year = cal.get(Calendar.YEAR)
-            "$day $month $year"
-        } else {
-            val locale = SupportedLanguageCatalog.localeForTag(norm)
-            SimpleDateFormat("dd MMM yyyy", locale).format(Date(millis))
+        val text = when {
+            norm == "bn" -> {
+                val day = cal.get(Calendar.DAY_OF_MONTH)
+                val month = banglaMonthsShort[cal.get(Calendar.MONTH)]
+                val year = cal.get(Calendar.YEAR)
+                "$day $month $year"
+            }
+            norm.startsWith("zh-") -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("yyyy年M月d日", locale).format(Date(millis))
+            }
+            else -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("dd MMM yyyy", locale).format(Date(millis))
+            }
         }
         return CurrencyFormatter.toLocalizedDigits(text, numberFormat)
     }
@@ -348,11 +365,16 @@ object DateTimeUtils {
     ): String {
         val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
         val cal = Calendar.getInstance().apply { timeInMillis = millis }
-        val text = if (norm == "bn") {
-            "${cal.get(Calendar.DAY_OF_MONTH)} ${banglaMonthsShort[cal.get(Calendar.MONTH)]}"
-        } else {
-            val locale = SupportedLanguageCatalog.localeForTag(norm)
-            SimpleDateFormat("dd MMM", locale).format(Date(millis))
+        val text = when {
+            norm == "bn" -> "${cal.get(Calendar.DAY_OF_MONTH)} ${banglaMonthsShort[cal.get(Calendar.MONTH)]}"
+            norm.startsWith("zh-") -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("M月d日", locale).format(Date(millis))
+            }
+            else -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("dd MMM", locale).format(Date(millis))
+            }
         }
         return CurrencyFormatter.toLocalizedDigits(text, numberFormat)
     }
@@ -363,8 +385,13 @@ object DateTimeUtils {
         is24Hour: Boolean = false,
         languageTag: String = "en"
     ): String {
-        val locale = SupportedLanguageCatalog.localeForTag(languageTag)
-        val pattern = if (is24Hour) "HH:mm" else "hh:mm a"
+        val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
+        val locale = SupportedLanguageCatalog.localeForTag(norm)
+        val pattern = when {
+            is24Hour -> "HH:mm"
+            norm.startsWith("zh-") -> "a h:mm"
+            else -> "hh:mm a"
+        }
         val text = SimpleDateFormat(pattern, locale).format(Date(millis))
         return CurrencyFormatter.toLocalizedDigits(text, numberFormat)
     }
@@ -455,11 +482,13 @@ object DateTimeUtils {
         val monthIdx = (parts.getOrNull(1)?.toIntOrNull() ?: 1) - 1
         val cal = Calendar.getInstance().apply { set(year, monthIdx, 1) }
         val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
-        val text = if (norm == "bn") {
-            "${banglaMonthsShort[monthIdx.coerceIn(0, 11)]} $year"
-        } else {
-            val locale = SupportedLanguageCatalog.localeForTag(norm)
-            SimpleDateFormat("MMMM yyyy", locale).format(cal.time)
+        val text = when {
+            norm == "bn" -> "${banglaMonthsShort[monthIdx.coerceIn(0, 11)]} $year"
+            norm.startsWith("zh-") -> "${year}年${monthIdx.coerceIn(0, 11) + 1}月"
+            else -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("MMMM yyyy", locale).format(cal.time)
+            }
         }
         return CurrencyFormatter.toLocalizedDigits(text, numberFormat)
     }
@@ -474,11 +503,13 @@ object DateTimeUtils {
         val monthIdx = (parts.getOrNull(1)?.toIntOrNull() ?: 1) - 1
         val cal = Calendar.getInstance().apply { set(year, monthIdx, 1) }
         val norm = SupportedLanguageCatalog.normalizeTag(languageTag)
-        val text = if (norm == "bn") {
-            banglaMonthsShort[monthIdx.coerceIn(0, 11)]
-        } else {
-            val locale = SupportedLanguageCatalog.localeForTag(norm)
-            SimpleDateFormat("MMM", locale).format(cal.time)
+        val text = when {
+            norm == "bn" -> banglaMonthsShort[monthIdx.coerceIn(0, 11)]
+            norm.startsWith("zh-") -> "${monthIdx.coerceIn(0, 11) + 1}月"
+            else -> {
+                val locale = SupportedLanguageCatalog.localeForTag(norm)
+                SimpleDateFormat("MMM", locale).format(cal.time)
+            }
         }
         return CurrencyFormatter.toLocalizedDigits(text, numberFormat)
     }

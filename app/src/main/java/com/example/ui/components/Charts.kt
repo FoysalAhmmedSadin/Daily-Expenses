@@ -90,8 +90,8 @@ fun IncomeVsExpenseBarChart(
             }
             if (selectedIndex in points.indices) {
                 val p = points[selectedIndex]
-                val inc = CurrencyFormatter.format(p.income, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, includeDecimals = false)
-                val exp = CurrencyFormatter.format(p.expense, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, includeDecimals = false)
+                val inc = CurrencyFormatter.format(p.income, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, includeDecimals = false, languageTag = preferences.effectiveLanguageTag)
+                val exp = CurrencyFormatter.format(p.expense, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, includeDecimals = false, languageTag = preferences.effectiveLanguageTag)
                 Text(
                     text = "${p.label}: +$inc / -$exp",
                     style = MaterialTheme.typography.labelSmall,
@@ -202,7 +202,7 @@ fun SpendingTrendLineChart(
             val p = points[selectedIdx]
             Text(
                 text = "${p.label}: ${
-                    CurrencyFormatter.format(p.expense, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances)
+                    CurrencyFormatter.format(p.expense, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, languageTag = preferences.effectiveLanguageTag)
                 }",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
@@ -413,7 +413,8 @@ fun CategoryDonutChart(
                         currencyCode,
                         preferences.numberFormat,
                         hideAmount = preferences.hideBalances,
-                        includeDecimals = false
+                        includeDecimals = false,
+                        languageTag = langTag
                     ),
                     style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSurface
@@ -563,7 +564,8 @@ fun CategoryExpenseBarChart(
                 currencyCode,
                 preferences.numberFormat,
                 hideAmount = preferences.hideBalances,
-                includeDecimals = false
+                includeDecimals = false,
+                languageTag = langTag
             )
             val pctText = CurrencyFormatter.formatPercent(
                 (selected.percentage * 100f).toDouble(),
@@ -575,6 +577,7 @@ fun CategoryExpenseBarChart(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 10.dp)
+                    .semantics(mergeDescendants = true) {}
                     .testTag("category_bar_selected_callout")
             ) {
                 Row(
@@ -730,7 +733,7 @@ fun CategoryExpenseBarChart(
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                         ),
                         color = if (isSelected) primaryColor else MaterialTheme.colorScheme.onSurface,
-                        maxLines = 1,
+                        maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Center
                     )

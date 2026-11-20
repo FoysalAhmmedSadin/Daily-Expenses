@@ -58,6 +58,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -214,7 +215,8 @@ fun TransactionRowItem(
         amount = tx.amount,
         currencyCode = txCurrencyCode,
         numberFormat = preferences.numberFormat,
-        hideAmount = preferences.hideBalances
+        hideAmount = preferences.hideBalances,
+        languageTag = langTag
     ).let { raw ->
         if (preferences.hideBalances) raw
         else when (tx.type) {
@@ -322,13 +324,15 @@ fun BudgetProgressItem(
         budgetWithProgress.spentAmount,
         currencyCode,
         preferences.numberFormat,
-        hideAmount = preferences.hideBalances
+        hideAmount = preferences.hideBalances,
+        languageTag = langTag
     )
     val limitText = CurrencyFormatter.format(
         budgetWithProgress.budget.amountLimit,
         currencyCode,
         preferences.numberFormat,
-        hideAmount = preferences.hideBalances
+        hideAmount = preferences.hideBalances,
+        languageTag = langTag
     )
     val percentText = CurrencyFormatter.toLocalizedDigits(
         "${budgetWithProgress.progressPercent}%",
@@ -390,7 +394,9 @@ fun BudgetProgressItem(
             Surface(
                 shape = RoundedCornerShape(999.dp),
                 color = statusColor.copy(alpha = 0.14f),
-                modifier = Modifier.testTag("${tagPrefix}budget_percent_${budgetWithProgress.budget.id}")
+                modifier = Modifier
+                    .semantics(mergeDescendants = true) {}
+                    .testTag("${tagPrefix}budget_percent_${budgetWithProgress.budget.id}")
             ) {
                 Text(
                     text = percentText,
@@ -427,11 +433,11 @@ fun BudgetProgressItem(
             val rem = budgetWithProgress.remainingAmount
             val remLabel = if (rem >= 0) {
                 "${strings.remaining}: ${
-                    CurrencyFormatter.format(rem, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances)
+                    CurrencyFormatter.format(rem, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, languageTag = langTag)
                 }"
             } else {
                 "${strings.overspentBy}: ${
-                    CurrencyFormatter.format(-rem, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances)
+                    CurrencyFormatter.format(-rem, currencyCode, preferences.numberFormat, hideAmount = preferences.hideBalances, languageTag = langTag)
                 }"
             }
             Text(
@@ -446,7 +452,9 @@ fun BudgetProgressItem(
                     text = if (budgetWithProgress.isOverspent) strings.limitExceeded else strings.approachingLimit,
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                     color = statusColor,
-                    modifier = Modifier.testTag("${tagPrefix}budget_status_${budgetWithProgress.budget.id}")
+                    modifier = Modifier
+                        .semantics(mergeDescendants = true) {}
+                        .testTag("${tagPrefix}budget_status_${budgetWithProgress.budget.id}")
                 )
             }
         }
@@ -729,7 +737,8 @@ fun MonthlyCsvExportDialog(
                                             monthIncome,
                                             currCode,
                                             preferences.numberFormat,
-                                            hideAmount = preferences.hideBalances
+                                            hideAmount = preferences.hideBalances,
+                                            languageTag = langTag
                                         )
                                     }",
                                     style = MaterialTheme.typography.bodySmall,
@@ -741,7 +750,8 @@ fun MonthlyCsvExportDialog(
                                             monthExpense,
                                             currCode,
                                             preferences.numberFormat,
-                                            hideAmount = preferences.hideBalances
+                                            hideAmount = preferences.hideBalances,
+                                            languageTag = langTag
                                         )
                                     }",
                                     style = MaterialTheme.typography.bodySmall,

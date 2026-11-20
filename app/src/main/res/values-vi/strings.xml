@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Vượt hạn mức</string>
     <string name="category_spending_cap" formatted="false">Hạn mức chi tiêu danh mục</string>
     <string name="updates_existing_cap" formatted="false">Hạn mức tháng này đã tồn tại; lưu sẽ cập nhật hạn mức.</string>
-    <string name="google_drive_backup" formatted="false">Sao lưu Google Drive</string>
-    <string name="google_drive_subtitle" formatted="false">Đồng bộ thư mục dữ liệu ứng dụng riêng tư &amp; khôi phục đám mây</string>
-    <string name="connect_google_drive" formatted="false">Kết nối Google Drive</string>
-    <string name="switch_account" formatted="false">Chuyển tài khoản</string>
-    <string name="disconnect" formatted="false">Ngắt kết nối</string>
-    <string name="back_up_now" formatted="false">Sao lưu ngay</string>
-    <string name="restore_from_drive" formatted="false">Khôi phục từ Drive</string>
-    <string name="drive_history_title" formatted="false">Bản sao lưu Google Drive</string>
-    <string name="no_drive_backups" formatted="false">Chưa có bản sao lưu nào trong thư mục Dữ liệu ứng dụng Google Drive.</string>
-    <string name="auto_backup_schedule" formatted="false">Sao lưu tự động</string>
-    <string name="schedule_manual_only" formatted="false">Thủ công</string>
-    <string name="schedule_daily" formatted="false">Hàng ngày</string>
-    <string name="schedule_weekly" formatted="false">Hàng tuần</string>
-    <string name="not_connected" formatted="false">Chưa kết nối</string>
-    <string name="connected_as" formatted="false">Đã kết nối</string>
-    <string name="encrypt_with_passphrase" formatted="false">Mã hóa bằng mật khẩu</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Lưu bản sao lưu mã hóa hoặc tiêu chuẩn riêng tư trong thư mục Dữ liệu ứng dụng Google Drive.</string>
     <string name="theme_system" formatted="false">Mặc định hệ thống</string>
     <string name="theme_light" formatted="false">Sáng</string>
     <string name="theme_dark" formatted="false">Tối</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Đầu tư</string>
     <string name="cat_gift_bonus" formatted="false">Quà tặng &amp; Thưởng</string>
     <string name="cat_other_income" formatted="false">Thu nhập khác</string>
+    <string name="developer_role" formatted="false">Nhà phát triển ứng dụng</string>
+    <string name="developer_copyright_text" formatted="false">Bản quyền © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">Tiếng Anh (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Tiếng Bengal (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">Đã xuất {count} giao dịch của {month} ra CSV.</string>
+    <string name="export_csv_all_success" formatted="false">Đã xuất {count} giao dịch ra CSV.</string>
+    <string name="export_csv_failed" formatted="false">Xuất CSV thất bại.</string>
+    <string name="export_pdf_success" formatted="false">Đã xuất sao kê PDF ({count} giao dịch).</string>
+    <string name="export_pdf_failed" formatted="false">Xuất PDF thất bại.</string>
+    <string name="backup_saved_status" formatted="false">Đã lưu bản sao lưu mã hóa ({transactions} giao dịch, {accounts} tài khoản).</string>
+    <string name="backup_encryption_failed" formatted="false">Mã hóa bản sao lưu thất bại.</string>
+    <string name="backup_decrypt_failed" formatted="false">Không thể giải mã bản sao lưu. Kiểm tra mật khẩu hoặc tệp.</string>
+    <string name="restore_success_status" formatted="false">Đã khôi phục {accounts} tài khoản và {transactions} giao dịch.</string>
+    <string name="restore_failed_status" formatted="false">Khôi phục thất bại.</string>
+    <string name="clear_all_data_done" formatted="false">Đã đặt lại toàn bộ dữ liệu tài chính.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Sao kê tài chính</string>
+    <string name="pdf_generated_meta" formatted="false">Ngày tạo: {date}  |  Tiền tệ: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Tổng quan tài khoản</string>
+    <string name="pdf_transactions_count" formatted="false">Giao dịch ({count})</string>
+    <string name="pdf_col_date" formatted="false">Ngày</string>
+    <string name="pdf_col_details" formatted="false">Danh mục / Chi tiết</string>
+    <string name="pdf_col_account" formatted="false">Tài khoản</string>
+    <string name="pdf_col_amount" formatted="false">Số tiền</string>
+    <string name="csv_header_row" formatted="false">Ngày,Giờ,Loại,Danh mục,Tài khoản,Tài khoản nhận,Số tiền,Tiền tệ,Ghi chú,Lặp lại</string>
 </resources>

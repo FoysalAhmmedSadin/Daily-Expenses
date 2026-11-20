@@ -8,8 +8,6 @@ import com.example.core.model.AppLanguage
 import com.example.core.model.BackupPayload
 import com.example.core.model.Budget
 import com.example.core.model.Category
-import com.example.core.model.DriveBackupEntry
-import com.example.core.model.DriveBackupSchedule
 import com.example.core.model.NumberFormatStyle
 import com.example.core.model.ThemeMode
 import com.example.core.model.Transaction
@@ -64,9 +62,6 @@ interface PreferencesRepository {
     suspend fun setBudgetAlerts(enabled: Boolean)
     suspend fun setHideBalances(hidden: Boolean)
     suspend fun setLastBackupInfo(timestamp: Long, status: String)
-    suspend fun setDriveAccount(email: String?, displayName: String?)
-    suspend fun setDriveBackupSchedule(schedule: DriveBackupSchedule)
-    suspend fun setLastDriveBackupInfo(timestamp: Long, status: String)
 }
 
 interface BackupAndExportRepository {
@@ -77,13 +72,4 @@ interface BackupAndExportRepository {
     suspend fun restoreBackup(payload: BackupPayload): Result<Unit>
     suspend fun clearAllFinancialData(): Result<Unit>
     suspend fun copyReceiptImageToInternal(uri: Uri): Result<String>
-}
-
-interface GoogleDriveBackupRepository {
-    fun isNetworkAvailable(): Boolean
-    suspend fun backupToDrive(accessToken: String, passphrase: String? = null): Result<DriveBackupEntry>
-    suspend fun listBackups(accessToken: String): Result<List<DriveBackupEntry>>
-    suspend fun downloadBackupBytes(accessToken: String, fileId: String): Result<ByteArray>
-    fun parseBackupBytes(bytes: ByteArray, passphrase: String? = null): Result<BackupPayload>
-    suspend fun deleteBackup(accessToken: String, fileId: String): Result<Unit>
 }

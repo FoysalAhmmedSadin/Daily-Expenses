@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">已超限额</string>
     <string name="category_spending_cap" formatted="false">分类支出上限</string>
     <string name="updates_existing_cap" formatted="false">本月已存在限额；保存将更新该限额。</string>
-    <string name="google_drive_backup" formatted="false">Google Drive 备份</string>
-    <string name="google_drive_subtitle" formatted="false">应用私有文件夹同步与云端恢复</string>
-    <string name="connect_google_drive" formatted="false">连接 Google Drive</string>
-    <string name="switch_account" formatted="false">切换账号</string>
-    <string name="disconnect" formatted="false">断开连接</string>
-    <string name="back_up_now" formatted="false">立即备份</string>
-    <string name="restore_from_drive" formatted="false">从 Drive 恢复</string>
-    <string name="drive_history_title" formatted="false">Google Drive 备份记录</string>
-    <string name="no_drive_backups" formatted="false">您的 Google Drive 应用数据文件夹中暂无云备份。</string>
-    <string name="auto_backup_schedule" formatted="false">自动备份</string>
-    <string name="schedule_manual_only" formatted="false">手动</string>
-    <string name="schedule_daily" formatted="false">每日</string>
-    <string name="schedule_weekly" formatted="false">每周</string>
-    <string name="not_connected" formatted="false">未连接</string>
-    <string name="connected_as" formatted="false">已连接</string>
-    <string name="encrypt_with_passphrase" formatted="false">使用密码加密</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">将加密或标准备份私密存储在 Google Drive 应用数据文件夹中。</string>
     <string name="theme_system" formatted="false">跟随系统</string>
     <string name="theme_light" formatted="false">浅色</string>
     <string name="theme_dark" formatted="false">深色</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">投资理财</string>
     <string name="cat_gift_bonus" formatted="false">礼金奖金</string>
     <string name="cat_other_income" formatted="false">其他收入</string>
+    <string name="developer_role" formatted="false">应用开发者</string>
+    <string name="developer_copyright_text" formatted="false">版权所有 © 2026 Foysal Ahmmed Sadin。</string>
+    <string name="number_format_latin_label" formatted="false">英文数字 (123)</string>
+    <string name="number_format_bangla_label" formatted="false">孟加拉数字 (১২৩)</string>
+    <string name="rtl_label" formatted="false">从右到左</string>
+    <string name="export_csv_month_success" formatted="false">已将 {month} 的 {count} 笔交易导出为 CSV。</string>
+    <string name="export_csv_all_success" formatted="false">已将 {count} 笔交易导出为 CSV。</string>
+    <string name="export_csv_failed" formatted="false">导出 CSV 失败。</string>
+    <string name="export_pdf_success" formatted="false">已导出 PDF 账单（{count} 笔交易）。</string>
+    <string name="export_pdf_failed" formatted="false">导出 PDF 失败。</string>
+    <string name="backup_saved_status" formatted="false">已保存加密备份（{transactions} 笔交易，{accounts} 个账户）。</string>
+    <string name="backup_encryption_failed" formatted="false">备份加密失败。</string>
+    <string name="backup_decrypt_failed" formatted="false">无法解密备份。请检查密码或文件。</string>
+    <string name="restore_success_status" formatted="false">已恢复 {accounts} 个账户和 {transactions} 笔交易。</string>
+    <string name="restore_failed_status" formatted="false">恢复失败。</string>
+    <string name="clear_all_data_done" formatted="false">所有财务数据已重置。</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — 财务对账单</string>
+    <string name="pdf_generated_meta" formatted="false">生成时间：{date}  |  货币：{currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">账户概览</string>
+    <string name="pdf_transactions_count" formatted="false">交易明细（{count}）</string>
+    <string name="pdf_col_date" formatted="false">日期</string>
+    <string name="pdf_col_details" formatted="false">分类 / 详情</string>
+    <string name="pdf_col_account" formatted="false">账户</string>
+    <string name="pdf_col_amount" formatted="false">金额</string>
+    <string name="csv_header_row" formatted="false">日期,时间,类型,分类,账户,转入账户,金额,货币,备注,周期</string>
 </resources>

@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Plafond dépassé</string>
     <string name="category_spending_cap" formatted="false">Plafond par catégorie</string>
     <string name="updates_existing_cap" formatted="false">Un plafond existe déjà ce mois-ci ; l\'enregistrement le mettra à jour.</string>
-    <string name="google_drive_backup" formatted="false">Sauvegarde Google Drive</string>
-    <string name="google_drive_subtitle" formatted="false">Synchronisation privée dans le dossier App Data</string>
-    <string name="connect_google_drive" formatted="false">Connecter Google Drive</string>
-    <string name="switch_account" formatted="false">Changer de compte</string>
-    <string name="disconnect" formatted="false">Déconnecter</string>
-    <string name="back_up_now" formatted="false">Sauvegarder</string>
-    <string name="restore_from_drive" formatted="false">Restaurer de Drive</string>
-    <string name="drive_history_title" formatted="false">Sauvegardes Google Drive</string>
-    <string name="no_drive_backups" formatted="false">Aucune sauvegarde dans votre Google Drive pour l\'instant.</string>
-    <string name="auto_backup_schedule" formatted="false">Sauvegarde auto</string>
-    <string name="schedule_manual_only" formatted="false">Manuelle</string>
-    <string name="schedule_daily" formatted="false">Quotidienne</string>
-    <string name="schedule_weekly" formatted="false">Hebdomadaire</string>
-    <string name="not_connected" formatted="false">Non connecté</string>
-    <string name="connected_as" formatted="false">Connecté</string>
-    <string name="encrypt_with_passphrase" formatted="false">Chiffrer avec mot de passe</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Enregistrez une sauvegarde privée dans votre dossier Google Drive.</string>
     <string name="theme_system" formatted="false">Système par défaut</string>
     <string name="theme_light" formatted="false">Clair</string>
     <string name="theme_dark" formatted="false">Sombre</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Investissement</string>
     <string name="cat_gift_bonus" formatted="false">Cadeaux et primes</string>
     <string name="cat_other_income" formatted="false">Autres revenus</string>
+    <string name="developer_role" formatted="false">Développeur d\'applications</string>
+    <string name="developer_copyright_text" formatted="false">Copyright © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">Anglais (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Bengali (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">{count} transactions pour {month} exportées en CSV.</string>
+    <string name="export_csv_all_success" formatted="false">{count} transactions exportées en CSV.</string>
+    <string name="export_csv_failed" formatted="false">Échec de l\'exportation CSV.</string>
+    <string name="export_pdf_success" formatted="false">Relevé PDF exporté ({count} transactions).</string>
+    <string name="export_pdf_failed" formatted="false">Échec de l\'exportation PDF.</string>
+    <string name="backup_saved_status" formatted="false">Sauvegarde chiffrée enregistrée ({transactions} transactions, {accounts} comptes).</string>
+    <string name="backup_encryption_failed" formatted="false">Échec du chiffrement de la sauvegarde.</string>
+    <string name="backup_decrypt_failed" formatted="false">Déchiffrement impossible. Vérifiez le mot de passe ou le fichier.</string>
+    <string name="restore_success_status" formatted="false">{accounts} comptes et {transactions} transactions restaurés.</string>
+    <string name="restore_failed_status" formatted="false">Échec de la restauration.</string>
+    <string name="clear_all_data_done" formatted="false">Toutes les données financières ont été réinitialisées.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Relevé Financier</string>
+    <string name="pdf_generated_meta" formatted="false">Généré : {date}  |  Devise : {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Aperçu des comptes</string>
+    <string name="pdf_transactions_count" formatted="false">Transactions ({count})</string>
+    <string name="pdf_col_date" formatted="false">Date</string>
+    <string name="pdf_col_details" formatted="false">Catégorie / Détails</string>
+    <string name="pdf_col_account" formatted="false">Compte</string>
+    <string name="pdf_col_amount" formatted="false">Montant</string>
+    <string name="csv_header_row" formatted="false">Date,Heure,Type,Catégorie,Compte,Compte cible,Montant,Devise,Note,Récurrence</string>
 </resources>

@@ -131,23 +131,6 @@
     <string name="limit_exceeded" formatted="false">Limite Superato</string>
     <string name="category_spending_cap" formatted="false">Limite Spesa Categoria</string>
     <string name="updates_existing_cap" formatted="false">Esiste già un limite per questo mese; il salvataggio lo aggiornerà.</string>
-    <string name="google_drive_backup" formatted="false">Backup Google Drive</string>
-    <string name="google_drive_subtitle" formatted="false">Sincronizzazione cartella privata App Data e ripristino cloud</string>
-    <string name="connect_google_drive" formatted="false">Connetti Google Drive</string>
-    <string name="switch_account" formatted="false">Cambia Account</string>
-    <string name="disconnect" formatted="false">Disconnetti</string>
-    <string name="back_up_now" formatted="false">Esegui Backup Ora</string>
-    <string name="restore_from_drive" formatted="false">Ripristina da Drive</string>
-    <string name="drive_history_title" formatted="false">Backup Google Drive</string>
-    <string name="no_drive_backups" formatted="false">Nessun backup trovato nella cartella Dati App di Google Drive.</string>
-    <string name="auto_backup_schedule" formatted="false">Backup Automatico</string>
-    <string name="schedule_manual_only" formatted="false">Manuale</string>
-    <string name="schedule_daily" formatted="false">Giornaliero</string>
-    <string name="schedule_weekly" formatted="false">Settimanale</string>
-    <string name="not_connected" formatted="false">Non connesso</string>
-    <string name="connected_as" formatted="false">Connesso</string>
-    <string name="encrypt_with_passphrase" formatted="false">Cifra con passphrase</string>
-    <string name="cloud_backup_dialog_subtitle" formatted="false">Salva un backup cifrato o standard privatamente nella cartella Dati App di Google Drive.</string>
     <string name="theme_system" formatted="false">Predefinito di Sistema</string>
     <string name="theme_light" formatted="false">Chiaro</string>
     <string name="theme_dark" formatted="false">Scuro</string>
@@ -254,4 +237,29 @@
     <string name="cat_investment" formatted="false">Investimenti</string>
     <string name="cat_gift_bonus" formatted="false">Regali e Bonus</string>
     <string name="cat_other_income" formatted="false">Altre Entrate</string>
+    <string name="developer_role" formatted="false">Sviluppatore App</string>
+    <string name="developer_copyright_text" formatted="false">Copyright © 2026 Foysal Ahmmed Sadin.</string>
+    <string name="number_format_latin_label" formatted="false">Inglese (123)</string>
+    <string name="number_format_bangla_label" formatted="false">Bengalese (১২৩)</string>
+    <string name="rtl_label" formatted="false">RTL</string>
+    <string name="export_csv_month_success" formatted="false">Esportate {count} transazioni per {month} in CSV.</string>
+    <string name="export_csv_all_success" formatted="false">Esportate {count} transazioni in CSV.</string>
+    <string name="export_csv_failed" formatted="false">Esportazione CSV non riuscita.</string>
+    <string name="export_pdf_success" formatted="false">Estratto conto PDF esportato ({count} transazioni).</string>
+    <string name="export_pdf_failed" formatted="false">Esportazione PDF non riuscita.</string>
+    <string name="backup_saved_status" formatted="false">Backup cifrato salvato ({transactions} transazioni, {accounts} conti).</string>
+    <string name="backup_encryption_failed" formatted="false">Cifratura del backup non riuscita.</string>
+    <string name="backup_decrypt_failed" formatted="false">Impossibile decifrare il backup. Controlla la passphrase o il file.</string>
+    <string name="restore_success_status" formatted="false">Ripristinati {accounts} conti e {transactions} transazioni.</string>
+    <string name="restore_failed_status" formatted="false">Ripristino non riuscito.</string>
+    <string name="clear_all_data_done" formatted="false">Tutti i dati finanziari sono stati reimpostati.</string>
+    <string name="pdf_statement_title" formatted="false">Daily Expenses — Estratto Conto</string>
+    <string name="pdf_generated_meta" formatted="false">Generato: {date}  |  Valuta: {currency}</string>
+    <string name="pdf_accounts_overview" formatted="false">Riepilogo Conti</string>
+    <string name="pdf_transactions_count" formatted="false">Transazioni ({count})</string>
+    <string name="pdf_col_date" formatted="false">Data</string>
+    <string name="pdf_col_details" formatted="false">Categoria / Dettagli</string>
+    <string name="pdf_col_account" formatted="false">Conto</string>
+    <string name="pdf_col_amount" formatted="false">Importo</string>
+    <string name="csv_header_row" formatted="false">Data,Ora,Tipo,Categoria,Conto,Conto Destinazione,Importo,Valuta,Nota,Ricorrenza</string>
 </resources>

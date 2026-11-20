@@ -112,7 +112,10 @@ object SupportedLanguageCatalog {
         SupportedLanguage("de", "Deutsch", "German", isRtl = false),
         SupportedLanguage("ru", "Русский", "Russian", isRtl = false),
         SupportedLanguage("zh-CN", "中文（简体）", "Chinese (Simplified)", isRtl = false),
-        SupportedLanguage("zh-TW", "中文（繁體）", "Chinese (Traditional)", isRtl = false),
+        SupportedLanguage("zh-TW", "中文（繁體 - 台灣）", "Chinese (Traditional, Taiwan)", isRtl = false),
+        SupportedLanguage("zh-HK", "中文（繁體 - 香港）", "Chinese (Traditional, Hong Kong)", isRtl = false),
+        SupportedLanguage("zh-MO", "中文（繁體 - 澳門）", "Chinese (Traditional, Macau)", isRtl = false),
+        SupportedLanguage("zh-SG", "中文（简体 - 新加坡）", "Chinese (Singapore)", isRtl = false),
         SupportedLanguage("ja", "日本語", "Japanese", isRtl = false),
         SupportedLanguage("ko", "한국어", "Korean", isRtl = false),
         SupportedLanguage("id", "Bahasa Indonesia", "Indonesian", isRtl = false),
@@ -128,8 +131,11 @@ object SupportedLanguageCatalog {
         val lower = cleaned.replace('_', '-').lowercase(Locale.US)
         return when {
             lower == "in" || lower.startsWith("in-") || lower == "id" || lower.startsWith("id-") -> "id"
-            lower == "zh-cn" || lower == "zh-hans" || lower.startsWith("zh-hans-") -> "zh-CN"
-            lower == "zh-tw" || lower == "zh-hk" || lower == "zh-hant" || lower.startsWith("zh-hant-") -> "zh-TW"
+            lower == "zh-hk" || lower == "zh-hant-hk" -> "zh-HK"
+            lower == "zh-mo" || lower == "zh-hant-mo" -> "zh-MO"
+            lower == "zh-sg" || lower == "zh-hans-sg" -> "zh-SG"
+            lower == "zh-tw" || lower == "zh-hant" || lower.startsWith("zh-hant-") -> "zh-TW"
+            lower == "zh" || lower == "zh-cn" || lower == "zh-hans" || lower.startsWith("zh-hans-") -> "zh-CN"
             else -> {
                 all.firstOrNull { it.tag.equals(cleaned, ignoreCase = true) }?.tag
                     ?: all.firstOrNull { lower.startsWith("${it.tag.lowercase(Locale.US)}-") }?.tag
@@ -149,6 +155,9 @@ object SupportedLanguageCatalog {
         return when (normalizeTag(tag)) {
             "zh-CN" -> Locale.SIMPLIFIED_CHINESE
             "zh-TW" -> Locale.TRADITIONAL_CHINESE
+            "zh-HK" -> Locale("zh", "HK")
+            "zh-MO" -> Locale("zh", "MO")
+            "zh-SG" -> Locale("zh", "SG")
             "id" -> Locale("in")
             else -> Locale.forLanguageTag(normalizeTag(tag))
         }
@@ -224,6 +233,7 @@ object IsoCurrencyCatalog {
         "DKK" to CurrencyInfo("DKK", "Danish Krone", "kr", "Denmark", 2, false),
         "NZD" to CurrencyInfo("NZD", "New Zealand Dollar", "NZ$", "New Zealand", 2, false),
         "HKD" to CurrencyInfo("HKD", "Hong Kong Dollar", "HK$", "Hong Kong", 2, false),
+        "MOP" to CurrencyInfo("MOP", "Macau Pataca", "MOP$", "Macau", 2, false),
         "ILS" to CurrencyInfo("ILS", "Israeli New Shekel", "₪", "Israel", 2, false),
         "UAH" to CurrencyInfo("UAH", "Ukrainian Hryvnia", "₴", "Ukraine", 2, false)
     )
@@ -311,6 +321,63 @@ object IsoCurrencyCatalog {
     fun toAppCurrencyOrNull(code: String?): AppCurrency? =
         AppCurrency.entries.firstOrNull { it.code.equals(code?.trim(), ignoreCase = true) }
 
+    private val searchAliases: Map<String, List<String>> = mapOf(
+        "CNY" to listOf("人民币", "人民幣", "rmb", "yuan", "renminbi", "中国", "中國", "china"),
+        "HKD" to listOf("港元", "港币", "港幣", "hong kong"),
+        "MOP" to listOf("澳门元", "澳門幣", "澳門元", "pataca", "macau", "macao"),
+        "TWD" to listOf("新台币", "新台幣", "台幣", "台币", "taiwan"),
+        "SGD" to listOf("新加坡元", "新币", "新幣", "singapore"),
+        "USD" to listOf("美元", "美金"),
+        "EUR" to listOf("欧元", "歐元"),
+        "GBP" to listOf("英镑", "英鎊"),
+        "JPY" to listOf("日元", "日圓"),
+        "BDT" to listOf("孟加拉塔卡", "塔卡")
+    )
+
+    fun displaySymbol(currencyCode: String, languageTag: String? = null): String {
+        val info = resolve(currencyCode)
+        if (!info.code.equals("CNY", ignoreCase = true) || languageTag.isNullOrBlank()) {
+            return info.symbol
+        }
+        return when (SupportedLanguageCatalog.normalizeTag(languageTag)) {
+            "zh-CN", "zh-SG" -> "¥"
+            "zh-TW", "zh-HK", "zh-MO" -> "CN¥"
+            else -> "CNY "
+        }
+    }
+
+    fun localizedName(info: CurrencyInfo, languageTag: String?): String {
+        val norm = languageTag?.let { SupportedLanguageCatalog.normalizeTag(it) } ?: "en"
+        return when (info.code) {
+            "CNY" -> when {
+                norm == "zh-CN" || norm == "zh-SG" -> "人民币 (CNY)"
+                norm.startsWith("zh-") -> "人民幣 (CNY)"
+                else -> "Chinese Yuan (CNY)"
+            }
+            "HKD" -> when {
+                norm == "zh-CN" || norm == "zh-SG" -> "港元 (HKD)"
+                norm.startsWith("zh-") -> "港元 (HKD)"
+                else -> "${info.name} (${info.code})"
+            }
+            "MOP" -> when {
+                norm == "zh-CN" || norm == "zh-SG" -> "澳门元 (MOP)"
+                norm.startsWith("zh-") -> "澳門幣 (MOP)"
+                else -> "${info.name} (${info.code})"
+            }
+            "TWD" -> when {
+                norm == "zh-CN" || norm == "zh-SG" -> "新台币 (TWD)"
+                norm.startsWith("zh-") -> "新台幣 (TWD)"
+                else -> "${info.name} (${info.code})"
+            }
+            "SGD" -> when {
+                norm == "zh-CN" || norm == "zh-SG" -> "新加坡元 (SGD)"
+                norm.startsWith("zh-") -> "新加坡元 (SGD)"
+                else -> "${info.name} (${info.code})"
+            }
+            else -> "${info.name} (${info.code})"
+        }
+    }
+
     fun search(query: String): List<CurrencyInfo> {
         val q = query.trim().lowercase(Locale.US)
         if (q.isEmpty()) return allCurrencies
@@ -318,7 +385,8 @@ object IsoCurrencyCatalog {
             it.code.lowercase(Locale.US).contains(q) ||
                 it.name.lowercase(Locale.US).contains(q) ||
                 it.symbol.lowercase(Locale.US).contains(q) ||
-                it.countryOrRegion.lowercase(Locale.US).contains(q)
+                it.countryOrRegion.lowercase(Locale.US).contains(q) ||
+                searchAliases[it.code]?.any { alias -> alias.lowercase(Locale.US).contains(q) } == true
         }
     }
 }
@@ -524,28 +592,6 @@ data class TransactionFilter(
 )
 
 @Serializable
-enum class DriveBackupSchedule {
-    MANUAL_ONLY,
-    DAILY,
-    WEEKLY
-}
-
-data class GoogleDriveAccount(
-    val email: String,
-    val displayName: String? = null
-)
-
-data class DriveBackupEntry(
-    val fileId: String,
-    val fileName: String,
-    val modifiedTimeMillis: Long,
-    val sizeBytes: Long,
-    val isEncrypted: Boolean = false,
-    val transactionCount: Int? = null,
-    val accountCount: Int? = null
-)
-
-@Serializable
 data class UserPreferences(
     val currency: AppCurrency = AppCurrency.BDT,
     val language: AppLanguage = AppLanguage.ENGLISH,
@@ -560,11 +606,6 @@ data class UserPreferences(
     val hideBalances: Boolean = false,
     val lastLocalBackupAt: Long? = null,
     val lastLocalBackupStatus: String = "",
-    val driveAccountEmail: String? = null,
-    val driveAccountName: String? = null,
-    val driveBackupSchedule: DriveBackupSchedule = DriveBackupSchedule.MANUAL_ONLY,
-    val lastDriveBackupAt: Long? = null,
-    val lastDriveBackupStatus: String = "",
     val viewMode: ViewMode = ViewMode.MONTHLY,
     val languageTag: String = "en",
     val currencyCode: String = "BDT"

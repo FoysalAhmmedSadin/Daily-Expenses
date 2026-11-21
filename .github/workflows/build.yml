@@ -1,21 +1,22 @@
-name: Build Universal Android APK
+name: Android CI
 
 on:
   push:
     branches: [main, master]
-    tags: ["v*"]
+  pull_request:
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: android-apk-${{ github.ref }}
+  group: android-ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build universal APK
+    name: Build debug APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,75 +28,27 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      # Locate sdkmanager dynamically because runner images may use different
-      # cmdline-tools versions (latest, 16.0, etc.).
-      - name: Locate Android SDK tools
-        shell: bash
-        run: |
-          SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          SDKMANAGER="$(command -v sdkmanager || true)"
-          if [ -z "$SDKMANAGER" ]; then
-            SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager -print -quit 2>/dev/null || true)"
-          fi
-          if [ -z "$SDKMANAGER" ]; then
-            echo "::error::sdkmanager was not found under $SDK_ROOT/cmdline-tools"
-            find "$SDK_ROOT" -maxdepth 4 -type d -print || true
-            exit 1
-          fi
-          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
-          echo "$(dirname "$SDKMANAGER")" >> "$GITHUB_PATH"
-          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
-          echo "SDKMANAGER=$SDKMANAGER" >> "$GITHUB_ENV"
-          echo "Using SDK manager: $SDKMANAGER"
-
-      - name: Accept Android SDK licences
-        shell: bash
-        run: |
-          set +e
-          yes | "$SDKMANAGER" --licenses
-          status=${PIPESTATUS[1]}
-          set -e
-          if [ "$status" -ne 0 ]; then
-            echo "::error::sdkmanager --licenses failed with exit code $status"
-            exit "$status"
-          fi
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Install Android SDK packages
-        shell: bash
-        run: |
-          "$SDKMANAGER" --install "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+        run: sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 
-      # This repository does not contain gradlew/gradlew.bat. Install the
-      # exact Gradle version declared by gradle/wrapper/gradle-wrapper.properties.
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "9.3.1"
 
-      - name: Generate CI debug keystore
-        shell: bash
+      - name: Generate CI-only debug keystore
         run: keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
-      - name: Build universal APK
+      - name: Build debug APK
         run: gradle --no-daemon :app:assembleDebug
 
-      - name: Prepare release APK
-        run: |
-          mkdir -p release
-          cp app/build/outputs/apk/debug/app-debug.apk release/daily-expenses-universal.apk
-
-      - name: Upload APK as workflow artifact
+      - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: daily-expenses-universal-apk
-          path: release/daily-expenses-universal.apk
+          name: daily-expenses-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
-          retention-days: 30
-
-      - name: Publish APK to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Daily Expenses ${{ github.ref_name }}
-          generate_release_notes: true
-          files: release/daily-expenses-universal.apk
+          retention-days: 14
